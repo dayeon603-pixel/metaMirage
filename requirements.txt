@@ -13,3 +13,4 @@ anthropic>=0.34.0
 
 # Development / analysis
 numpy>=1.24.0
+matplotlib>=3.7.0       # required by kaggle_submission.ipynb (per-family scatter plot)
