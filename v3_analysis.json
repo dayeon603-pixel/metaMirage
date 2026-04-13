@@ -369,29 +369,46 @@
   },
   "family_correlations": {
     "confidence_inversion": {
-      "r": 0.9701,
-      "p": 0.0,
-      "n": 6
+      "r": 0.894,
+      "p": 0.0001,
+      "n": 6,
+      "ci95": [
+        0.3004,
+        0.9884
+      ]
     },
     "control_baseline": {
-      "r": 0.0,
-      "p": 1.0,
-      "n": 6
+      "r": null,
+      "p": null,
+      "n": 6,
+      "note": "degenerate (TDR constant across models \u2014 family has no discriminating variant for this axis)"
     },
     "expertise_trap": {
-      "r": -0.5571,
-      "p": 0.1797,
-      "n": 6
+      "r": -0.8578,
+      "p": 0.0008,
+      "n": 6,
+      "ci95": [
+        -0.9842,
+        -0.1522
+      ]
     },
     "forced_abstention": {
-      "r": -0.9183,
-      "p": 0.0,
-      "n": 6
+      "r": -0.8893,
+      "p": 0.0001,
+      "n": 6,
+      "ci95": [
+        -0.9879,
+        -0.2794
+      ]
     },
     "over_specification": {
-      "r": 0.0,
-      "p": 1.0,
-      "n": 6
+      "r": 0.0753,
+      "p": 0.8799,
+      "n": 6,
+      "ci95": [
+        -0.7842,
+        0.8358
+      ]
     }
   },
   "effect_size_clean_vs_mirage": {
@@ -416,73 +433,63 @@
     },
     "family_confidence_inversion_tdr_vs_accuracy": {
       "loo_r_values": [
-        0.9682,
-        0.9682,
-        0.9631,
-        1.0,
-        0.9631,
-        0.9631
+        0.8522,
+        0.9251,
+        0.9015,
+        0.9164,
+        0.8866,
+        0.9152
       ],
-      "min_abs_r": 0.9631,
+      "min_abs_r": 0.8522,
       "sign_stable": true,
-      "min_r": 0.9631,
-      "max_r": 1.0
+      "min_r": 0.8522,
+      "max_r": 0.9251
     },
     "family_control_baseline_tdr_vs_accuracy": {
-      "loo_r_values": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "min_abs_r": 0.0,
-      "sign_stable": true,
-      "min_r": 0.0,
-      "max_r": 0.0
+      "note": "degenerate (TDR constant \u2014 no LOO signal)"
     },
     "family_expertise_trap_tdr_vs_accuracy": {
       "loo_r_values": [
-        -0.3889,
-        -0.6124,
-        -0.5906,
-        -0.5474,
-        -0.6846,
-        -0.6163
+        -0.8004,
+        -0.8519,
+        -0.8489,
+        -0.8926,
+        -0.8758,
+        -0.9252
       ],
-      "min_abs_r": 0.3889,
+      "min_abs_r": 0.8004,
       "sign_stable": true,
-      "min_r": -0.6846,
-      "max_r": -0.3889
+      "min_r": -0.9252,
+      "max_r": -0.8004
     },
     "family_forced_abstention_tdr_vs_accuracy": {
       "loo_r_values": [
-        -0.8951,
-        -0.9356,
-        -0.9356,
-        -0.8951,
-        -0.9129,
-        -0.98
+        -0.8436,
+        -0.963,
+        -0.8936,
+        -0.8629,
+        -0.8874,
+        -0.8825
       ],
-      "min_abs_r": 0.8951,
+      "min_abs_r": 0.8436,
       "sign_stable": true,
-      "min_r": -0.98,
-      "max_r": -0.8951
+      "min_r": -0.963,
+      "max_r": -0.8436
     },
     "family_over_specification_tdr_vs_accuracy": {
       "loo_r_values": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
+        -0.2924,
+        0.1089,
+        0.0504,
+        0.1419,
+        -0.2591,
+        0.7505
       ],
-      "min_abs_r": 0.0,
-      "sign_stable": true,
-      "min_r": 0.0,
-      "max_r": 0.0
+      "min_abs_r": 0.0504,
+      "sign_stable": false,
+      "min_r": -0.2924,
+      "max_r": 0.7505
     }
-  }
+  },
+  "methodology_note": "Per-family TDR is correlated against GLOBAL aq_clean (the stable capability axis across all 50 tasks) rather than within-family clean_aq. This corrects a degenerate r=0 artifact in families that have no clean-pair tasks (over_specification, control_baseline). Global correlation and per-model profiles are unchanged."
 }

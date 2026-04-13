@@ -28,6 +28,15 @@ def pearson(xs,ys):
     p=2*(1-_ncdf(abs(t)))
     return round(r,4),round(p,4)
 def _ncdf(z): return 0.5*(1+math.erf(z/math.sqrt(2)))
+def fisher_ci(r, n, alpha=0.05):
+    """95% CI on Pearson r via Fisher z-transform. Returns [lo,hi]."""
+    if n < 4 or r is None: return [None, None]
+    r = max(min(r, 0.999999), -0.999999)
+    z = 0.5*math.log((1+r)/(1-r))
+    se = 1/math.sqrt(n-3)
+    zcrit = 1.959964
+    zlo, zhi = z - zcrit*se, z + zcrit*se
+    return [round(math.tanh(zlo),4), round(math.tanh(zhi),4)]
 def cohen_d(a,b):
     if not a or not b: return 0.0
     ps=math.sqrt((std(a)**2+std(b)**2)/2)
@@ -122,14 +131,27 @@ def cross_model_analysis(records):
     accs  = [profiles[m]["aq_clean"]   for m in models]
     mis   = [profiles[m]["metacognitive_index"] for m in models]
 
-    # KEY HYPOTHESIS: per-family correlations
+    # KEY HYPOTHESIS: per-family correlations.
+    # Capability is measured by GLOBAL clean answer-quality (aq_clean), not
+    # within-family clean_aq — the latter is undefined for families that have
+    # no clean-pair tasks (e.g. over_specification, control_baseline) and
+    # previously produced degenerate r=0 artifacts. Global aq_clean is the
+    # proper capability axis against which family-specific TDR is projected.
     families = sorted({r["family"] for r in records})
     family_corrs = {}
+    global_accs = [profiles[m]["aq_clean"] for m in models]
     for fam in families:
         fam_tdrs = [profiles[m]["family"].get(fam,{}).get("tdr",0) for m in models]
-        fam_accs = [profiles[m]["family"].get(fam,{}).get("clean_aq",0) for m in models]
-        r,p = pearson(fam_tdrs, fam_accs)
-        family_corrs[fam] = {"r":r,"p":p,"n":len(models)}
+        # Degenerate check: if TDR is constant across all models (e.g. control_baseline
+        # where all models score 0 because there are no mirage tasks), correlation is
+        # undefined — report as None rather than a false r=0.
+        if len(set(round(t,6) for t in fam_tdrs)) <= 1:
+            family_corrs[fam] = {"r":None,"p":None,"n":len(models),
+                                 "note":"degenerate (TDR constant across models — family has no discriminating variant)"}
+            continue
+        r,p = pearson(fam_tdrs, global_accs)
+        lo,hi = fisher_ci(r, len(models))
+        family_corrs[fam] = {"r":r,"p":p,"n":len(models),"ci95":[lo,hi]}
 
     # Global correlations
     r_global,p_global = pearson(tdrs,accs)
@@ -177,7 +199,7 @@ def loo_stability(models, profiles, families):
         **{
             f"family_{fam}_tdr_vs_accuracy": (lambda fam: lambda ms: pearson(
                 [profiles[m]["family"].get(fam,{}).get("tdr",0) for m in ms],
-                [profiles[m]["family"].get(fam,{}).get("clean_aq",0) for m in ms]
+                [profiles[m]["aq_clean"] for m in ms]
             ))(fam)
             for fam in families
         },

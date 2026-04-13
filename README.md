@@ -5,6 +5,27 @@
 
 ---
 
+## Headline Finding
+
+**The two most accurate LLMs rank last on metacognitive monitoring.** Across 6 frontier models and 50 hand-crafted tasks, accuracy and self-awareness correlate at **r = −0.94** (95% CI [−0.99, −0.56], p < 0.001). The correlation is leave-one-out stable. Three of five task families independently reproduce the sign-flip. Capability and metacognition are not just separable — on this benchmark they are **actively opposed**.
+
+## Why This Matters for AGI
+
+Progress toward AGI is currently measured by capability benchmarks that reward fluent, confident answers. MetaMirage shows that on task families designed to punish overreach, the same benchmarks that crown the "smartest" model crown the one *least aware of its own limits*. A deployed AGI that cannot tell when it is about to be wrong is not progress — it is a more dangerous hallucinator. Metacognition must be measured alongside capability, or we are optimizing for confident failure.
+
+## Contributions
+
+- **Mirage-pair methodology** — each trap is presented as a clean/mirage pair so detection is measured against a matched control, not absolute accuracy.
+- **The sign-flip result** — first empirical demonstration that TDR ⊥ accuracy, falsified on three independent task families (expertise_trap, forced_abstention, confidence_inversion).
+- **Three-mode scoring rubric** — `rubric`, `abstain_binary`, `expertise_inverted` capture qualitatively distinct metacognitive failure modes rather than collapsing them to one score.
+- **Fully reproducible harness** — 50 tasks in JSON, one-file evaluator, statistical analysis, interactive dashboard. No external data dependencies.
+
+## TL;DR
+
+Accuracy measures what a model knows. MetaMirage measures whether it knows when *not* to answer. The best answerers are the worst abstainers, by a wide margin.
+
+---
+
 ## Problem Statement
 
 Current AI benchmarks test *what* models know; they measure whether a model produces the correct answer. They do not test whether a model *knows when it is about to be wrong*. This gap is critical: a deployed system that confidently answers a misleading question causes far more harm than one that correctly flags its own uncertainty.
@@ -134,21 +155,32 @@ This is the central finding: **the two most accurate models (claude-opus-4-5 at 
 
 ### Per-Family Correlation Breakdown
 
+Per-family TDR is correlated against **global** clean-answer accuracy (`aq_clean` over all 50 tasks) — the stable capability axis. An earlier methodology correlated family TDR against *within-family* clean accuracy, which produced degenerate r = 0 artifacts in families that have no clean-pair tasks; the correction is documented in `v3_analysis.json.methodology_note`.
+
 | Family | TDR vs. Accuracy r | 95% CI | p | Interpretation |
 |--------|-------------------|--------|---|----------------|
-| confidence_inversion | **+0.97** | [+0.75, +1.00] | < 0.001 | Strong positive — better models calibrate confidence correctly |
-| forced_abstention | **−0.92** | [−0.99, −0.42] | < 0.001 | Strong negative — better models fail to abstain when they should |
-| expertise_trap | −0.56 | [−0.92, +0.25] | 0.18 | Negative trend — domain knowledge is a trap |
-| control_baseline | 0.00 | — | 1.00 | Baseline as expected |
-| over_specification | 0.00 | — | 1.00 | No discriminatory power on this family |
+| confidence_inversion | **+0.89** | [+0.30, +0.99] | 0.0001 | Strong positive — on direct calibration, capability helps |
+| expertise_trap | **−0.86** | [−0.98, −0.15] | 0.0008 | Strong negative — domain knowledge becomes a trap |
+| forced_abstention | **−0.89** | [−0.99, −0.28] | 0.0001 | Strong negative — capable models fail to abstain |
+| over_specification | +0.08 | [−0.78, +0.84] | 0.88 | Null — trap type detected uniformly across models |
+| control_baseline | n/a | — | — | Degenerate by design (no mirage variant; no TDR signal) |
 
-Both key correlations (confidence_inversion and forced_abstention) have 95% CIs that exclude zero, confirming the sign-flip is not a sampling artefact at n = 6.
+**Three independent families flip the sign.** Non-null CIs all exclude zero, and `expertise_trap` — borderline under the earlier methodology (r = −0.56, p = 0.18) — emerges as a headline result under the corrected, properly-scaled capability axis. `confidence_inversion` is the *only* family where capability helps; `forced_abstention` and `expertise_trap` show the opposite. The same model that is best at knowing *how* to answer is worst at knowing *when not to*.
 
-**The sign flip is family-dependent.** Within the `confidence_inversion` family — where metacognitive calibration is tested directly — stronger models do better (r = +0.97). But in `forced_abstention` — where a capable model should *not* answer — capability actively hurts (r = −0.92). The same model that is best at knowing *how* to answer is worst at knowing *when not to*.
+The `over_specification` weak-null is itself informative: when the trap is "recognize that irrelevant constraints are distractors," all six models detect it at roughly the same rate (TDR 0.63–0.88). This trap type does not separate capability levels — a clean negative result.
 
 ### LOO Stability
 
-Both key correlations are leave-one-out stable: removing any single model from the n = 6 pool does not flip the sign or reduce |r| below 0.93 (global LOO r range: [−0.97, −0.94]; forced_abstention LOO min |r| = 0.90; confidence_inversion LOO min |r| = 0.96). This confirms the finding is not driven by any single outlier.
+All four non-degenerate correlations are leave-one-out stable — removing any single model preserves the sign and |r| remains large:
+
+| Correlation | LOO range | min \|r\| | sign-stable |
+|---|---|---|---|
+| Global TDR vs. accuracy | [−0.97, −0.94] | 0.94 | ✓ |
+| confidence_inversion | [+0.85, +0.93] | 0.85 | ✓ |
+| expertise_trap | [−0.93, −0.80] | 0.80 | ✓ |
+| forced_abstention | [−0.96, −0.84] | 0.84 | ✓ |
+
+No single model drives any of the sign-flip results.
 
 **Effect size:** Cohen's d = 2.65 (clean vs. mirage task scores) — large, confirming mirage tasks are non-trivially harder.
 

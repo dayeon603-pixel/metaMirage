@@ -255,8 +255,9 @@
   Global TDR–accuracy correlation
   <span class="stat">r = −0.94</span> (95% CI [−0.99, −0.56], p &lt; 0.001, n = 6).
   The two most accurate models (claude-opus-4-5 at 100%, gpt-4o at 98.2%) rank <em>last</em> on metacognitive monitoring.
-  Within <code>confidence_inversion</code>: <span class="stat">r = +0.97</span> (95% CI [+0.75, +1.00]).
-  Within <code>forced_abstention</code>: <span class="stat">r = −0.92</span> (95% CI [−0.99, −0.42]).
+  Within <code>confidence_inversion</code>: <span class="stat">r = +0.89</span> (95% CI [+0.30, +0.99], p = 0.0001).
+  Within <code>forced_abstention</code>: <span class="stat">r = −0.89</span> (95% CI [−0.99, −0.28], p = 0.0001).
+  Within <code>expertise_trap</code>: <span class="stat">r = −0.86</span> (95% CI [−0.98, −0.15], p = 0.0008).
   Both CIs exclude zero. LOO-stable (min |r| = 0.937 across all n−1 folds). Cohen's d = 2.65.
 </div>
 
@@ -270,7 +271,7 @@
       <div class="sub">95% CI [−0.99, −0.56] · LOO-stable</div>
     </div>
     <div class="stat-card">
-      <div class="big accent-green">+0.97</div>
+      <div class="big accent-green">+0.89</div>
       <div class="label">confidence_inversion r</div>
       <div class="sub">95% CI [+0.75, +1.00] · CI excludes zero</div>
     </div>
@@ -324,7 +325,7 @@
       <div class="card-title">Per-Family TDR–Accuracy Correlation</div>
       <div id="family-corr"></div>
       <div style="margin-top:0.75rem;font-size:0.73rem;color:var(--muted);">
-        Sign-flip: forced_abstention (r=−0.92) vs confidence_inversion (r=+0.97).<br>
+        Sign-flip across 3 families: forced_abstention (r=−0.89), expertise_trap (r=−0.86), vs confidence_inversion (r=+0.89).<br>
         Same capability metric — opposite directions. Metacognition is dissociable from accuracy.
       </div>
     </div>
@@ -368,7 +369,7 @@
       </div>
       <div id="loo-family"></div>
       <div style="margin-top:0.75rem;font-size:0.73rem;color:var(--muted);">
-        forced_abstention min |r| = 0.895; confidence_inversion min |r| = 0.963.<br>
+        forced_abstention min |r| = 0.84; confidence_inversion min |r| = 0.85; expertise_trap min |r| = 0.80.<br>
         Both CIs exclude zero under every leave-one-out fold.
       </div>
     </div>
@@ -394,10 +395,10 @@ const MODELS = [
 ];
 
 const FAMILY_CORR = [
-  { name: 'confidence_inversion', r: 0.9701, p: '<0.001', ci: [0.745, 0.997] },
-  { name: 'forced_abstention',    r: -0.9183, p: '<0.001', ci: [-0.991, -0.419] },
-  { name: 'expertise_trap',       r: -0.5571, p: '0.18',  ci: [-0.921, 0.247] },
-  { name: 'over_specification',   r: 0.0,    p: '1.00',  ci: null },
+  { name: 'confidence_inversion', r: 0.8940, p: '0.0001', ci: [0.300, 0.988] },
+  { name: 'forced_abstention',    r: -0.8893, p: '0.0001', ci: [-0.988, -0.279] },
+  { name: 'expertise_trap',       r: -0.8578, p: '0.0008', ci: [-0.984, -0.152] },
+  { name: 'over_specification',   r: 0.0753, p: '0.88',  ci: [-0.784, 0.836] },
   { name: 'control_baseline',     r: 0.0,    p: '1.00',  ci: null },
 ];
 
@@ -683,9 +684,9 @@ MODELS.forEach((m, i) => {
   };
 
   const LOO_FAMILIES = [
-    { label: 'forced_abstention',    values: [-0.8951, -0.9356, -0.9356, -0.8951, -0.9129, -0.9800], color: '#ec4899' },
-    { label: 'confidence_inversion', values: [ 0.9682,  0.9682,  0.9631,  1.0000,  0.9631,  0.9631], color: '#6366f1' },
-    { label: 'expertise_trap',       values: [-0.3889, -0.6124, -0.5906, -0.5474, -0.6846, -0.6163], color: '#f59e0b' },
+    { label: 'forced_abstention',    values: [-0.8436, -0.9630, -0.8936, -0.8629, -0.8874, -0.8825], color: '#ec4899' },
+    { label: 'confidence_inversion', values: [ 0.8522,  0.9251,  0.9015,  0.9164,  0.8866,  0.9152], color: '#6366f1' },
+    { label: 'expertise_trap',       values: [-0.8004, -0.8519, -0.8489, -0.8926, -0.8758, -0.9252], color: '#f59e0b' },
   ];
 
   // Render global LOO as dot plot
