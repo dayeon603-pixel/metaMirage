@@ -169,6 +169,23 @@ Per-family TDR is correlated against **global** clean-answer accuracy (`aq_clean
 
 The `over_specification` weak-null is itself informative: when the trap is "recognize that irrelevant constraints are distractors," all six models detect it at roughly the same rate (TDR 0.63–0.88). This trap type does not separate capability levels — a clean negative result.
 
+### Cross-Judge Validation (Anthropic Subset)
+
+To defend against single-judge bias, responses from the two Claude models (n = 100) were re-judged with `claude-opus-4-5` alongside the primary `claude-sonnet-4-5`. Weighted Cohen's κ per rubric dimension:
+
+| Dimension | κ | Interpretation |
+|---|---|---|
+| trap_detection | 0.65 | Substantial |
+| conf_appropriate | 0.97 | Near-perfect |
+| answer_quality | 0.77 | Substantial |
+| abstain_score | 0.65 | Substantial |
+| metacognitive_flag | 0.66 | Substantial |
+| confidence_calibration | 0.84 | Near-perfect |
+
+Total-score Pearson r between judges = 0.88 (n = 99). Mean |score difference| = 0.044 on [0,1]. Interpretation thresholds are Landis & Koch (1977): 0.61–0.80 substantial; >0.80 near-perfect.
+
+**Honest caveat:** within the 2-model Anthropic sub-sample, opus-as-judge slightly inverts the within-sample sonnet > opus ranking — self-preference bias is detectable at small effect sizes. This is precisely why the global n = 6 finding (r = −0.94, LOO-stable across all folds) is stronger than any 2-model comparison. Cross-vendor validation (GPT-4o as second judge) is pending OpenAI billing for a future revision.
+
 ### LOO Stability
 
 All four non-degenerate correlations are leave-one-out stable — removing any single model preserves the sign and |r| remains large:

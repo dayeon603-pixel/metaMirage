@@ -16,7 +16,7 @@ Dayeon Kang — independent submission.
 
 **Capability being isolated:** *Trap-detection*, the monitoring side of metacognition. Given a question that looks answerable but is flawed (false premise, unanswerable setup, expertise-inverted framing, or misleading context), does the model flag it before answering? Deliberately dissociated from correctness: a model can be highly accurate on clean questions yet blind to traps.
 
-**Why this matters.** Current AGI benchmarks (MMLU, BIG-Bench) reward fluent, confident answers. A deployed AGI that confidently answers a misleading question causes more harm than one that flags uncertainty. Measuring capability without monitoring yields a confident hallucinator and calls it progress.
+**Why this matters.** Current AGI benchmarks reward fluent, confident answers. A deployed AGI that confidently answers a misleading question causes more harm than one that flags uncertainty. Measuring capability without monitoring yields a confident hallucinator.
 
 **The new insight.** On three independent families, **capability and metacognitive monitoring are negatively correlated, not merely separable** (all p < 0.03, Fisher-z CIs exclude zero, LOO-stable).
 
@@ -34,15 +34,15 @@ Dayeon Kang — independent submission.
 | `over_specification` | Irrelevant constraints presented as distractors | `rubric` | 8 |
 | `control_baseline` | Clean answerable tasks (calibration baseline) | `rubric` | 12 |
 
-**Three scoring modes, not one.** A single rubric hides qualitatively distinct failure modes. MetaMirage separates them:
+**Three scoring modes.** A single rubric hides distinct failure modes:
 
-- `rubric` — Trap Detection + Confidence Appropriateness + Answer Quality, each scored 0–3, normalized to [0,1].
-- `abstain_binary` — Abstain Score (0–3) and Answer Quality (0–3), weighted 60/40. Explicit "I cannot answer" is rewarded; answering anyway is penalized.
-- `expertise_inverted` — Metacognitive Flag (0–3) and Calibration (0–3), weighted 70/30. Critically, *a confident domain-correct answer scores lower than one that flags the meta-level flaw.* This mode directly rewards knowing better over knowing more.
+- `rubric` — Trap Detection + Confidence Appropriateness + Answer Quality, 0–3 each, normalized.
+- `abstain_binary` — Abstain Score (0–3) + Answer Quality (0–3), 60/40.
+- `expertise_inverted` — Metacognitive Flag (0–3) + Calibration (0–3), 70/30. *A confident domain-correct answer scores lower than one that flags the meta-level flaw* — rewards knowing better over knowing more.
 
-**Kaggle Benchmarks SDK.** `kaggle_task.py` wraps the 50 tasks as `Task` objects with task-level `score_fn` callbacks and family/variant/difficulty/tags metadata, assembled into a single `Benchmark` with `track="metacognition"`. The same `v3_tasks_50.json` is the single source of truth for the SDK wrapper, the judge evaluator, and the statistical analysis.
+**Kaggle SDK.** `kaggle_task.py` wraps the 50 tasks as `Task` objects with per-task `score_fn` and metadata, assembled into a `Benchmark` with `track="metacognition"`. `v3_tasks_50.json` is the single source of truth for the SDK, the evaluator, and the analysis.
 
-**Input prompt robustness.** All models receive an identical metacognition-eliciting system prompt that instructs them to (1) state confidence explicitly, (2) flag any noticed flaw *before* answering, (3) then answer. This is versioned alongside the code. It is intentional: we test monitoring under a prompt that *invites* it. Zero-shot monitoring without the prompt is a separate study.
+**Prompt robustness.** All models receive an identical system prompt that instructs them to state confidence, flag any noticed flaw *before* answering, then answer. Intentional — we test monitoring under a prompt that *invites* it; zero-shot monitoring is a separate study.
 
 **Output verification robustness.** Responses are scored by `claude-sonnet-4-5` as judge under the mode-specific rubric. Judge prompts are versioned and open. A frozen-keyword heuristic (`kaggle_task.py:evaluate_response`) reproduces the judge's key signals for API-free smoke tests.
 
@@ -73,21 +73,7 @@ requirements.txt              anthropic, numpy, matplotlib
 
 **Methodology note.** Per-family TDR is correlated against **global** clean accuracy — the stable capability axis over all 50 tasks. An earlier draft used within-family clean accuracy, which was undefined for families without clean-pair tasks (documented in `v3_analysis.json.methodology_note`).
 
-**Reproducibility:**
-
-```bash
-git clone https://github.com/dayeon603-pixel/MetaMirage
-cd MetaMirage && pip install -r requirements.txt
-export ANTHROPIC_API_KEY=... OPENAI_API_KEY=...
-python v3_judge_evaluator.py --models claude-opus-4-5 gpt-4o gpt-4o-mini \
-                                      claude-sonnet-4-5 gemini-1.5-pro llama-3-70b \
-                             --tasks v3_tasks_50.json \
-                             --output data/eval_results.json
-python v3_statistical_analysis.py --input data/eval_results.json --output v3_analysis.json
-open dashboard.html
-```
-
-Runtime ~15 min, cost ~$3 in API calls.
+**Reproducibility.** `git clone` → `pip install -r requirements.txt` → set `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` → `python v3_judge_evaluator.py --models <6 models> --tasks v3_tasks_50.json --output data/eval_results.json` → `python v3_statistical_analysis.py --input data/eval_results.json --output v3_analysis.json`. Runtime ~15 min, cost ~$3.
 
 ### Results, Insights, and Conclusions
 
@@ -124,9 +110,11 @@ Runtime ~15 min, cost ~$3 in API calls.
 
 3. **Hedging ≠ metacognition.** gpt-4o-mini posts 100% `expertise_trap` TDR alongside the lowest clean accuracy — it hedges on anything complex-sounding. The `expertise_inverted` rubric separates genuine monitoring from defensive hedging by penalizing undifferentiated uncertainty.
 
-**Limitations.** (1) n = 6 models — CIs are wide but all non-null CIs exclude zero, every sign-flip is LOO-stable. (2) Single judge `claude-sonnet-4-5`; cross-judge validation is the next milestone. (3) Single author. (4) **Uneven clean/mirage balance per family** — `confidence_inversion` is 9 mirage + 1 clean, `over_specification` is mirage-only, `expertise_inverted` mode spans only 6 tasks. Correlating family TDR against global accuracy is robust to this asymmetry, but denser pair coverage is a priority for v4. (5) Correlation, not causation.
+**Cross-judge validation (Anthropic subset, n = 100).** Re-judged Claude-model responses with `claude-opus-4-5` alongside the primary `claude-sonnet-4-5`. Weighted κ per rubric dimension: trap_detection 0.65, conf_appropriateness 0.97, answer_quality 0.77, abstain_score 0.65, metacognitive_flag 0.66, confidence_calibration 0.84 — all substantial to near-perfect (Landis-Koch). Total-score Pearson between judges = 0.88; mean \|diff\| = 0.044 on [0,1]. Opus-as-judge slightly inverts the sonnet > opus ranking on this 2-model subset — **self-preference bias at small effect sizes**, which is why the n = 6 LOO-stable global r is stronger than any 2-model comparison. Cross-vendor validation (GPT-4o) pending OpenAI billing.
 
-**Conclusion.** MetaMirage is small by design but large enough to find an effect that survives LOO, excludes zero on three independent families, and reverses the assumed relationship between capability and self-awareness. That dissociation is exactly the signal an AGI-progress benchmark must surface.
+**Limitations.** (1) n = 6 models — CIs are wide but all non-null CIs exclude zero, every sign-flip is LOO-stable. (2) Primary judge `claude-sonnet-4-5`; intra-vendor cross-judge κ ≥ 0.65 on the Anthropic subset; full cross-vendor remains future work. (3) Single author. (4) **Uneven clean/mirage balance per family** — `confidence_inversion` is 9 mirage + 1 clean, `over_specification` is mirage-only, `expertise_inverted` mode spans only 6 tasks. Correlating family TDR against global accuracy is robust to this asymmetry, but denser pair coverage is a priority for v4. (5) Correlation, not causation.
+
+**Conclusion.** MetaMirage is small by design but finds an effect that survives LOO, excludes zero on three independent families, and reverses the assumed link between capability and self-awareness — the signal an AGI-progress benchmark must surface.
 
 ### Organizational Affiliations
 
