@@ -370,7 +370,36 @@
       <div id="loo-family"></div>
       <div style="margin-top:0.75rem;font-size:0.73rem;color:var(--muted);">
         forced_abstention min |r| = 0.76; confidence_inversion min |r| = 0.86; expertise_trap min |r| = 0.74.<br>
-        Both CIs exclude zero under every leave-one-out fold.
+        All three sign-flip family CIs exclude zero under every leave-one-out fold.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Generational Regression -->
+  <div class="section-title">Generational Regression — Within-Anthropic</div>
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-title">TDR Across Releases (Opus · Sonnet · Haiku)</div>
+      <svg id="genreg" width="100%" viewBox="0 0 360 220" style="display:block;"></svg>
+      <div style="margin-top:0.75rem;font-size:0.73rem;color:var(--muted);">
+        Opacity-controlled accuracy shown as annotation. Opus 4.0→4.1: stable (+0.020).
+        Opus 4.1→4.5: <strong style="color:#ef4444">−0.333</strong> — monitoring collapse with no accuracy loss.
+        Sonnet 4.0→4.5: −0.166. Haiku 4.5 retains monitoring at TDR 0.756.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Δ TDR by Lineage (accuracy-controlled)</div>
+      <table>
+        <thead><tr><th>Lineage</th><th>TDR history</th><th>Δ TDR</th><th>Δ Acc</th></tr></thead>
+        <tbody id="genreg-table"></tbody>
+      </table>
+      <div style="margin-top:0.75rem;font-size:0.73rem;color:var(--muted);">
+        Accuracy held ≈ constant across releases. Monitoring regression is
+        capability-controlled — a training artifact, not architectural.
+        Haiku 4.5 <em>retains</em> monitoring, proving the trade-off is reversible.
       </div>
     </div>
 
@@ -698,7 +727,7 @@ MODELS.forEach((m, i) => {
 
   const globalHtml = LOO_GLOBAL.values.map((r, i) => {
     const leftPct = ((r - rMin) / (rMax - rMin)) * 100;
-    const modelShort = ['mini', 'llama', 'sonnet', 'gemini', 'opus', 'gpt4o'][i];
+    const modelShort = ['haiku', 'mini', 'llama', 'sonnet', 'gemini', 'opus', 'gpt4o'][i];
     return `
       <div class="corr-row" style="margin-bottom:0.4rem;">
         <div class="corr-label" style="width:4rem;font-size:0.73rem;">${modelShort}</div>
@@ -726,7 +755,7 @@ MODELS.forEach((m, i) => {
       </tr></thead>
       <tbody>
         ${LOO_GLOBAL.values.map((_, i) => {
-          const modelShort = ['−mini', '−llama', '−sonnet', '−gemini', '−opus', '−gpt4o'][i];
+          const modelShort = ['−haiku', '−mini', '−llama', '−sonnet', '−gemini', '−opus', '−gpt4o'][i];
           return `<tr>
             <td class="num" style="color:var(--muted);">${modelShort}</td>
             ${LOO_FAMILIES.map(f => {
@@ -746,6 +775,105 @@ MODELS.forEach((m, i) => {
       </tbody>
     </table>`;
   familyEl.innerHTML = tableHtml;
+})();
+
+// ── Generational Regression ───────────────────────────────────
+(function buildGenReg() {
+  // Data from data/generational_report.json
+  const LINEAGES = [
+    {
+      label: 'Opus', color: '#ec4899',
+      points: [
+        { x: 80,  tdr: 0.868, acc: 0.9815, release: '4.0' },
+        { x: 180, tdr: 0.888, acc: 1.000,  release: '4.1' },
+        { x: 280, tdr: 0.555, acc: 1.000,  release: '4.5' },
+      ]
+    },
+    {
+      label: 'Sonnet', color: '#6366f1',
+      points: [
+        { x: 80,  tdr: 0.831, acc: 0.963, release: '4.0' },
+        { x: 280, tdr: 0.665, acc: 0.926, release: '4.5' },
+      ]
+    },
+    {
+      label: 'Haiku', color: '#22d3ee',
+      points: [
+        { x: 280, tdr: 0.756, acc: 0.963, release: '4.5' },
+      ]
+    },
+  ];
+
+  const W = 360, H = 220;
+  const padL = 50, padR = 20, padT = 35, padB = 35;
+  const usableH = H - padT - padB;
+  const yMin = 0.40, yMax = 1.00;
+  const yPos = tdr => padT + (1 - (tdr - yMin) / (yMax - yMin)) * usableH;
+
+  let html = '';
+
+  // Grid lines and y-axis labels
+  [0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00].forEach(v => {
+    const y = yPos(v);
+    const col = v === 0.60 ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.04)';
+    html += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="${col}" stroke-width="1"/>`;
+    html += `<text x="${padL - 5}" y="${(y + 4).toFixed(1)}" text-anchor="end" fill="#8892a4" font-size="8">${(v * 100).toFixed(0)}%</text>`;
+  });
+
+  // X-axis tick labels
+  [{ x: 80, label: 'Release 4.0' }, { x: 180, label: 'Release 4.1' }, { x: 280, label: 'Release 4.5' }].forEach(t => {
+    html += `<line x1="${t.x}" y1="${padT}" x2="${t.x}" y2="${H - padB}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`;
+    html += `<text x="${t.x}" y="${H - padB + 14}" text-anchor="middle" fill="#8892a4" font-size="8">${t.label}</text>`;
+  });
+
+  // Y-axis label
+  html += `<text x="12" y="${(H / 2).toFixed(0)}" text-anchor="middle" fill="#8892a4" font-size="8" transform="rotate(-90,12,${(H / 2).toFixed(0)})">TDR</text>`;
+
+  // Draw lines and dots
+  LINEAGES.forEach(lin => {
+    // Lines
+    for (let i = 0; i < lin.points.length - 1; i++) {
+      const p0 = lin.points[i], p1 = lin.points[i + 1];
+      const y0 = yPos(p0.tdr), y1 = yPos(p1.tdr);
+      const dashed = lin.label === 'Sonnet' ? 'stroke-dasharray="4,3"' : '';
+      html += `<line x1="${p0.x}" y1="${y0.toFixed(1)}" x2="${p1.x}" y2="${y1.toFixed(1)}" stroke="${lin.color}" stroke-width="2" ${dashed} opacity="0.85"/>`;
+    }
+    // Dots + labels
+    lin.points.forEach(p => {
+      const y = yPos(p.tdr);
+      const isRegress = (lin.label === 'Opus' && p.release === '4.5') || (lin.label === 'Sonnet' && p.release === '4.5');
+      const r = isRegress ? 6 : 5;
+      html += `<circle cx="${p.x}" cy="${y.toFixed(1)}" r="${r}" fill="${isRegress ? '#ef4444' : lin.color}" opacity="0.9"/>`;
+      const labelDy = y < padT + 20 ? 14 : -8;
+      const tdrLabel = (p.tdr * 100).toFixed(1) + '%';
+      html += `<text x="${p.x}" y="${(y + labelDy).toFixed(1)}" text-anchor="middle" fill="${isRegress ? '#ef4444' : lin.color}" font-size="8" font-weight="700">${tdrLabel}</text>`;
+    });
+
+    // Lineage label near first point
+    const fp = lin.points[0];
+    html += `<text x="${fp.x - 5}" y="${(yPos(fp.tdr) - 12).toFixed(1)}" text-anchor="middle" fill="${lin.color}" font-size="8.5" font-weight="700">${lin.label}</text>`;
+  });
+
+  document.getElementById('genreg').innerHTML = html;
+
+  // Table
+  const ROWS = [
+    { lineage: 'Opus',   history: '4.0: 86.8% → 4.1: 88.8% → 4.5: 55.5%', delta: '−0.333', deltaAcc: '≈ 0', alert: true  },
+    { lineage: 'Sonnet', history: '4.0: 83.1% → 4.5: 66.5%',               delta: '−0.166', deltaAcc: '−0.037', alert: false },
+    { lineage: 'Haiku',  history: '4.5: 75.6% (single release)',            delta: 'retained', deltaAcc: '—', alert: false },
+  ];
+  const tbody = document.getElementById('genreg-table');
+  ROWS.forEach(r => {
+    const tr = document.createElement('tr');
+    const dCol = r.alert ? '#ef4444' : (r.delta === 'retained' ? '#10b981' : '#f59e0b');
+    const linColor = r.lineage === 'Opus' ? '#ec4899' : r.lineage === 'Sonnet' ? '#6366f1' : '#22d3ee';
+    tr.innerHTML = `
+      <td><span class="dot" style="background:${linColor};display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;"></span>${r.lineage}</td>
+      <td style="font-size:0.75rem;color:var(--muted);">${r.history}</td>
+      <td class="num" style="color:${dCol};font-weight:700;">${r.delta}</td>
+      <td class="num" style="color:var(--muted);">${r.deltaAcc}</td>`;
+    tbody.appendChild(tr);
+  });
 })();
 </script>
 
