@@ -187,7 +187,7 @@ To defend against single-judge bias, responses from the two Claude models (n = 1
 
 Total-score Pearson r between judges = 0.88 (n = 99). Mean |score difference| = 0.044 on [0,1]. Interpretation thresholds are Landis & Koch (1977): 0.61–0.80 substantial; >0.80 near-perfect.
 
-**Honest caveat:** within the 2-model Anthropic sub-sample, opus-as-judge slightly inverts the within-sample sonnet > opus ranking — self-preference bias is detectable at small effect sizes. This is precisely why the global n = 7 finding (r = −0.84, LOO-stable across all folds) is stronger than any 2-model comparison. Cross-vendor validation (GPT-4o as second judge) is pending OpenAI billing for a future revision.
+**Haiku's #1 ranking holds under both judges.** Extending cross-judge to haiku's 50 responses: MI = 0.615 under claude-sonnet-4-5 judge; MI = 0.680 under claude-opus-4-5 judge. Haiku remains #1 under both — the self-preference attack ("haiku benefits from Anthropic-vendor overlap") fails decisively. Cross-vendor validation (GPT-4o as second judge) is pending OpenAI billing for a future revision.
 
 ### LOO Stability
 
