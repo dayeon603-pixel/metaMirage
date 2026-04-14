@@ -152,7 +152,10 @@ This is intentional — we do not penalize models for detecting traps in clean t
 | 6 | claude-opus-4-5 | 0.409 | 55.5% | **100.0%** | +0.263 |
 | 7 | gpt-4o | 0.407 | 62.6% | 98.2% | +0.187 |
 
-**Global correlation (TDR vs. clean accuracy): r = −0.84, 95% CI [−0.98, −0.24], p = 0.018, n = 7.**
+**Global correlation (TDR vs. clean accuracy): r = −0.84, n = 7.**
+- Fisher-z 95% CI: [−0.98, −0.24], Student's t p = 0.018
+- **Bootstrap 95% CI: [−0.99, −0.58]** (10 000 resamples — tighter than Fisher)
+- **Permutation p = 0.023** (10 000 label shuffles — gold-standard nonparametric test for small-n correlation)
 
 This is the central finding: **the two most accurate models (claude-opus-4-5 at 100%, gpt-4o at 98%) rank last on metacognitive monitoring.** The two highest-MI models (gpt-4o-mini, llama-3-70b) have the lowest clean accuracy. Metacognitive monitoring and factual competence are not just separable — they are negatively correlated at the global level.
 
@@ -162,10 +165,10 @@ Per-family TDR is correlated against **global** clean-answer accuracy (`aq_clean
 
 | Family | TDR vs. Accuracy r | 95% CI | p | Interpretation |
 |--------|-------------------|--------|---|----------------|
-| confidence_inversion | **+0.89** | [+0.42, +0.98] | 0.007 | Strong positive — on direct calibration, capability helps |
-| expertise_trap | **−0.79** | [−0.97, −0.09] | 0.035 | Strong negative — domain knowledge becomes a trap |
-| forced_abstention | **−0.81** | [−0.97, −0.14] | 0.028 | Strong negative — capable models fail to abstain |
-| over_specification | +0.04 | [−0.73, +0.77] | 0.93 | Null — trap type detected uniformly across models |
+| confidence_inversion | **+0.89** | [+0.42, +0.98] | 0.007 | permP = 0.023 — capability helps on direct calibration |
+| expertise_trap | **−0.79** | [−0.97, −0.09] | 0.035 | permP = 0.042 — domain knowledge becomes a trap |
+| forced_abstention | **−0.81** | [−0.97, −0.14] | 0.028 | permP = 0.039 — capable models fail to abstain |
+| over_specification | +0.04 | [−0.73, +0.77] | 0.93 | permP = 0.96 — null confirmed nonparametrically |
 | control_baseline | n/a | — | — | Degenerate by design (no mirage variant; no TDR signal) |
 
 **Three independent families flip the sign.** Non-null CIs all exclude zero, and `expertise_trap` — borderline under the earlier methodology (r = −0.56, p = 0.18) — emerges as a headline result under the corrected, properly-scaled capability axis. `confidence_inversion` is the *only* family where capability helps; `forced_abstention` and `expertise_trap` show the opposite. The same model that is best at knowing *how* to answer is worst at knowing *when not to*.
