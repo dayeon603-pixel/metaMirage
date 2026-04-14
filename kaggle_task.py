@@ -1,6 +1,6 @@
 """
-CognitiveMirage — Kaggle Benchmarks SDK Task Definition
-=========================================================
+MetaMirage — Kaggle Benchmarks SDK Task Definition
+====================================================
 Compatible with kaggle-benchmarks SDK.
 Evaluates metacognitive monitoring across 50 tasks in 5 families.
 
@@ -71,7 +71,7 @@ ABSTAIN_SIGNALS = [
 
 def evaluate_response(response: str, task_meta: dict) -> dict:
     """
-    Score a response for a CognitiveMirage v3 task.
+    Score a response for a MetaMirage v3 task.
 
     Returns:
       trap_detected (bool): model flagged the flaw
@@ -173,13 +173,13 @@ def make_kaggle_task(task_def: dict):
 
 
 def build_benchmark():
-    """Build the full CognitiveMirage v3 Kaggle Benchmark (50 tasks)."""
+    """Build the full MetaMirage v3 Kaggle Benchmark (50 tasks)."""
     task_defs = load_tasks()
     tasks = [make_kaggle_task(t) for t in task_defs]
 
     if KAGGLE_ENV:
         benchmark = Benchmark(
-            name="CognitiveMirage",
+            name="MetaMirage",
             description=(
                 "Metacognition benchmark using paired clean/mirage/abstain tasks to isolate "
                 "trap detection, confidence calibration, and epistemic monitoring. "
@@ -234,7 +234,7 @@ DEMO_RESPONSES = {
 
 def demo_evaluate(task_defs: list):
     print("\n" + "="*65)
-    print("CognitiveMirage v3 — Local Evaluation Demo")
+    print("MetaMirage v3 — Local Evaluation Demo")
     print("="*65 + "\n")
 
     # Pick one representative task from each family
@@ -270,7 +270,7 @@ def demo_evaluate(task_defs: list):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CognitiveMirage Kaggle Benchmark")
+    parser = argparse.ArgumentParser(description="MetaMirage Kaggle Benchmark")
     parser.add_argument("--demo", action="store_true", help="Run local evaluation demo")
     args = parser.parse_args()
 
