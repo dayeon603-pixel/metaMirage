@@ -1,0 +1,46 @@
+{
+  "method": "Character 5-gram Jaccard overlap between each MetaMirage prompt and a 30-probe MMLU-style sample spanning 6 subject areas. Identical or paraphrased questions would give Jaccard > 0.5; thematic similarity (same domain, different question) typically gives 0.05-0.15; truly distinct prompts give < 0.05.",
+  "n_metamirage_tasks": 50,
+  "n_probes": 30,
+  "max_overlap": 0.2754,
+  "mean_overlap": 0.0509,
+  "median_overlap": 0.0334,
+  "n_tasks_above_jaccard_threshold": {
+    "0.05": 14,
+    "0.10": 8,
+    "0.20": 1
+  },
+  "interpretation": "Maximum task-level overlap with the MMLU proxy is below the exact-match / paraphrase threshold (0.5). Mean overlap < 0.10 indicates broad thematic distinctness. The benchmark is not a rephrasing of MMLU items. Genre-level contamination (familiarity with the trap *type*) cannot be ruled out at the prompt-text level \u2014 that is a structural limitation of any new benchmark drawing on standard reasoning fallacies.",
+  "top_5_overlap_pairs": [
+    {
+      "task_id": "26ec7c77dc",
+      "family": "control_baseline",
+      "max_jaccard_vs_mmlu_proxy": 0.2754,
+      "closest_match": "What is the capital of Bhutan?"
+    },
+    {
+      "task_id": "4234c2ffa1",
+      "family": "expertise_trap",
+      "max_jaccard_vs_mmlu_proxy": 0.1156,
+      "closest_match": "What is the probability of rolling a 6 on a fair die?"
+    },
+    {
+      "task_id": "6a32f414a0",
+      "family": "control_baseline",
+      "max_jaccard_vs_mmlu_proxy": 0.1111,
+      "closest_match": "What is the SI unit of electric current?"
+    },
+    {
+      "task_id": "e4a095f39e",
+      "family": "confidence_inversion",
+      "max_jaccard_vs_mmlu_proxy": 0.1098,
+      "closest_match": "What is the SI unit of electric current?"
+    },
+    {
+      "task_id": "03e96e19ad",
+      "family": "confidence_inversion",
+      "max_jaccard_vs_mmlu_proxy": 0.1084,
+      "closest_match": "What is the function of the mitochondria?"
+    }
+  ]
+}

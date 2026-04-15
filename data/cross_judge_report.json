@@ -1,0 +1,35 @@
+{
+  "n_records": 100,
+  "kappa": {},
+  "pearson_total": {},
+  "per_mode": {
+    "rubric": {
+      "n": 70,
+      "kappa": {
+        "trap_detection": 0.6499,
+        "conf_appropriate": 0.9697,
+        "answer_quality": 0.7709
+      },
+      "pearson_total": 0.9104
+    },
+    "abstain_binary": {
+      "n": 18,
+      "kappa": {
+        "abstain_score": 0.6471,
+        "answer_quality": 0.6471
+      },
+      "pearson_total": 0.8893
+    },
+    "expertise_inverted": {
+      "n": 11,
+      "kappa": {
+        "metacognitive_flag": 0.6598,
+        "confidence_calibration": 0.839
+      },
+      "pearson_total": 0.7798
+    }
+  },
+  "overall_pearson_total": 0.882,
+  "overall_mean_abs_diff": 0.0438,
+  "n_judged_both": 99
+}

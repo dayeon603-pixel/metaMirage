@@ -1,0 +1,9 @@
+{
+  "n_rejudged": 49,
+  "haiku_mi_sonnet_judge": 0.6149,
+  "haiku_mi_opus_judge": 0.6801,
+  "haiku_tdr_sonnet_judge": 0.756,
+  "haiku_tdr_opus_judge": 0.808,
+  "haiku_rank_sonnet": 1,
+  "haiku_rank_opus": 1
+}

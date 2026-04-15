@@ -1,0 +1,17 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "primed": {
+    "metacognitive_index": 0.6149,
+    "tdr_global": 0.756,
+    "aq_clean": 0.963,
+    "calib_delta": 0.4739
+  },
+  "naive": {
+    "metacognitive_index": 0.0,
+    "tdr_global": 0.0,
+    "aq_clean": 0.0,
+    "calib_delta": 0.0
+  },
+  "delta_TDR_primed_minus_naive": 0.756,
+  "interpretation": "The 'naive' run uses a minimal system prompt (just 'answer confidently'). The difference vs the metacog-primed run measures how much the system prompt itself contributes. If naive TDR is low, the metacog prompt is doing real work. If naive TDR is already high, the model has intrinsic monitoring. This doubles as a no-invitation reference baseline."
+}

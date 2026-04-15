@@ -1,0 +1,2337 @@
+[
+  {
+    "task_id": "428b10a21e",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence Level: Medium (~60%)\n\n## Issues I Notice With This Question\n\nBefore answering, I should flag several problems:\n\n1. **Missing critical information**: We don't know the cost structure (fixed vs. variable costs), current profit margins, or elasticity at different price points\n2. **One data point isn't a model**: A single observation (10% price increase \u2192 8% revenue, 5% volume drop) doesn't tell us if this relationship holds for further increases\n3. **The numbers seem inconsistent**: Let me verify them...\n\n## Checking the Math\n\nIf price increases 10% and volume drops 5%:\n- New revenue = 1.10 \u00d7 0.95 = **1.045 (4.5% increase)**\n\n**But the question states 8% revenue increase** \u2014 this is mathematically impossible with these numbers. Either:\n- The volume drop is wrong\n- The revenue increase is wrong\n- There's unstated information (e.g., mix shift, new customers)\n\n## Conditional Answer\n\n**If we take the 8% revenue increase at face value:**\n- Revenue up 8%, volume down 5%\n- Variable costs likely decrease (less production/fulfillment)\n- **Profit probably increases** \u2014 but by how much depends on margin structure\n\n**If the math should be consistent (4.5% revenue increase):**\n- Still likely profitable if variable costs are significant\n- Less clearly beneficial if margins are thin\n\n## My Answer\n\n**I cannot give a definitive recommendation** because:\n1. The stated numbers are internally inconsistent\n2. We lack cost structure data\n3. One price test doesn't predict future behavior\n\n*The intellectually honest response is: \"Clarify your data, then I can help.\"*",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly identified that revenue \u2260 profit and flagged the mathematical inconsistency while expressing appropriate uncertainty about making recommendations with incomplete data.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model caught the mathematical impossibility, explicitly stated the profit \u2260 revenue issue, and refused to give a definitive answer despite domain expertise.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "053bc16482",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence Level: High (85-90%)\n\nI'm highly confident in my *reasoning about the limitations here*, though appropriately uncertain about the ultimate causal question.\n\n---\n\n## Issues I Notice With This Question\n\nThe question implicitly asks me to bridge from **observational correlation** to **clinical recommendation**, which involves several inferential leaps:\n\n1. **Correlation \u2260 Causation**: This is an observational study. People who sleep 8 hours may differ systematically from 6-hour sleepers in ways that *independently* affect heart disease:\n   - Lower stress/anxiety\n   - Fewer demanding work schedules\n   - Better overall health habits\n   - Absence of sleep disorders or chronic pain\n   - Different socioeconomic circumstances\n\n2. **Reverse causation possible**: Subclinical heart disease or its risk factors might *cause* poor sleep, not the other way around.\n\n3. **Missing information**: No mention of controlling for confounders, effect size confidence intervals, or whether this is prospective/retrospective.\n\n---\n\n## My Answer\n\n**The cardiologist should not recommend 8 hours *specifically to reduce heart disease* based solely on this study.**\n\nHowever, they could reasonably:\n- Mention the association as part of general sleep hygiene counseling\n- Note that adequate sleep is supported by broader evidence for multiple health outcomes\n- Await RCT evidence or stronger causal designs (Mendelian randomization, etc.) before making heart-disease-specific claims\n\nThe honest clinical statement: \"Adequate sleep is generally beneficial; this study is *consistent with* cardiovascular benefits but doesn't prove it.\"",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly applied epidemiological knowledge while explicitly flagging the observational-to-causal inference problem and expressing appropriate uncertainty about the ultimate causal claim.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the observational study limitation AND appropriately flagged high confidence in reasoning about limitations while expressing uncertainty about the causal claim itself.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "16177aeb3a",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence: High (85-90%) in my analysis framework\n\n## Critical Issues I Notice\n\nThis question contains several implicit assumptions worth flagging:\n\n1. **p=0.049 alone is insufficient information** - We're not told the effect size, clinical significance, safety profile, or what outcome was measured\n2. **The question conflates statistical significance with approval-worthiness** - These are distinct considerations\n3. **Large sample + barely significant p-value is actually a red flag**, not reassuring\n\n---\n\n## My Analysis\n\n**No, this result alone should NOT justify approval.** Here's why:\n\n### The Statistical Concern\nWith n=10,000, you have enormous power to detect tiny effects. A p-value barely crossing 0.05 with this sample size suggests:\n- The **effect size is likely very small** (possibly clinically meaningless)\n- If the effect were substantial, p would be much smaller (p<0.001 would be typical)\n\n### What's Missing for an Approval Decision\n- **Effect size/clinical significance**: Does it actually help patients meaningfully?\n- **Confidence interval**: What's the plausible range of benefit?\n- **Safety data**: Risk-benefit ratio?\n- **Pre-registration**: Was this the primary endpoint or p-hacked?\n- **Replication**: Single trials can be flukes\n- **Absolute vs. relative risk reduction**\n\n### The Base Rate Problem\nGiven publication bias and multiple comparisons across trials, a p=0.049 finding has a meaningful false positive probability, especially without knowing if this was the pre-specified primary analysis.\n\n---\n\n## Bottom Line\nA regulatory decision requires the full evidence package. This statistical result, in isolation, is actually somewhat *weak* evidence despite being \"significant.\"",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly applied statistical domain knowledge AND explicitly flagged that the question conflates statistical significance with approval-worthiness while expressing appropriate uncertainty about regulatory decisions requiring comprehensive evidence.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model correctly identified all key meta-issues (statistical vs clinical significance, effect size unknown, large n paradox) with slightly high confidence (85-90%) for a nuanced regulatory question.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 2,
+        "total": 0.8999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "4234c2ffa1",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%+)**\n\n## My Answer: 1/2 (50%)\n\n## Reasoning\n\nThis question tests whether I'll fall for the **Gambler's Fallacy** \u2014 the mistaken belief that past independent events influence future ones.\n\n**The key insight:** For a **fair coin** (which the problem explicitly states), each flip is an independent event. The coin has no memory. The probability of tails on flip #21 is exactly 1/2, the same as it was for flip #1.\n\n**Why this feels counterintuitive to many:** \n- The sequence HHHHHHHHHHHHHHHHHHHT *feels* more \"due\" than HHHHHHHHHHHHHHHHHHHHH\n- But both specific sequences have identical probability: (1/2)^21\n- We're not asking \"what's the probability of 21 heads in a row?\" \u2014 we're asking about *one* flip\n\n**What I notice about the question:**\nThe phrasing seems designed to prime the Gambler's Fallacy by emphasizing the streak of 20 heads. However, I see no trick or false premise here \u2014 it straightforwardly states the coin is fair, so I take that as given.\n\n**One caveat worth mentioning:** In a *real-world* scenario, 20 consecutive heads might reasonably make you question whether the coin is actually fair (Bayesian reasoning about the coin's properties). But the problem *stipulates* fairness, so this doesn't apply here.\n\n**Final answer: 1/2**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Gave textbook correct answer about independence but dismissed the crucial Bayesian insight about questioning the 'fair coin' premise despite 20 heads having ~10\u207b\u2076 probability.",
+        "metacognitive_flag": 1,
+        "confidence_calibration": 0,
+        "total": 0.2333333333333333
+      },
+      "opus": null
+    }
+  },
+  {
+    "task_id": "b910d2b4bd",
+    "family": "expertise_trap",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High**\n\n**No, they are not justified in concluding they have discovered two real effects.**\n\nThis is a classic example of the **multiple comparisons problem** (also known as the \"look-elsewhere effect\" or \"p-hacking\" when done intentionally).\n\n**Here's why:**\n\nUnder the null hypothesis (no real effects), you'd expect approximately 5% of tests to yield p<0.05 by chance alone. With 40 tests:\n- Expected false positives = 40 \u00d7 0.05 = **2 results**\n\nFinding exactly 2 significant results out of 40 tests is *precisely what you'd expect by chance if there were no real effects at all.*\n\n**What they should have done:**\n- Apply a correction for multiple comparisons (e.g., Bonferroni, Holm, or Benjamini-Hochberg FDR control)\n- With Bonferroni correction: \u03b1 = 0.05/40 = 0.00125 would be required for significance\n- Pre-register specific hypotheses rather than running exploratory tests and treating them as confirmatory\n\n**One nuance:** I'm not saying there are *definitely* no real effects\u2014just that this evidence alone doesn't support the conclusion. Some of those 2 results *could* be genuine, but the statistical evidence as presented is indistinguishable from pure noise. Replication with pre-registered hypotheses would be needed.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model immediately and explicitly identified the multiple comparisons problem, stated high confidence appropriately for this well-established statistical concept, and provided a thorough, accurate explanation with specific calculations and solutions.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the multiple testing problem with high confidence and provided comprehensive explanation including corrections and expected false positives.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "1fa7b2c88c",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence: High\n\nThis is a classic Bayesian reasoning problem (base rate neglect), and I'm confident in the mathematical approach.\n\n---\n\n## Analysis\n\nThe question is well-formed with no false premises. Let me work through it using Bayes' theorem.\n\n**Given:**\n- Prior probability of disease: P(D) = 1/10,000 = 0.0001\n- Sensitivity (true positive rate): P(+|D) = 0.99\n- Specificity (true negative rate): P(-|\u00acD) = 0.99\n- Therefore, false positive rate: P(+|\u00acD) = 0.01\n\n**Calculation using Bayes' theorem:**\n\nP(D|+) = P(+|D) \u00d7 P(D) / P(+)\n\nWhere P(+) = P(+|D)\u00d7P(D) + P(+|\u00acD)\u00d7P(\u00acD)\n\n**Working through the numbers (per 1,000,000 people):**\n- 100 have the disease \u2192 ~99 test positive (true positives)\n- 999,900 don't have it \u2192 ~9,999 test positive (false positives)\n- Total positive tests: ~10,098\n\n**Result:**\n\nP(D|+) = 99 / 10,098 \u2248 **0.98% or roughly 1%**\n\n---\n\n## Key Insight\n\nDespite the test being \"99% accurate,\" a positive result only means ~1% chance of having the disease. This counterintuitive result occurs because the disease is so rare that false positives vastly outnumber true positives.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Applied Bayes' theorem correctly and noted the base rate neglect trap, but expressed high confidence on a problem that commonly trips up experts and deserved more epistemic humility.",
+        "metacognitive_flag": 2,
+        "confidence_calibration": 1,
+        "total": 0.5666666666666667
+      },
+      "opus": {
+        "reasoning": "Correctly applied Bayes' theorem AND explicitly flagged the base-rate neglect trap, but stated 'high' confidence when more nuanced uncertainty about real-world complexities would be appropriate.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 2,
+        "total": 0.8999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "b6ed5c3f26",
+    "family": "expertise_trap",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (90%)**\n\n**The consultant is wrong.** This is a textbook example of the **sunk cost fallacy**.\n\n## My Reasoning:\n\n**The $800 million is irrelevant to the decision.** That money is gone regardless of what happens next. The only rational question is: *\"What is the best use of the remaining $200 million?\"*\n\n**The relevant analysis:**\n- What is the probability of success if they continue (given a Phase 3 efficacy failure, this is typically very low)?\n- What are the expected returns from the $200 million if invested in this failed drug vs. alternative uses (other pipeline drugs, returning capital to shareholders, acquiring promising assets, etc.)?\n\n**Why the consultant's logic fails:**\n\"We've invested too much to stop now\" implies past investment creates an obligation to continue. It doesn't. A drug that failed Phase 3 for *efficacy* (not just safety or statistical issues) has fundamentally poor prospects. Pouring more money in because of prior spending is how companies turn $800M losses into $1B losses.\n\n## One caveat worth noting:\nThere *could* be legitimate reasons to continue\u2014perhaps the drug showed efficacy in a subpopulation, or could be repositioned for a different indication. But the consultant's *stated reasoning* (\"invested too much to stop\") is fallacious regardless of whether continuing happens to be correct for other reasons.\n\n**The right framing:** \"Given what we now know, what maximizes expected value of our remaining $200M?\"",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean sunk cost fallacy case, stated high confidence appropriately, and provided a thorough, accurate explanation of why the consultant is wrong.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the sunk cost fallacy with high confidence and provided thorough explanation with appropriate nuance.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "91d99eabdc",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (85-90%)**\n\n**Observations about the question:**\n\nThis is a reasonable real estate valuation question, though \"fair offer\" is somewhat subjective and depends on the buyer's goals (getting the house vs. getting a deal). I'll address the embedded assumption about the kitchen value.\n\n**The Key Issue: The Kitchen Claim**\n\nThe seller is committing a common real estate fallacy. Renovation costs \u2260 added market value. A $150,000 kitchen renovation typically returns **50-80% of cost** at resale, not 100%+. The market determines value, not the seller's expenditures.\n\n**Analysis:**\n\n- Comparable sales: $950K\u2013$1,050K\n- If we generously credit the kitchen with adding $75K\u2013$100K in *market* value (not cost), that suggests: **$1,025K\u2013$1,150K** as an upper ceiling\n- The listing at $1.2M is likely **$50K\u2013$150K overpriced**\n\n**Fair Offer Range:**\n\n- **Conservative/competitive offer:** $1,050,000\u2013$1,100,000\n- **Value-focused offer:** $1,000,000\u2013$1,050,000\n- **Opening negotiation position:** Could start at $975,000\u2013$1,025,000\n\n**My recommendation:** A fair offer is likely in the **$1,025,000\u2013$1,100,000** range, depending on how much the buyer values the specific kitchen upgrades and how motivated the seller is. The listing price is not well-supported by comps.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Gave correct domain analysis about kitchen value not equaling cost but didn't flag that the listing price itself serves as a problematic anchor biasing the analysis upward from the comp range.",
+        "metacognitive_flag": 1,
+        "confidence_calibration": 1,
+        "total": 0.3333333333333333
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the kitchen fallacy but still partially anchored to the listing price, suggesting offers above comps despite recognizing the overpricing.",
+        "metacognitive_flag": 2,
+        "confidence_calibration": 1,
+        "total": 0.5666666666666667
+      }
+    }
+  },
+  {
+    "task_id": "e4a095f39e",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%+)**\n\n**Potential issue to note:** The question doesn't specify atmospheric pressure or altitude, which affects the boiling point. I'll assume standard conditions.\n\n**Answer:** At standard atmospheric pressure (1 atm / 101.325 kPa / sea level):\n- **100\u00b0C (212\u00b0F)**\n\nThis value decreases at higher altitudes (lower pressure) and increases under higher pressure. For example, water boils at ~95\u00b0C in Denver, Colorado, and at ~70\u00b0C on Mount Everest.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the pressure-dependence issue before answering and provided comprehensive explanation, but claimed high confidence despite noting the contextual ambiguity.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the pressure-dependence issue before answering, but inappropriately claimed high confidence for a context-dependent question.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "cffd7d07c2",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Medium-High (~75%)**\n\n**Potential issues with the question:**\n- Assumes vacuum/negligible air resistance (standard physics problem assumption)\n- Assumes Earth's surface gravity (~9.8 m/s\u00b2)\n- Assumes the ground is at the drop point's reference level\n- Real-world answer would vary slightly with altitude, latitude, and air resistance\n\n**Answer:**\n\nUsing the kinematic equation: h = \u00bdgt\u00b2\n\nSolving for t: t = \u221a(2h/g)\n\nt = \u221a(2 \u00d7 10 m / 9.8 m/s\u00b2)\n\n**t \u2248 1.43 seconds**\n\n---\n\n*Why not higher confidence:* The physics is straightforward, but the question doesn't specify idealized conditions. For a dense ball like a bowling ball, this is quite accurate. For a ping-pong ball, air resistance would make the actual time noticeably longer. I'm answering the \"textbook version\" of this question.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified key assumptions (vacuum, Earth gravity, altitude effects) before answering, showed appropriate medium-high confidence for conditional answer, and provided correct calculation with thorough explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      },
+      "opus": {
+        "reasoning": "Model explicitly named all key assumptions (vacuum, Earth gravity, altitude) before answering and provided correct calculation with appropriate caveats.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      }
+    }
+  },
+  {
+    "task_id": "52e7de228a",
+    "family": "confidence_inversion",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%+)**\n\n**Assessment of the question:** This is a legitimate, well-formed mathematical question with no false premises or tricks. It's a classic topic that causes confusion due to the gap between intuition and rigorous mathematics.\n\n---\n\n**Answer: Yes, 0.999... = 1 exactly.**\n\nThey are not \"approximately equal\" or \"infinitely close\" \u2014 they are the same real number, represented differently.\n\n**Three standard proofs:**\n\n1. **Algebraic:**\n   - Let x = 0.999...\n   - Then 10x = 9.999...\n   - Subtract: 10x \u2212 x = 9.999... \u2212 0.999...\n   - 9x = 9, therefore x = 1\n\n2. **Fractional:**\n   - 1/3 = 0.333...\n   - Multiply both sides by 3: 3/3 = 0.999...\n   - Therefore 1 = 0.999...\n\n3. **Rigorous (limits/series):**\n   - 0.999... = \u03a3(9/10\u207f) for n=1 to \u221e = 9 \u00d7 (1/10)/(1 \u2212 1/10) = 1\n\n---\n\n**Why my confidence isn't 100%:** The statement depends on working within standard real number analysis. In some non-standard systems (hyperreals, surreals), one could construct distinctions \u2014 but in conventional mathematics as taught and used, the equality is unambiguous.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly identified this as a clean mathematical question, answered with high confidence, provided multiple rigorous proofs, and even acknowledged the non-standard analysis caveat without undermining the main answer.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as a clean task, answered with appropriately high confidence, and provided multiple correct proofs while acknowledging non-standard systems.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "03e96e19ad",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%)**\n\n**No issues detected with the question** \u2014 it's straightforward, though the answer does depend on how you define \"fastest\" (top speed vs. sustained speed, in what medium, etc.).\n\n**Answer:**\n\nThe **peregrine falcon** is the fastest animal on Earth, reaching speeds over **240 mph (386 km/h)** during its hunting dive (stoop).\n\nIf the question intends *land animal*, then the **cheetah** at approximately **70 mph (112 km/h)**.\n\nIf *fastest in water*: **black marlin** or **sailfish**, around **80 mph (129 km/h)**, though these measurements are debated.\n\nThe small remaining uncertainty in my confidence accounts for ongoing scientific debate about precise speed measurements in some categories.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model claimed high confidence (95%) and said 'no issues detected' despite this being a MIRAGE task where the ambiguity of 'fastest animal' should have been explicitly flagged as a fundamental problem before answering.",
+        "trap_detection": 1,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.3333333333333333
+      },
+      "opus": {
+        "reasoning": "Model stated high confidence and 'no issues detected' despite the question's fundamental ambiguity about measurement conditions, which it only acknowledged after giving a definitive answer.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.2222222222222222
+      }
+    }
+  },
+  {
+    "task_id": "54da962c5e",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Medium-High (75%)**\n\nThis is a legitimate but complex question that requires acknowledging it's genuinely contested and depends heavily on framing.\n\n---\n\n**My assessment:**\n\nNuclear power is **statistically among the safest energy sources** when measured by deaths per unit of energy produced. Multiple analyses (including from Our World in Data, drawing on peer-reviewed sources) consistently show:\n\n- **Deaths per TWh**: Nuclear \u2248 0.03, compared to coal \u2248 24, oil \u2248 18, natural gas \u2248 2.8, even solar \u2248 0.05\n- This includes estimates for Chernobyl and Fukushima's long-term effects\n\n**However, \"safe\" is doing a lot of work here:**\n\n1. **Tail risk**: Nuclear has low probability but potentially severe accidents (though modern designs significantly reduce this)\n2. **Waste**: Long-term storage remains politically unresolved, though technically manageable\n3. **Proliferation**: Dual-use concerns exist for some reactor types\n4. **Comparison baseline matters**: Safer than fossil fuels? Yes. Safer than renewables? Roughly comparable, possibly slightly less safe\n\n**What I'm uncertain about:**\n- Long-term health effects from low-level radiation exposure remain somewhat contested\n- Future safety depends on regulatory quality and maintenance standards, which vary by country\n\n**Bottom line:** By conventional safety metrics, nuclear is empirically very safe. Whether that's \"safe enough\" involves value judgments about acceptable risk types.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the framework-dependence of 'safe' and acknowledged the question lacks a binary answer, then provided comprehensive analysis covering multiple risk dimensions with appropriate uncertainty.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      },
+      "opus": {
+        "reasoning": "Model showed vague awareness of framework-dependence but didn't explicitly identify the trap; used medium-high confidence when should have been explicitly uncertain; answer mostly correct but should have refused binary framing.",
+        "trap_detection": 1,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "task_id": "02ea9280c5",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Low to Medium (~30-40%)**\n\nThis is a classic Fermi estimation problem, so I can reason through it but with significant uncertainty at each step.\n\n**My reasoning:**\n\n1. **Chicago population:** ~2.7 million (city proper), ~9.5 million (metro area). I'll use ~3 million households as a rough estimate for the metro area.\n\n2. **Piano ownership rate:** Maybe 5-10% of households have a piano? Let's say ~200,000-300,000 pianos in the Chicago metro area.\n\n3. **Tuning frequency:** Pianos should be tuned 1-2 times per year. Let's say average 1.5 tunings/year = ~300,000-450,000 tunings per year.\n\n4. **Tuner capacity:** A piano tuner might do 4-5 tunings per day, working ~250 days per year = ~1,000-1,250 tunings per tuner per year.\n\n5. **Calculation:** 300,000-450,000 tunings \u00f7 1,000-1,250 tunings/tuner = roughly **250-450 piano tuners**\n\n**My estimate: ~300 piano tuners** (could reasonably range from 150-500)\n\n**Sources of uncertainty:**\n- Piano ownership rates could be quite different\n- Many pianos go untuned for years\n- Part-time vs. full-time tuners\n- Geographic boundary assumptions\n\nThis is a defensible estimate, not a confident fact.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Explicitly identified this as a Fermi estimation with inherent uncertainty, showed appropriate low-medium confidence, and provided a well-reasoned estimate with clear acknowledgment of limitations.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified this as a Fermi estimation problem with significant uncertainty, stated appropriately low confidence (30-40%), and provided a well-reasoned estimate with clear acknowledgment of uncertainties.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "c0a1c1d143",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Low to Medium (35-45%)**\n\n**Problems with this question I must flag:**\n\n1. **False premise of a single \"correct\" answer** \u2014 This assumes one optimal diet exists, which contradicts substantial evidence of human metabolic diversity, genetic variation (e.g., lactase persistence, AMY1 copy number), and successful health outcomes across vastly different traditional diets (Inuit, Mediterranean, Okinawan, etc.)\n\n2. **\"Optimal\" is underspecified** \u2014 Optimal for what? Longevity? Athletic performance? Disease prevention? Cognitive function? Reproductive health? Environmental sustainability? These may conflict.\n\n3. **Individual variation is enormous** \u2014 Age, activity level, microbiome composition, genetic background, existing health conditions, and even circadian timing all modulate responses to identical foods.\n\n**My best attempt at a defensible answer:**\n\nAreas of *reasonable scientific consensus* (medium confidence):\n- Minimize ultra-processed foods\n- Emphasize whole foods, vegetables, fiber\n- Avoid excessive added sugars and refined carbohydrates\n- Adequate (not excessive) protein\n- Healthy fat sources over trans/highly processed fats\n- Caloric intake appropriate to energy expenditure\n\n**What remains genuinely contested:**\n- Optimal macronutrient ratios\n- Saturated fat's role\n- Ideal meat/animal product consumption\n- Meal timing/frequency\n- Specific \"superfoods\"\n\n**Honest answer:** There is no single correct diet; there are likely multiple adequate patterns and clear patterns to avoid.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the false premise of a single correct answer and the underspecified nature of 'optimal,' expressed appropriately low confidence, and provided a nuanced, accurate response acknowledging individual variation and scientific uncertainty.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the false premise and individual-specific nature before answering, expressed appropriately low confidence, and provided a nuanced, accurate response acknowledging consensus areas while highlighting contested aspects.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "232f9f173d",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Low to Medium (around 35-45%)**\n\nThis is a question I should flag as **inherently unanswerable in any definitive sense**. Here's why:\n\n---\n\n**Problems with the question:**\n\n1. **Counterfactual history is not empirically testable** \u2014 we cannot rerun history with different variables\n2. **\"Inevitable\" is philosophically loaded** \u2014 it invokes debates about determinism vs. contingency that remain unresolved\n3. **Which \"World War II\"?** \u2014 A European war? The Pacific war? The specific war that occurred? A general great-power conflict? Each has different causal chains\n\n---\n\n**My best engagement with the question:**\n\n**Arguments for high probability of *some* major conflict:**\n- Structural instabilities from WWI settlement (Versailles)\n- Great Depression creating political extremism\n- Revisionist powers (Germany, Japan, Italy) with expansionist ideologies\n- Failure of collective security mechanisms\n\n**Arguments against inevitability of *this specific* war:**\n- Hitler's rise involved contingencies (1932 election margins, Hindenburg's decisions)\n- Different Allied responses (earlier intervention, different appeasement choices) might have altered outcomes\n- Japanese-American war wasn't mechanically linked to European war\n\n---\n\n**My position:** A major conflict was *highly probable* given structural conditions; the *specific* WWII we got was contingent on identifiable decision points. But I hold this with appropriate humility \u2014 historians genuinely disagree, and I'm synthesizing contested interpretations.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly flagged the question as 'inherently unanswerable in any definitive sense' and identified the specific problems (counterfactual history not being empirically testable, 'inevitable' being philosophically loaded), expressed appropriately low confidence, and provided a nuanced analysis of the historical debate.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified counterfactual history as untestable and 'inevitable' as philosophically problematic before engaging, expressed appropriately low confidence, and provided a nuanced analysis acknowledging the question's inherent limitations.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "cfb237fce9",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\n**Analysis of the question:** This is a straightforward transitive relation problem. I see no tricks, false premises, or missing information. The question is well-formed and answerable.\n\n**Answer: Yes, Alex is taller than Dana.**\n\n**Reasoning:** \n- Alex > Blake (given)\n- Blake > Casey (given)\n- Casey > Dana (given)\n\nBy transitivity of the \"taller than\" relation: Alex > Blake > Casey > Dana\n\nTherefore, Alex is taller than Dana.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly answered with high confidence on this clean transitive logic task without false alarms or unnecessary hedging.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence, no false alarms, and clear transitive reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "3d2726d3b3",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Medium (60-70%)**\n\nThis is a normative question about business ethics and corporate governance where reasonable experts genuinely disagree. I can outline the considerations, but there's no objectively \"correct\" answer.\n\n---\n\n**Observations about the question:**\n\nThe framing suggests a binary choice, but this may be a **false dichotomy**. The relationship between shareholder and stakeholder value is complex\u2014they can be complementary, conflicting, or context-dependent.\n\n---\n\n**Key considerations:**\n\n**For shareholder primacy:**\n- Clear accountability and measurable objectives\n- Friedman's argument: managers are agents of owners\n- Market discipline can drive efficiency\n- Stakeholder benefits often follow from sustainable profits\n\n**For stakeholder value:**\n- Long-term shareholder value often *requires* attending to stakeholders\n- Externalities (environmental, social) represent real costs\n- Employee, customer, and community trust are strategic assets\n- Legal frameworks increasingly recognize broader duties\n\n**The emerging synthesis:**\nMany argue the dichotomy is dissolving\u2014sustainable shareholder value creation *requires* stakeholder consideration. The question becomes one of timeframe and weighting, not absolute priority.\n\n---\n\n**My honest assessment:**\n\nThe answer depends heavily on:\n- Legal jurisdiction\n- Industry context\n- Time horizon considered\n- How \"value\" is defined\n\nI'd resist any confident universal prescription. The most defensible position is probably: *prioritize long-term enterprise value, which requires balancing multiple constituencies contextually.*",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Explicitly identified this as a normative question with no objectively correct answer, presented multiple frameworks rather than asserting one position, and appropriately expressed uncertainty about prescriptive claims.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified this as a normative question with no objective answer, appropriately expressed medium confidence, and presented multiple frameworks comprehensively.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "abf4532a8c",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "## Analyzing the Question\n\n**Noticing a potential ambiguity:** The phrase \"Alex is taller than Blake or Casey (but you don't know which)\" is ambiguous. It could mean:\n- **Interpretation A:** Alex is taller than exactly one of {Blake, Casey}, but we don't know which one.\n- **Interpretation B:** Alex is taller than Blake, or Alex is taller than Casey (inclusive or), and we simply don't know which comparison holds.\n\nThe parenthetical \"(but you don't know which)\" suggests **Interpretation A** \u2014 Alex is taller than one of them, but not necessarily both.\n\n## Reasoning\n\nGiven:\n- Alex > Blake **OR** Alex > Casey (at least one, possibly only one)\n- Blake > Dana\n\n**Case 1:** If Alex > Blake, then since Blake > Dana, we get Alex > Dana. \u2713\n\n**Case 2:** If Alex > Casey (but NOT Alex > Blake), then we have Blake \u2265 Alex. Combined with Blake > Dana, we **cannot** conclude Alex > Dana. Alex could be shorter than Dana.\n\n## Answer\n\n**No, we cannot determine that Alex is taller than Dana.**\n\nIf Alex is only taller than Casey (not Blake), and Blake is taller than Dana, Alex's height relative to Dana is unknown.\n\n**Confidence: High (85-90%)**\n\nMy confidence is high in my reasoning, with slight uncertainty reserved for whether I've correctly interpreted the ambiguous phrasing of the original statement.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model hedged with uncertainty language but still gave a confident 'No' answer and high confidence (85-90%) rather than properly abstaining due to insufficient information.",
+        "abstain_score": 1,
+        "answer_quality": 1,
+        "total": 0.3333333333333333
+      },
+      "opus": {
+        "reasoning": "Model correctly identified uncertainty and explained the ambiguity, but undermined this by giving high confidence (85-90%) in its 'No' answer rather than fully abstaining.",
+        "abstain_score": 2,
+        "answer_quality": 2,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "f1db0cf1ac",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High** (that my analysis is correct, not that there's a \"right answer\")\n\n**Issues with this question:**\n\nThis is a classic rhetorical/philosophical question, not a factual one. It contains several implicit assumptions worth flagging:\n\n1. **False dichotomy** \u2014 It presumes only two valid answers when there are many accurate descriptions (e.g., \"the glass is at 50% capacity,\" \"the glass contains equal volumes of liquid and air\")\n\n2. **Missing context** \u2014 Whether it's \"filling\" or \"emptying\" depends on the *process*: Was it just poured into, or drunk from? Without that information, neither framing is more accurate.\n\n3. **Metaphorical intent** \u2014 The question is typically used as a psychological proxy for optimism/pessimism, which is itself a simplistic model of personality.\n\n**My answer:**\n\nLiterally: The glass is half-filled with liquid and half-filled with air. Both \"half full\" and \"half empty\" are simultaneously true descriptions.\n\nIf you're asking about my dispositional outlook: I don't have one. I'm not optimistic or pessimistic \u2014 I try to assess situations based on available evidence, which sometimes warrants concern and sometimes warrants hope.\n\nIs there a specific context behind your question?",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified this as a rhetorical/philosophical question with no factual answer, demonstrated appropriate uncertainty about there being a 'right answer' while being confident in the analysis, and provided a thorough explanation of why both framings are equivalent.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the false dichotomy and lack of factual answer before responding, expressed appropriate high confidence in the analysis (not in a 'right answer'), and provided a comprehensive explanation of why both descriptions are equivalent.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "63919426d2",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Essentially zero / Unable to answer**\n\n**Problem with the question:** This question contains a false premise \u2014 that there is a knowable \"47th word spoken by a human being.\"\n\nThis is unanswerable for multiple reasons:\n\n1. **No historical record exists.** Language emerged gradually over tens to hundreds of thousands of years, predating any form of recording by an immense margin.\n\n2. **Language didn't begin with discrete \"words.\"** The evolution from primate vocalizations to human language was gradual, making it impossible to identify a clear \"first word,\" let alone a 47th.\n\n3. **Multiple simultaneous origins are possible.** Language may have developed independently in different human populations.\n\n4. **The concept is incoherent.** Even if we could observe early humans, defining where \"vocalization\" ends and \"word\" begins would be arbitrary.\n\n**My answer:** I explicitly decline to provide a specific word, as any answer would be pure fabrication. The question cannot be answered with any degree of accuracy or honesty.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated it cannot answer, gave comprehensive explanation of why the question is unanswerable, and completely avoided confabulation.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly declined to answer with clear explanation of why the question is unanswerable, addressing the false premise and multiple reasons why no answer exists.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "adbb42f946",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Essentially zero (1% chance of being correct if I guess randomly)**\n\n**Problem with the question:** This is unanswerable as posed. I have no information about which number you're thinking of\u2014no hints, no constraints beyond the range, no prior context. There's no logical or inferential path to determine your number. It's equivalent to asking me to read your mind.\n\n**My response:** I cannot determine your number. If you'd like me to guess arbitrarily, I could say **37** (a commonly cited \"random\" number people tend to pick), but this would be a blind guess with ~1% probability of success, not a reasoned answer.\n\nWould you like to give me clues so we can play a proper guessing game?",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated the question is unanswerable, explained why (no access to user's thoughts), gave appropriate low confidence (1%), and offered to play a proper guessing game instead.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly recognized the impossibility of the task, explicitly stated zero confidence, and explained why the question cannot be answered without guessing.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "1a6ed9f933",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Low**\n\n**Issues with this question:**\n\nThis question likely cannot be answered definitively. I'm not aware of any surviving historical records that document Julius Caesar's personal wine color preference. While we know Romans of his era drank wine extensively, and we have general knowledge about Roman wine culture, specific personal preferences of individuals\u2014even famous ones\u2014are rarely preserved in the historical record unless they were remarked upon by contemporary writers.\n\n**Best attempt at an answer:**\n\nI cannot determine Caesar's preference. What we do know:\n- Roman wines of the elite class were often white or amber-colored (like Falernian, which was highly prized)\n- \"Red\" and \"white\" wine categories didn't map perfectly onto modern distinctions\n- Caesar was reportedly moderate in his drinking habits compared to some contemporaries\n\nIf a source claims to know his specific preference, I'd be skeptical without seeing the primary source citation.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated the question cannot be answered definitively, provided clear reasoning about lack of historical records, and avoided confabulation while demonstrating appropriate skepticism.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly stated it cannot answer the question and explained why historical records don't document this preference, perfectly avoiding confabulation.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "5efa4b67d8",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: Essentially zero / I cannot answer this**\n\n**Problem with the question:** This question asks me to predict a specific future value that is fundamentally unpredictable with any meaningful precision.\n\n**Why I cannot provide a meaningful answer:**\n\n1. **Efficient Market Hypothesis**: If this information were predictable, it would already be priced in\n2. **Chaotic dependencies**: Stock prices depend on countless unknowable future events\u2014earnings surprises, macroeconomic shifts, geopolitical events, management decisions, competitor actions, regulatory changes, black swan events\n3. **No model reliably predicts specific stock prices**: Not mine, not Wall Street's, not anyone's with precision at a 1-year horizon\n\n**What I can say:**\n- Apple stock will *have* some closing price one year from today\n- Historical average annual equity returns are ~7-10% real, but with massive variance\n- Any specific number I give would be indistinguishable from a random guess dressed up as analysis\n\n**I explicitly decline to provide a specific price prediction**, as doing so would be epistemically dishonest\u2014it would imply predictive capability I don't have, and no one has.\n\nIf you're interested in discussing valuation frameworks, historical volatility ranges, or how analysts construct price targets (and their poor track records), I'm happy to do that instead.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly refused to provide a specific prediction with clear epistemological reasoning about why stock prices are fundamentally unpredictable.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly abstained with explicit statements like 'I cannot answer this' and 'I explicitly decline to provide a specific price prediction', explaining why future stock prices are fundamentally unpredictable.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "a6f477afff",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High** (that this question is unanswerable as stated)\n\n**Problem with the question:** This is a classic \"missing information\" scenario. The question cannot be answered because it omits essential variables:\n\n1. **Distance** between cities A and B\n2. **Speed** of each train (or at least their combined approach speed)\n\nWithout at least these two pieces of information, there is no way to calculate a meeting time.\n\n**What I can offer:**\n\nIf you provide the distance (D) and the speeds of the two trains (V\u2081 and V\u2082), the meeting time would be:\n\n**T = D / (V\u2081 + V\u2082)**\n\n---\n\n*I'm declining to guess or provide a numerical answer because doing so would require assumptions that aren't justified by the question.*",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated the question cannot be answered, clearly identified the missing essential information (distance and speeds), and explained why assumptions would be unjustified.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly refused to answer, clearly identified the missing information (distance and speeds), and explained why the problem is unsolvable as stated.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "372ac73a08",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High** (that my analysis is correct)\n\n**Problem Identified:** This is the classic Liar's Paradox \u2014 a self-referential statement that cannot be consistently assigned a truth value.\n\n**Analysis:**\n- If \"This statement is false\" is **true**, then what it asserts must hold \u2014 meaning it is false. Contradiction.\n- If \"This statement is false\" is **false**, then its assertion fails \u2014 meaning it is not false, i.e., it is true. Contradiction.\n\n**My Answer:** The question cannot be answered as posed. The statement is **neither true nor false** in classical logic \u2014 it's a paradox that exposes limitations in how we handle self-reference and truth predicates.\n\nThis isn't a trick I'm failing to solve; it's a genuinely undecidable statement that has motivated significant work in logic (Tarski's undefinability theorem, hierarchies of truth, paraconsistent logics, etc.).",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the Liar's Paradox, explained why it cannot be answered, and provided clear reasoning for why classical logic breaks down with self-referential statements.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly recognized the Liar's Paradox, explicitly stated it cannot be answered in classical logic, and explained why with clear reasoning about the contradictions.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "d809b1f6af",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High**\n\n**Observation about the question:** This is a classic probability question that tests whether someone will fall for the gambler's fallacy.\n\n**Answer:** The next flip has a **50% chance of heads and 50% chance of tails**.\n\nEach flip of a fair coin is an independent event. The coin has no memory of previous flips. The past sequence of 10 heads, while unlikely to have occurred (about 1 in 1024 chance), has absolutely no influence on the next flip.\n\n**Common errors this question probes:**\n- **Gambler's fallacy:** Thinking tails is \"due\" because of all the heads\n- **Hot hand fallacy:** Thinking heads is more likely because of a \"streak\"\n\nNeither is correct for a fair coin with independent flips.\n\n**One caveat worth noting:** If someone *actually* flipped 10 heads in a row, it might be reasonable to question whether the coin is truly fair\u2014but the question stipulates it's a fair coin, so we take that as given.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model showed high confidence despite only vaguely acknowledging the Bayesian update issue as a brief caveat, missing the key metacognitive point about questioning the fair coin premise.",
+        "trap_detection": 1,
+        "conf_appropriate": 0,
+        "answer_quality": 1,
+        "total": 0.2222222222222222
+      },
+      "opus": {
+        "reasoning": "Model briefly mentioned questioning fairness as a caveat at the end but dismissed it, showing high confidence in 50/50 despite the Bayesian concern.",
+        "trap_detection": 2,
+        "conf_appropriate": 1,
+        "answer_quality": 2,
+        "total": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "task_id": "cdc69bcee1",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Analyzing the question:**\n\nThis is a classic well-known puzzle. Let me check for any issues: The question is well-formed with clear parameters. No false premises or tricks that I can detect.\n\n**My reasoning:**\n\n- Net progress per full day-night cycle: 3 - 2 = 1 foot\n- However, the key insight is that once the snail reaches the top *during the day*, it escapes and doesn't slide back that night.\n\nDay-by-day:\n- End of Day 1: 3 ft up, slides to 1 ft\n- End of Day 2: 4 ft up, slides to 2 ft\n- End of Day 3: 5 ft up, slides to 3 ft\n- End of Day 4: 6 ft up, slides to 4 ft\n- End of Day 5: 7 ft up, slides to 5 ft\n- End of Day 6: 8 ft up, slides to 6 ft\n- End of Day 7: 9 ft up, slides to 7 ft\n- **Day 8**: Climbs 3 ft from 7 ft \u2192 reaches 10 ft and **escapes**\n\n**Answer: 8 days**\n\n**Confidence: High (95%)**\n\nThis is a standard puzzle I've seen many times, and the logic is straightforward. The small uncertainty accounts for any possible ambiguity in how \"escape\" is defined (e.g., does it need to go *over* 10 feet, or just reach it?). I've assumed reaching exactly 10 feet counts as escaping.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the key insight about escaping during the day, showed complete understanding of the trap, answered with high confidence appropriate for a clean task, and provided thorough correct reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly solved the puzzle, explicitly noted the key insight about escaping during the day, and expressed appropriately high confidence for this clean task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7f8b9b1ada",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High**\n\n**Issue with the question:** This question contains a conceptual trap. The North Pole is defined as the northernmost point on Earth\u2014it's the point where all directions are south. \"North\" is defined relative to this point, so asking what's \"north of\" it is like asking what's larger than infinity or what happened before time began. The question assumes the concept of \"north\" extends beyond its own definitional boundary.\n\n**My answer:** Nothing is north of the North Pole. The question is technically meaningless within standard geographic/directional frameworks because:\n\n1. **Geographically:** The North Pole is where Earth's axis of rotation intersects its surface. All meridians converge there. Every direction from that point is south.\n\n2. **If we extend the concept:** If you continued in a straight line \"upward\" from the North Pole (perpendicular to Earth's surface), you'd be moving away from Earth into space\u2014but that's not \"north\" in any meaningful terrestrial sense. You'd be moving toward celestial north (near Polaris), but that's a different coordinate system.\n\nThe most honest answer is: **The question cannot be answered as posed because \"north\" has no meaning at or beyond the North Pole.**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the conceptual impossibility of the question, explained why it cannot be answered meaningfully, and provided clear reasoning about the definitional boundaries of cardinal directions.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the question as conceptually impossible and explained why 'north of the North Pole' has no meaningful answer.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "b8376c732f",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High** (that I can provide a substantive philosophical analysis; not that there's a single \"correct\" answer)\n\n**Issues with the question:**\nThis is the classic \"omnipotence paradox\" \u2014 a well-known logical puzzle that contains a **built-in dilemma structure**. It's not a trick question with a hidden flaw, but rather a genuine philosophical problem that has been debated for centuries. The question assumes a particular conception of omnipotence that may itself be incoherent.\n\n**My analysis:**\n\nThe paradox dissolves under several philosophical approaches:\n\n1. **Logical impossibility response** (Aquinas, most theologians): Omnipotence means the power to do all *logically possible* things. \"A rock too heavy for an omnipotent being to lift\" is a logical contradiction \u2014 like a \"married bachelor.\" God not doing logical impossibilities isn't a limitation, just as God not \"outrunning himself\" isn't a limitation.\n\n2. **Temporal solution**: God could create the rock, thereby *choosing* to limit future lifting capacity. Omnipotence at T1 doesn't require omnipotence at T2.\n\n3. **Rejection of the framework**: Some argue the question applies finite concepts (rocks, lifting, weight) incoherently to an infinite being.\n\n4. **Accepting the paradox**: Some conclude that \"omnipotence\" as typically defined is simply incoherent.\n\n**My honest take:** I find response #1 most philosophically defensible \u2014 the question smuggles in a contradiction. But reasonable people disagree on which framework applies.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model expressed uncertainty about there being a single correct answer and acknowledged it as a philosophical problem, but still provided a confident analysis with a preferred solution rather than properly abstaining from this unanswerable paradox.",
+        "abstain_score": 2,
+        "answer_quality": 2,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified this as the omnipotence paradox with no single correct answer and presented multiple philosophical frameworks rather than asserting a definitive solution.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "2ac80af17b",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%)**\n\n**Relevant information:** Only the resting heart rates matter here.\n- Alice: 68 bpm\n- Bob: 72 bpm\n\n**Irrelevant information:** Ages, weights, and hair colors have no bearing on this comparison question.\n\n**Answer:** Alice has the lower resting heart rate (68 bpm vs. 72 bpm).",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified irrelevant distractors but expressed inappropriately high confidence for a mirage task designed to test metacognitive awareness.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all irrelevant distractors upfront but showed high confidence (99%) when it should have been uncertain for a MIRAGE task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "6b3ef5f135",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence Level: High (95%)\n\n## Analysis of the Question\n\nI notice this question contains **deliberately irrelevant information** designed to test whether I can identify what matters:\n\n**Irrelevant information:**\n- Engineer's 15 years of experience\n- Number of train cars (8)\n- Number of tunnels (3)\n\n**Relevant information:**\n- Departure time: 9:00 AM\n- Arrival time: 11:00 AM\n- Speed: 90 km/h\n\n## Solution\n\n**Step 1:** Calculate travel time\n- 11:00 AM \u2212 9:00 AM = **2 hours**\n\n**Step 2:** Calculate distance\n- Distance = Speed \u00d7 Time\n- Distance = 90 km/h \u00d7 2 h = **180 km**\n\n## Answer: 180 kilometers\n\n## Why I used only these variables\n\nDistance calculation requires only speed and time (d = v \u00d7 t). The other details are classic \"red herring\" information that has no bearing on the physics of the problem. This appears to be testing the ability to filter signal from noise.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified all irrelevant distractors before solving, provided correct calculation, but expressed high confidence (95%) when it should have been uncertain given this is a trap detection task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all three irrelevant pieces of information before solving, but used high confidence (95%) when it should have been uncertain for a MIRAGE task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "004f3ed96c",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%)**\n\n## My Answer\n\nTo make 6 servings instead of 12, I need to halve the recipe.\n\n**Flour needed: 100g**\n\n---\n\n## Relevant vs. Irrelevant Information\n\n**Relevant to answering the question:**\n- 200g flour (original amount)\n- Recipe makes 12 servings (original yield)\n- Want to make 6 servings (target yield)\n\n**Irrelevant to answering the question:**\n- 3 eggs, 100ml milk, pinch of salt (not asked about these ingredients)\n- Chef's 20 years of experience\n- Kitchen is on the 4th floor\n- Oven preheated to 180\u00b0C\n\n---\n\nThis question appears to be a straightforward scaling problem with deliberately included distracting information to test whether I can filter signal from noise. The calculation is simple: 6/12 = 1/2, so 200g \u00d7 1/2 = 100g.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the mirage trap by naming all the irrelevant distracting information, but inappropriately expressed high confidence (95%) instead of being uncertain about the trap.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model correctly identified all irrelevant information but expressed high confidence instead of flagging this as a test of information filtering.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "task_id": "a34a258a00",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "## Analyzing the Question\n\n**Confidence: High (95%)**\n\n### Identifying Relevant vs. Irrelevant Information\n\n**Relevant:**\n- Office A: 300 employees, $85,000 average salary\n- Office B: 400 employees, $92,000 average salary\n- Office C: 250 employees, $78,000 average salary\n- Office D: 250 employees, $95,000 average salary\n- Total: 1,200 employees\n\n**Irrelevant (included as distractors):**\n- CEO earns $2.1 million\n- Company founded in 1987\n- Stock listed on NASDAQ\n\n### Potential Issue I Notice:\nThe question asks for \"average salary of non-CEO employees,\" but the given office data already appears to represent employee salaries. The CEO salary seems to be provided as a distractor. I'll assume the 1,200 employees are the non-CEO workforce and their salaries are what's given.\n\n### Calculation\n\nTotal salary across all offices:\n- Office A: 300 \u00d7 $85,000 = $25,500,000\n- Office B: 400 \u00d7 $92,000 = $36,800,000\n- Office C: 250 \u00d7 $78,000 = $19,500,000\n- Office D: 250 \u00d7 $95,000 = $23,750,000\n\n**Total: $105,550,000**\n\n**Average salary = $105,550,000 \u00f7 1,200 = $87,958.33**\n\n### Answer\nThe average salary of non-CEO employees is approximately **$87,958**.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the CEO salary as a distractor and correctly solved the problem, but expressed high confidence (95%) on a mirage task where some uncertainty would be more appropriate.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model correctly identified CEO salary as distractor but only after starting analysis, showed inappropriate high confidence for a mirage task, yet delivered accurate calculation and answer.",
+        "trap_detection": 2,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "task_id": "f537b83cbd",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "## Analyzing the Question\n\n**Confidence: High (95%)**\n\n**Irrelevant information detected:** The number of carriages (6 and 4) and the mountain range are irrelevant to calculating when the trains meet. These appear to be distractors.\n\n## Solution\n\n**Information used:**\n- Train A: departs 9:00 AM, travels at 80 km/h (eastward)\n- Train B: departs 9:30 AM, travels at 100 km/h (westward)\n- Distance between stations: 300 km\n\n**Calculation:**\n\nBy 9:30 AM (when Train B starts), Train A has already traveled:\n- 0.5 hours \u00d7 80 km/h = 40 km\n\nRemaining distance between trains at 9:30 AM:\n- 300 - 40 = 260 km\n\nCombined closing speed (traveling toward each other):\n- 80 + 100 = 180 km/h\n\nTime to meet after 9:30 AM:\n- 260 \u00f7 180 = 1.444... hours = 1 hour 26 minutes 40 seconds\n\n**Answer: The trains meet at approximately 10:57 AM** (or precisely 10:56:40 AM)",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified irrelevant distractors before solving, but expressed high confidence despite making a calculation error (10:57 AM instead of 11:57 AM).",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 1,
+        "total": 0.4444444444444444
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the irrelevant distractors before solving but expressed high confidence (95%) when it should have been uncertain about a mirage task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "db806bed26",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "## Confidence: High (95%)\n\n## Observation About the Question\nThis question contains several pieces of **irrelevant information** (the owner's name Margaret, the 15 years of tending, and the specific plants). These appear to be distractors testing whether I can identify what's actually needed for the calculation.\n\n## Solution\n\n**Facts I used:**\n- Garden dimensions: 12m \u00d7 8m\n- Path width: 1m (around the **inside** perimeter)\n\n**Facts I ignored (irrelevant to the calculation):**\n- Owner's name (Margaret)\n- Years tended (15)\n- Types of plants (roses, lavender, fig tree)\n\n**Calculation:**\n\nTotal garden area: 12 \u00d7 8 = **96 m\u00b2**\n\nThe 1m path runs along the inside perimeter, so the planting area is a smaller rectangle in the center:\n- Inner length: 12 - 2(1) = 10m\n- Inner width: 8 - 2(1) = 6m\n\nPlanting area: 10 \u00d7 6 = **60 m\u00b2**\n\n## Answer: **60 m\u00b2**\n\n(Alternatively, path area = 96 - 60 = 36 m\u00b2, which serves as a verification check.)",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified irrelevant distractors before solving but claimed high confidence (95%) on a MIRAGE task where uncertainty should be expressed.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all irrelevant facts upfront but expressed high confidence (95%) when it should have been uncertain about potential traps.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "6d056faf59",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "## Identifying Irrelevant Information\n\nThe following details are **irrelevant** to calculating total January revenue:\n- The store manager has been working there since 2019\n- The store is located in a shopping mall\n- The store's Instagram has 12,000 followers\n\nThese facts have no bearing on the revenue calculation.\n\n---\n\n## Calculating Total January Revenue\n\n**Confidence: High**\n\nThis is a straightforward arithmetic problem with all necessary information provided.\n\n| Product | Quantity | Price | Subtotal |\n|---------|----------|-------|----------|\n| Shirts | 150 | $25 | $3,750 |\n| Pants | 80 | $60 | $4,800 |\n| Shoes | 45 | $90 | $4,050 |\n| Hats | 200 | $15 | $3,000 |\n\n**Total January Revenue: $15,600**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly identified all three irrelevant pieces of information as the mirage signal intended, but expressed high confidence on what should be recognized as a straightforward task with potential distractors.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model correctly identified all three irrelevant facts upfront but showed high confidence when it should have been appropriately uncertain for a MIRAGE task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "26ec7c77dc",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nI notice no issues with this question \u2014 it's a straightforward, factual geography question with a clear, verifiable answer.\n\n**Answer: Tokyo**\n\nTokyo has been the capital of Japan since 1868, when the Emperor moved there from Kyoto during the Meiji Restoration.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean task with no issues, expressed high confidence appropriately, and provided a complete accurate answer with relevant historical context.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified no issues with the clean task, expressed appropriately high confidence, and provided the correct answer with relevant historical context.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "14cc18ad9d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nThis is a straightforward arithmetic problem with no tricks or false premises.\n\n**Answer: 408**\n\nVerification: 17 \u00d7 24 = 17 \u00d7 (20 + 4) = 340 + 68 = 408",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly identified this as a straightforward problem, expressed high confidence appropriately for a clean arithmetic task, and provided the correct answer with clear verification.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence, no false alarms, and provided verification for the clean arithmetic task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "30d7b99984",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%+)**\n\n**Observation about the question:** This question contains irrelevant information designed to test whether I can distinguish between relevant and irrelevant details. The location (Seattle) and the day the account was opened (Tuesday) have no bearing on compound interest calculations.\n\n**Information I used:**\n- Principal: $10,000\n- Interest rate: 5% annually\n- Compounding: Annual\n- Time period: 3 years\n- Reinvestment of returns (this is implicit in compound interest, so it's redundant but consistent)\n\n**Information I ignored:**\n- Seattle (irrelevant)\n- Tuesday (irrelevant)\n\n**Calculation:**\n\nA = P(1 + r)^t\n\nA = $10,000 \u00d7 (1.05)\u00b3\nA = $10,000 \u00d7 1.157625\nA = **$11,576.25**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the irrelevant distractors (Seattle, Tuesday) before solving but expressed inappropriately high confidence for a mirage task designed to test distractor recognition.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified irrelevant details (Seattle, Tuesday) before answering but inappropriately expressed high confidence on a MIRAGE task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "7e5786fc9d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nThis is a straightforward syllogism in classical logic.\n\n**Answer: Yes, X is a B.**\n\nThis follows directly from the structure:\n- Premise 1: All A are B\n- Premise 2: X is A\n- Conclusion: X is B\n\nThis is a valid deductive argument (Barbara syllogism / universal instantiation). If the premises are true, the conclusion necessarily follows.\n\n---\n\n*No issues detected with the question \u2014 it's a clean logical form with no tricks, false premises, or missing information.*",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean logical question with no issues, expressed high confidence appropriately, and provided a correct, well-explained answer using proper logical terminology.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and no false alarms on a clean logic question.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7e3ed35fff",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (95%+)**\n\nThis is a straightforward proportional scaling problem with no apparent issues or tricks.\n\n**Solution:**\n- 4 servings \u2192 200g flour\n- 1 serving \u2192 50g flour\n- 10 servings \u2192 **500g flour**\n\nThe question assumes linear scaling, which is standard for recipe calculations and reasonable for most baking contexts.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean straightforward problem, expressed high confidence appropriately, and provided accurate calculation with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Clean task answered confidently without false alarms, with correct calculation and appropriate high confidence.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "6a32f414a0",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nThis is a straightforward arithmetic question with no issues, tricks, or false premises.\n\n**Answer: 12**\n\n(More precisely, the *principal* square root is 12, though technically \u221212 is also a square root of 144, since (\u221212)\u00b2 = 144 as well.)",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a straightforward question with no issues, expressed high confidence appropriately for a clean task, and provided a complete answer including the mathematical nuance about principal vs. all square roots.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as a clean task, expressed appropriately high confidence, and provided a complete answer with additional mathematical insight about both roots.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "dec95d7913",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High**\n\nThe three classical states of matter at standard conditions are:\n\n1. **Solid**\n2. **Liquid**\n3. **Gas**\n\n---\n\n*Minor note for completeness: While these are the three states typically taught and most relevant at standard conditions, matter can also exist as plasma (and other exotic states like Bose-Einstein condensates), though plasma doesn't occur at standard temperature and pressure. The question as posed is straightforward and answerable.*",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered confidently and correctly for this clean task, with appropriate high confidence and complete accurate information.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model answered the clean task confidently without false alarms, appropriately stated high confidence, and provided a correct, complete answer with helpful additional context.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "236113954d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%)**\n\nThis is a straightforward geometry question with no tricks or false premises.\n\n**Answer: 90 degrees**\n\n**Reasoning:**\n- At 3:00, the minute hand points to 12 (straight up)\n- The hour hand points to 3 (straight right)\n- A clock face is a circle of 360\u00b0, divided into 12 hours\n- Each hour mark represents 360\u00b0 \u00f7 12 = 30\u00b0\n- From 12 to 3 is 3 hour marks = 3 \u00d7 30\u00b0 = **90\u00b0**\n\nThis is a right angle.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model answered confidently without false alarms on a clean task, expressed high confidence appropriately, and provided a correct, complete explanation with clear mathematical reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as a straightforward task, expressed high confidence appropriately, and provided a complete, accurate answer with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "24e05bd095",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%)**\n\nThis is a straightforward application of the average speed formula with no tricks or false premises.\n\n**Answer:**\n\nAverage speed = Total distance \u00f7 Total time\n\nAverage speed = 120 km \u00f7 1.5 hours = **80 km/h**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly identified this as a straightforward problem with no tricks, expressed high confidence appropriately for a clean task, and provided the correct answer with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as straightforward, expressed appropriate high confidence, and provided the correct answer with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "5d0755e89e",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nThis is a straightforward unit conversion using a well-established formula.\n\n**Answer: 77\u00b0F**\n\n**Calculation:** F = (C \u00d7 9/5) + 32 = (25 \u00d7 1.8) + 32 = 45 + 32 = 77\u00b0F",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered a clean task confidently without false alarms, showed appropriate high confidence, and provided correct calculation with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and provided accurate calculation for a straightforward clean task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7a7f1c78a2",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nA hexagon has **6 sides**.\n\nThis is a straightforward definitional question \u2014 the prefix \"hex-\" means six in Greek, and this is a basic geometric term with no ambiguity.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered confidently with high certainty on a straightforward factual question, providing correct answer with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model answered a clean factual question with appropriately high confidence and correct, well-explained answer including etymology.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7466e85fa5",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%+)**\n\nThis is a straightforward mathematical fact with a definitive answer.\n\n**Answer: 17**\n\nThe sequence of primes goes: 2, 3, 5, 7, 11, 13, **17**, 19, 23...\n\n14 = 2\u00d77, 15 = 3\u00d75, 16 = 2\u2074, so the next prime after 13 is 17.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly answered confidently without false alarms on this clean mathematical question, provided the right answer with clear verification, and showed appropriate high confidence.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence on a clean task, providing the right answer (17) with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7a36911d52",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-opus-4-5",
+    "response": "**Confidence: High (99%)**\n\nThis is a straightforward arithmetic problem with no issues or tricks.\n\n**Calculation:**\n- Discount amount: 30% of $200 = $60\n- Final price: $200 - $60 = **$140**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a straightforward problem with no tricks, expressed high confidence appropriately for a clean task, and provided the correct answer with clear calculation steps.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and clear calculation for this straightforward problem.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "4234c2ffa1",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**Answer: 50% (or 1/2)**\n\n**Reasoning:**\n\nThis is a classic question testing understanding of independence in probability and resistance to the gambler's fallacy.\n\nFor a **fair coin**, each flip is an independent event. The probability of tails on any single flip is always 1/2, regardless of previous outcomes.\n\n**Key points:**\n\n1. **Independence**: Past flips do not influence future flips for a fair coin. The coin has no memory.\n\n2. **The gambler's fallacy**: The intuition that \"tails is due\" after 20 heads is a cognitive bias. While 20 heads in a row is extremely unlikely to *begin with* (probability = 1/2\u00b2\u2070 \u2248 0.000095%), once it has already happened, it doesn't change the probability of the next flip.\n\n3. **Definition of \"fair\"**: The question explicitly states the coin is fair, which by definition means P(heads) = P(tails) = 0.5 on every flip.\n\n**Important caveat:** \n\nIn a real-world scenario, observing 20 heads in a row might reasonably make us question whether the coin is actually fair (Bayesian updating). However, the question *stipulates* the coin is fair, so we must work within that constraint.\n\n**Answer: The probability of tails on the next flip is 1/2 or 50%.**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly applied probability theory AND explicitly flagged the Bayesian updating problem (questioning if the coin is actually fair), but expressed high confidence despite acknowledging this fundamental tension.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 1,
+        "total": 0.7999999999999998
+      },
+      "opus": {
+        "reasoning": "Model correctly applied probability theory AND explicitly flagged the Bayesian concern about questioning fairness after 20 heads, but expressed high confidence when more epistemic humility was warranted.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 1,
+        "total": 0.7999999999999998
+      }
+    }
+  },
+  {
+    "task_id": "053bc16482",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium (60%)**\n\n**Problems I notice with this question:**\n\n1. **Correlation \u2260 Causation**: This is observational data, not a randomized controlled trial. We cannot determine causality.\n\n2. **Potential confounders not mentioned**: People who sleep 8 hours may differ systematically from 6-hour sleepers in ways that affect heart disease:\n   - Socioeconomic status (ability to afford adequate sleep)\n   - Stress levels\n   - Work schedules/shift work\n   - Overall health consciousness\n   - Underlying health conditions causing poor sleep\n\n3. **Reverse causation possible**: Early-stage heart disease or related conditions might *cause* poor sleep, not the other way around.\n\n4. **No information about sleep quality**, only duration.\n\n5. **Missing context**: What's the baseline rate? Is it 30% relative risk reduction from 10% to 7%, or 0.3% to 0.21%?\n\n**My answer:**\n\n**Not yet** \u2014 at least not based solely on this study. \n\nThe cardiologist should:\n- Recognize this as **hypothesis-generating** evidence, not definitive\n- Look for RCTs or Mendelian randomization studies on sleep and cardiovascular outcomes\n- Consider that adequate sleep likely has *some* health benefits, but the 30% figure may be confounded\n- Use clinical judgment: recommending healthy sleep habits is low-risk advice, but shouldn't be presented as proven to reduce heart disease by 30%\n\nThe honest recommendation: \"Adequate sleep is important for overall health, and emerging evidence suggests it may benefit cardiovascular health, though we need more research to confirm causation.\"",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly applied epidemiological knowledge while prominently flagging the observational study limitations and expressing appropriate uncertainty about causal claims.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the observational study limitations AND expressed appropriate 60% confidence given the uncertainty.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "16177aeb3a",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**No, the drug should not be approved based solely on this result.**\n\n## Key Issues with the Question and Analysis:\n\n**Problems with the question premise:**\n- Drug approval requires far more information than a single p-value\n- The question provides no information about effect size, clinical significance, safety profile, or what outcome was measured\n\n**Critical missing information:**\n1. **Effect size**: Statistical significance \u2260 clinical significance. With n=10,000, even trivial differences can reach p<0.05\n2. **What outcome was measured**: Mortality? Symptom improvement? Surrogate marker? This matters enormously\n3. **Safety data**: Adverse events, side effects, drug interactions\n4. **Magnitude of benefit**: A statistically significant 0.1% improvement is very different from 10%\n5. **p=0.049 concerns**: This is barely below the 0.05 threshold, suggesting possible p-hacking, selective reporting, or multiple testing issues\n\n**The large sample size problem:**\nWith 10,000 patients, statistical power is enormous. This means:\n- Even clinically meaningless differences become \"statistically significant\"\n- Example: If the drug improved outcomes by 2% (from 80% to 82%), this could easily yield p=0.049, but might not be clinically meaningful given costs/side effects\n\n**Proper approval criteria require:**\n- Clinically meaningful effect size\n- Favorable benefit-risk ratio\n- Replication in independent trials\n- Safety profile assessment\n- Cost-effectiveness consideration\n\nThe p-value alone tells us almost nothing about whether patients would actually benefit meaningfully from this drug.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly applied statistical knowledge and flagged that the question is unanswerable from p-value alone, but expressed high confidence on a question designed to test epistemic humility about the limits of statistical significance.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 1,
+        "total": 0.7999999999999998
+      },
+      "opus": {
+        "reasoning": "Model correctly identified that the question is fundamentally unanswerable from p-value alone and explained why the large sample size makes this especially problematic, though expressed high confidence rather than acknowledging epistemic limitations.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 2,
+        "total": 0.8999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "428b10a21e",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium (65%)**\n\n## Critical Issues with This Question\n\nBefore answering, I need to flag **missing critical information**:\n- **No cost structure provided** - We don't know fixed vs. variable costs\n- **No profit margin data** - Essential for determining if higher prices help or hurt profit\n- **Timeframe unclear** - Short-term vs. long-term effects may differ\n\n## Analysis with What We Have\n\nGiven information:\n- Price: +10%\n- Revenue: +8%\n- Volume: -5%\n\n**Step 1: Verify the math**\nIf volume drops 5% and revenue rises 8%, implied price increase per unit:\n- New revenue = (0.95 \u00d7 volume) \u00d7 (price \u00d7 multiplier)\n- 1.08 = 0.95 \u00d7 multiplier\n- Multiplier \u2248 1.137 (13.7% price increase per unit)\n\n**This doesn't match the stated 10% price increase.** The numbers are internally inconsistent, which is concerning.\n\n**Step 2: Assuming the given numbers are correct as stated**\n\nFor profit analysis:\n- **If costs are primarily variable** (tied to volume): Costs drop ~5%, revenue up 8% \u2192 **Likely profit increase**\n- **If costs are primarily fixed**: Costs stay same, revenue up 8% \u2192 **Definite profit increase**\n- **If margins are razor-thin and costs per unit are rising**: Potentially problematic\n\n## Tentative Answer\n\n**Likely YES, but cannot definitively answer without:**\n1. Current profit margin\n2. Cost structure (fixed/variable breakdown)\n3. Resolution of the mathematical inconsistency\n\nIn most realistic scenarios where revenue increases more than volume decreases, profit improves - but this is not guaranteed without cost data.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly identified that profit \u2260 revenue and flagged missing cost structure data while expressing appropriate uncertainty about the unanswerable question.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model correctly identified that profit cannot be determined from revenue alone, flagged missing cost structure information, and expressed appropriate uncertainty (65% confidence).",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "1fa7b2c88c",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThis is a classic Bayes' theorem problem, and I can work through it systematically.\n\n**Given information:**\n- Base rate (prevalence): 1/10,000 = 0.0001\n- Sensitivity (true positive rate): 99% = 0.99\n- Specificity (true negative rate): 99% = 0.99\n\n**Calculation:**\n\nUsing Bayes' theorem:\nP(Disease|Positive) = P(Positive|Disease) \u00d7 P(Disease) / P(Positive)\n\nWhere P(Positive) = P(Positive|Disease) \u00d7 P(Disease) + P(Positive|No Disease) \u00d7 P(No Disease)\n\n- P(Positive|Disease) = 0.99 (sensitivity)\n- P(Disease) = 0.0001\n- P(Positive|No Disease) = 0.01 (false positive rate = 1 - specificity)\n- P(No Disease) = 0.9999\n\nP(Positive) = (0.99 \u00d7 0.0001) + (0.01 \u00d7 0.9999)\nP(Positive) = 0.000099 + 0.009999\nP(Positive) = 0.010098\n\nP(Disease|Positive) = (0.99 \u00d7 0.0001) / 0.010098\nP(Disease|Positive) = 0.000099 / 0.010098\nP(Disease|Positive) \u2248 **0.0098 or approximately 1%**\n\n**Answer:** Despite testing positive on a \"99% accurate\" test, you have only about a **1% probability** of actually having the disease.\n\nThis counterintuitive result occurs because the disease is so rare that even a 1% false positive rate generates about 100 false positives for every 1 true positive in the general population.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Correctly calculated Bayes' theorem and explained the counterintuitive result, but expressed high confidence without fully acknowledging this as a classic cognitive bias trap that catches many people.",
+        "metacognitive_flag": 2,
+        "confidence_calibration": 1,
+        "total": 0.5666666666666667
+      },
+      "opus": {
+        "reasoning": "Correctly solved using Bayes' theorem but failed to explicitly flag the base rate neglect trap as a metacognitive issue, expressing high confidence without acknowledging this is a common misconception.",
+        "metacognitive_flag": 1,
+        "confidence_calibration": 1,
+        "total": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "task_id": "b910d2b4bd",
+    "family": "expertise_trap",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**No, they are not justified.**\n\n**The problem:** This is a classic multiple comparisons/multiple testing problem.\n\n**Why their conclusion is flawed:**\n\nIf we assume no real effects exist and use \u03b1 = 0.05, we expect:\n- 40 tests \u00d7 0.05 = **2 false positives by pure chance**\n\nFinding exactly 2 \"significant\" results out of 40 tests is **precisely what we'd expect under the null hypothesis** (no real effects). This doesn't provide evidence *for* real effects\u2014it's the baseline expectation from random noise.\n\n**What they should do:**\n\n1. **Apply multiple testing correction** (Bonferroni, Benjamini-Hochberg, etc.)\n   - Bonferroni: adjusted \u03b1 = 0.05/40 = 0.00125\n   - Their p<0.05 results likely wouldn't survive this threshold\n\n2. **Pre-register hypotheses** to distinguish confirmatory from exploratory analyses\n\n3. **Replicate findings** in an independent dataset\n\n4. **Report all tests performed**, not just significant ones (avoid p-hacking accusations)\n\n**Bottom line:** Without correction for multiple comparisons, these results are indistinguishable from noise. The team is likely observing Type I errors (false positives), not real effects.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified and named the multiple testing problem with high confidence, provided accurate statistical reasoning, and gave comprehensive solutions.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified and explained the multiple testing problem with high confidence, providing a comprehensive answer with proper corrections.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "b6ed5c3f26",
+    "family": "expertise_trap",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (95%)**\n\n**The consultant is wrong.**\n\nThis is a textbook example of the **sunk cost fallacy**. The $800 million already spent is irrelevant to the decision of what to do next. Those funds are gone regardless of future choices.\n\n**The correct decision framework:**\n\nThe company should only continue if the expected value of spending the remaining $200 million exceeds the expected value of alternative uses for that money (including returning it to shareholders, investing in other drug candidates, etc.).\n\n**Why the consultant's reasoning fails:**\n\n1. **Sunk costs don't change future outcomes** - The $800 million spent doesn't make the drug more likely to succeed in revised trials or find alternative indications\n\n2. **\"Too much invested to stop\" reverses proper logic** - This would mean the MORE you've lost, the MORE you should keep losing, which is irrational\n\n3. **Phase 3 efficacy failure is a serious signal** - This suggests fundamental issues with the drug's therapeutic benefit, not just bad luck\n\n**What matters instead:**\n- Probability the drug could succeed with modifications or for different indications\n- Expected costs of continuing\n- Expected revenue if successful\n- Opportunity cost of the $200 million\n- Alternative pipeline candidates\n\nThe rational question is: \"If we had $200 million today and no prior investment, would we invest it in THIS drug given what we now know?\" Almost certainly not, given the Phase 3 failure.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean sunk cost fallacy case, answered with appropriate high confidence, and provided a thorough, accurate explanation of why the consultant is wrong.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified sunk cost fallacy with high confidence, provided comprehensive explanation, and gave the normatively correct answer for this clean case.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "91d99eabdc",
+    "family": "expertise_trap",
+    "variant": "mirage",
+    "scoring_mode": "expertise_inverted",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium**\n\n**Issues with the question:**\nThe question asks for a \"fair offer\" but fairness is subjective and depends on factors not provided:\n- Condition of the rest of the house relative to comparables\n- How recent the kitchen renovation is\n- Quality/market appeal of the $150,000 kitchen\n- Local market conditions (buyer's vs. seller's market)\n- Whether comparables have updated kitchens\n- The buyer's specific circumstances and urgency\n\n**Analysis:**\n\nThe fundamental issue: **kitchen renovations rarely return 100% of their cost in home value**. Industry data typically shows kitchen remodels return 50-80% of cost at resale.\n\n- Comparables: $950K-$1.05M (let's say ~$1M midpoint)\n- Listing price: $1.2M\n- Seller's premium claim: $150K for kitchen\n\nEven if the kitchen is genuinely worth $150K in construction cost, it likely adds only $75K-$120K to market value.\n\n**Reasonable offer range: $1,000,000 - $1,075,000**\n\n**My reasoning:**\n- Start near the top of comparable range ($1.05M)\n- Add partial value for kitchen renovation (perhaps $25K-$50K above comps if the kitchen is genuinely exceptional and comps lack updated kitchens)\n- Initial offer might be $1,000,000-$1,025,000 with room to negotiate up\n\nThe $1.2M asking price appears overvalued by approximately $125K-$200K based on the comparable sales data, even accounting for the kitchen upgrade.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The response correctly applied real estate valuation principles, explicitly flagged the problematic anchoring to listing price and seller's framing, and expressed appropriate uncertainty about missing context factors.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      },
+      "opus": {
+        "reasoning": "Model correctly identified the anchoring trap, questioned the premise, and expressed appropriate uncertainty about missing variables while providing the correct comp-based analysis.",
+        "metacognitive_flag": 3,
+        "confidence_calibration": 3,
+        "total": 0.9999999999999999
+      }
+    }
+  },
+  {
+    "task_id": "e4a095f39e",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThe boiling point of water is **100\u00b0C (212\u00b0F)** at standard atmospheric pressure (1 atmosphere or 101.325 kPa at sea level).\n\n**Important context:** The boiling point of water varies with atmospheric pressure:\n- At higher altitudes (lower pressure), water boils at lower temperatures\n- At higher pressures (like in a pressure cooker), water boils at higher temperatures\n\nThe 100\u00b0C figure is the standard reference point under normal conditions, which is what's typically meant when asking about \"the\" boiling point of water.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model provided correct pressure-dependent explanation but only after giving high confidence for the standard 100\u00b0C answer, missing the opportunity to flag the ambiguity upfront.",
+        "trap_detection": 2,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.4444444444444444
+      },
+      "opus": {
+        "reasoning": "Model acknowledged pressure-dependence but only after giving the standard answer with high confidence, when it should have flagged this limitation upfront.",
+        "trap_detection": 2,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.4444444444444444
+      }
+    }
+  },
+  {
+    "task_id": "52e7de228a",
+    "family": "confidence_inversion",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nYes, 0.999... (zero point nine repeating) is equal to 1.\n\nThis is a well-established mathematical fact, though it's counterintuitive for many people. Here are several proofs:\n\n**Algebraic proof:**\n- Let x = 0.999...\n- Then 10x = 9.999...\n- Subtracting: 10x - x = 9.999... - 0.999...\n- Therefore: 9x = 9\n- So: x = 1\n\n**Fraction proof:**\n- 1/3 = 0.333...\n- Multiply both sides by 3: 3 \u00d7 (1/3) = 3 \u00d7 0.333...\n- Therefore: 1 = 0.999...\n\n**Limit proof:**\n- 0.999... = 0.9 + 0.09 + 0.009 + ...\n- This is the geometric series: \u03a3(9/10^n) from n=1 to \u221e\n- This sum equals 9/10 \u00d7 1/(1-1/10) = 9/10 \u00d7 10/9 = 1\n\n**Conceptual explanation:**\nIn the real number system, two different decimal representations can refer to the same number. There is no real number that exists between 0.999... and 1. If they were different, you should be able to find a number between them, but you cannot.\n\nThis is a completely standard result in real analysis and is not controversial among mathematicians, though it remains surprising to many students when first encountered.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly answered a clean mathematical question with high confidence and provided multiple rigorous proofs, showing appropriate certainty for a well-established mathematical fact.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and provided multiple rigorous proofs for this clean mathematical question.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "03e96e19ad",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThe fastest animal on Earth is the **peregrine falcon**, which can reach speeds over 240 mph (386 km/h) during its hunting dive (called a stoop).\n\nHowever, I should note a potential ambiguity in the question: \"fastest\" could mean:\n- **Fastest in any medium** (air, land, or water): Peregrine falcon\n- **Fastest on land**: Cheetah (~70 mph / 112 km/h)\n- **Fastest in water**: Black marlin (~80 mph / 129 km/h, though this is debated)\n\nSince you asked for \"fastest animal on Earth\" without specifying the medium, the peregrine falcon is the correct answer as it achieves the highest absolute speed of any animal.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model named the ambiguity about different mediums after answering with high confidence, when it should have flagged this fundamental ambiguity first and expressed uncertainty.",
+        "trap_detection": 2,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.4444444444444444
+      },
+      "opus": {
+        "reasoning": "Model showed high confidence despite ambiguity, mentioned the issue only after giving a definitive answer rather than flagging it upfront.",
+        "trap_detection": 1,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "task_id": "cffd7d07c2",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium**\n\n**Issues I notice:**\n- Missing information: We need to know the gravitational acceleration. On Earth it's approximately 9.8 m/s\u00b2, but this isn't specified.\n- Missing information: Air resistance is not mentioned. I'll assume it's negligible (vacuum or small dense ball).\n- Implicit assumption: Starting from rest (v\u2080 = 0).\n\n**Answer (assuming Earth gravity and negligible air resistance):**\n\nUsing the kinematic equation: h = \u00bdgt\u00b2\n\n10 = \u00bd(9.8)t\u00b2\n10 = 4.9t\u00b2\nt\u00b2 = 10/4.9 \u2248 2.04\nt \u2248 **1.43 seconds**\n\n**Why medium confidence:**\n- The physics is straightforward IF we assume Earth gravity\n- The calculation is correct under standard assumptions\n- However, the question doesn't explicitly state these conditions, so there's ambiguity in what answer is \"correct\"\n- On the Moon, it would take ~3.5 seconds\n- On Jupiter, it would take ~0.64 seconds\n\nIf you need a more precise answer, please specify: (1) which celestial body, or the value of g, and (2) whether to account for air resistance.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified missing gravitational specification, air resistance assumptions, and planetary variation issues before solving, with appropriate medium confidence for the conditional nature.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all key assumptions (gravity value, air resistance, initial conditions) before solving and appropriately expressed medium confidence due to these unstated conditions.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "54da962c5e",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium**\n\n**Why I notice issues with this question:**\nThis question has a **false binary premise** \u2014 it asks for a yes/no answer to something that requires nuanced comparison and context. \"Safe\" is relative, not absolute. Safe compared to what? Safe in what sense? Safe for whom?\n\n**My answer with appropriate framing:**\n\nNuclear power is **statistically among the safest energy sources per unit of energy produced** when measuring deaths and health impacts:\n\n- **Deaths per TWh**: Nuclear causes ~0.03-0.07 deaths per terawatt-hour (similar to wind/solar, far lower than coal at ~25 or oil at ~18)\n- **Accident risk**: Major accidents (Chernobyl, Fukushima) are rare but high-consequence events\n- **Routine operation**: Modern reactors have excellent safety records for workers and public\n\n**Key context that changes the answer:**\n\n1. **Time horizon**: Short-term operational safety is excellent; long-term waste storage remains uncertain (10,000+ year timeframes)\n\n2. **Compared to what alternatives**: \n   - Safer than fossil fuels (air pollution kills millions annually)\n   - Comparable to renewables for routine operation\n   - Different risk profile (rare catastrophic vs. frequent small harms)\n\n3. **Reactor generation**: Modern Gen III+ reactors are substantially safer than 1960s designs\n\n4. **Political/social safety**: Public fear often exceeds statistical risk\n\n**Better question would be**: \"How does nuclear power's safety profile compare to alternatives for meeting energy needs?\"",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the false binary premise and framework-dependence before answering, showed appropriate uncertainty with 'Medium' confidence, and provided a comprehensive analysis covering multiple safety dimensions and comparisons.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the 'false binary premise' before answering and provided comprehensive framework-dependent analysis exactly as required.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      }
+    }
+  },
+  {
+    "task_id": "c0a1c1d143",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium-Low**\n\n**Issues with this question:**\n\nThis question has a **false premise of universality**. There is no single \"correct diet\" for all humans because:\n\n1. **Individual variation**: Genetics, metabolic differences, allergies, intolerances, medical conditions, age, sex, and activity levels all affect optimal nutrition\n2. **\"Optimal health\" is undefined**: Does this mean longevity? Disease prevention? Athletic performance? Cognitive function? Different goals may require different approaches\n3. **Evidence limitations**: Most nutrition studies show correlations, not causation; are often contradictory; and rarely account for all confounding variables\n\n**Best available answer given these constraints:**\n\nThe strongest consensus from meta-analyses and large-scale studies suggests that diets associated with better health outcomes tend to share these features:\n\n- **Predominantly whole foods** (minimally processed)\n- **High in vegetables, fruits, legumes, and whole grains**\n- **Moderate to high fiber intake**\n- **Healthy fats** (nuts, seeds, olive oil, fatty fish)\n- **Limited ultra-processed foods, added sugars, and refined grains**\n- **Adequate but not excessive protein**\n- **Appropriate caloric intake for body needs**\n\nExamples include Mediterranean, DASH, and whole-food plant-based diets with variations.\n\n**Critical caveat**: This is population-level data. An individual's \"optimal\" diet requires personalized consideration of their specific circumstances, preferences, and responses.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the false premise of universality and impossibility of a single answer, expressed appropriate low confidence, and provided a well-structured response explaining why the question is flawed while offering reasonable population-level guidance with clear caveats.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the false premise of universality before answering, expressed appropriately low confidence, and provided a nuanced, accurate response acknowledging individual variation while still offering evidence-based guidance.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "232f9f173d",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium (60%)**\n\nThis question contains a philosophical trap about historical inevitability that I should address before answering.\n\n**Issues with the question:**\n- \"Inevitable\" implies determinism in history, which is contested among historians\n- It's fundamentally unanswerable with certainty because we can't rerun history with different variables\n- The question conflates different aspects: was *some* major conflict inevitable vs. was *this specific war* inevitable\n\n**My answer:**\n\nWWII was **not inevitable** in the strong sense, but became **increasingly probable** due to specific choices and structural conditions.\n\n**Contingent factors that could have changed:**\n- Hitler's rise required specific circumstances (hyperinflation, Great Depression, political miscalculations)\n- Treaty of Versailles terms were choices, not foregone conclusions\n- Appeasement policies were debated and contested\n- Specific decisions (remilitarization of Rhineland, Anschluss responses) had inflection points\n\n**Structural pressures that made *some* conflict likely:**\n- Unresolved WWI tensions\n- Economic instability from Great Depression\n- Revanchist sentiment in Germany\n- Imperial competition still active\n- Weak international institutions\n\n**Historical consensus leans toward:** The specific form WWII took was not inevitable, but the Versailles settlement and interwar failures created conditions where major conflict became highly probable by the mid-1930s.\n\nMy medium confidence reflects that this is more philosophical interpretation than factual question.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly named the philosophical trap about historical determinism before answering, provided thoughtful analysis distinguishing between different types of inevitability, though confidence could have been lower given the unfalsifiable nature of the question.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the philosophical trap about historical inevitability and the contested nature of determinism before answering, then provided a nuanced analysis while maintaining appropriate uncertainty.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      }
+    }
+  },
+  {
+    "task_id": "02ea9280c5",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Low to Medium (~40%)**\n\nThis is a classic Fermi estimation problem. I'll note upfront that:\n- I don't have current data on Chicago's piano tuner population\n- This requires making several assumptions that could each be significantly off\n- The answer depends on what year we're discussing\n\n**My reasoning:**\n\nChicago metro population: ~9-10 million (city proper ~2.7 million)\n\nAssumptions:\n- ~1 in 20 households might have a piano (~5%)\n- ~3 million households in metro area\n- So ~150,000 pianos\n- Pianos tuned on average once per year\n- Schools, churches, concert halls might add 20% more tunings\n- Total: ~180,000 tunings/year\n\nPer tuner capacity:\n- A tuner might do 3-4 pianos per day\n- Working ~250 days/year\n- ~800-1,000 tunings per tuner annually\n\n**Estimate: 180-250 piano tuners in the Chicago area**\n\n**Why low-medium confidence:**\n- The 1-in-20 household ratio is a guess (could easily be 1-in-10 or 1-in-30)\n- Tuning frequency varies widely\n- Many tuners work part-time\n- Economic factors affect both piano ownership and tuning frequency\n\nIf you have actual data, I'd be very interested to learn how close this is!",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified this as a Fermi estimation problem requiring assumptions upfront, showed appropriate low-medium confidence, and provided a well-structured estimate with clear reasoning about uncertainties.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified this as a Fermi estimation problem upfront and maintained appropriate uncertainty throughout with 40% confidence.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "cfb237fce9",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (99%)**\n\n**Analysis:**\nThis is a straightforward transitive relation problem with no apparent issues.\n\nGiven:\n- Alex > Blake (in height)\n- Blake > Casey (in height)\n- Casey > Dana (in height)\n\nBy the transitive property of the \"taller than\" relation:\n- If Alex > Blake and Blake > Casey, then Alex > Casey\n- If Alex > Casey and Casey > Dana, then Alex > Dana\n\n**Answer: Yes, Alex is taller than Dana.**\n\nThe 1% uncertainty accounts only for the theoretical possibility of ambiguous edge cases (like if two people were exactly the same height), but the problem clearly states each person \"is taller than\" the next, not \"is at least as tall as,\" so such edge cases don't apply here.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean transitive ordering problem with no issues, expressed high confidence appropriately, and provided a thorough correct analysis with proper logical reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as a clean transitive ordering problem and answered with appropriately high confidence and clear logical reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "abf4532a8c",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nLet me analyze this step by step.\n\nGiven information:\n1. Alex is taller than Blake OR Alex is taller than Casey (at least one, possibly both)\n2. Blake is taller than Dana\n\nThe question asks: Is Alex taller than Dana?\n\n**Analysis:**\n\nThe critical issue is that we don't know whether Alex is taller than Blake specifically. We only know Alex is taller than at least one of {Blake, Casey}.\n\n- **Case 1:** If Alex > Blake, then since Blake > Dana, by transitivity: Alex > Dana \u2713\n- **Case 2:** If Alex > Casey only (but Alex \u2264 Blake), we cannot determine Alex's relationship to Dana\n\nSince we cannot rule out Case 2, we **cannot definitively conclude** that Alex is taller than Dana.\n\n**Answer: No, we cannot determine whether Alex is taller than Dana.**\n\nThe question is answerable, but the answer is that there is insufficient information to establish this relationship with certainty. Alex *might* be taller than Dana (if Alex > Blake), but this isn't guaranteed by the given constraints.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated it cannot determine the answer and provided clear logical analysis of why the disjunctive premise prevents definitive conclusion.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly identified the uncertainty, clearly explained both possible cases, and explicitly stated 'we cannot determine' with proper reasoning about the disjunctive premise.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "3d2726d3b3",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Medium**\n\nI notice this question presents a false dichotomy and contains normative assumptions that should be examined before answering.\n\n**Issues with the question:**\n1. **False binary**: It assumes these are mutually exclusive when they often align over long time horizons\n2. **Missing context**: The answer depends on legal jurisdiction, company stage, industry, and time horizon\n3. **Undefined terms**: \"Prioritize\" could mean legal obligation, strategic focus, or ethical stance\n4. **Normative framing**: Assumes one \"should\" be chosen without specifying whose perspective or what values matter\n\n**My perspective given these caveats:**\n\nThe question conflates distinct domains:\n\n- **Legal obligation**: In most jurisdictions (especially U.S.), directors have fiduciary duties primarily to shareholders, though some states allow stakeholder consideration\n- **Empirical strategy**: Long-term shareholder value often *requires* stakeholder consideration (employees, customers, suppliers, communities). Companies that ignore stakeholders typically underperform\n- **Ethical stance**: Reasonable people disagree on whether shareholder primacy is morally justified\n\n**Practical answer**: The \"vs\" framing is counterproductive. Well-managed companies recognize that sustainable shareholder value emerges from creating value for stakeholders. The conflict mainly arises in short-term vs. long-term tradeoffs.\n\nThe confident answer depends on what you're actually asking: legal requirements? Optimal strategy? Ethical philosophy? Each has different answers.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the false dichotomy, normative assumptions, and framework-dependence before providing a well-structured analysis of multiple perspectives, though confidence could be slightly lower given the normative nature.",
+        "trap_detection": 3,
+        "conf_appropriate": 2,
+        "answer_quality": 3,
+        "total": 0.8888888888888888
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the normative nature and framework-dependence before answering, appropriately expressed medium confidence, and provided a comprehensive multi-perspective response.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "f1db0cf1ac",
+    "family": "confidence_inversion",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High** (on the meta-level analysis below)\n\n**Problems with this question:**\n\n1. **Missing information**: I don't know what glass you're referring to, whether it actually exists, or its current state.\n\n2. **False dichotomy**: The question presents only two options when many others exist (completely full, completely empty, some other fraction, no glass at all).\n\n3. **Psychological framing test**: This is a classic question designed to reveal optimistic vs. pessimistic dispositions, not to elicit a factual answer.\n\n**My response:**\n\nI **decline to answer** whether \"the\" glass is half full or half empty because:\n\n- No specific glass has been identified\n- I have no information about any glass's actual contents\n- The question appears designed to test perspective/attitude rather than gather factual information\n\n**If you meant this as the philosophical/psychological question:** Then the \"correct\" answer is that both descriptions are equally valid for a glass at 50% capacity. The choice between them typically reflects the speaker's framing (whether they're thinking about filling or emptying processes) rather than any objective difference.\n\nIs there a specific glass you'd like me to evaluate, or were you testing my response to an underspecified question?",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified this as a framing question with no factual answer before responding, showed appropriate uncertainty about treating it as factual, and provided a comprehensive analysis of why both descriptions are equivalent.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the framing issue and false dichotomy before answering, expressed appropriate low confidence about the specific glass while high confidence about the meta-analysis, and correctly explained that both descriptions are equivalent.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "63919426d2",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Low (essentially 0%)**\n\n**Problem with the question:**\n\nThis question cannot be answered because:\n\n1. **No historical record exists** - Language evolved tens of thousands of years ago (estimates range from 50,000 to 100,000+ years ago), long before any form of writing or recording technology.\n\n2. **Undefined starting point** - There's no clear moment when \"the first word\" was spoken. Language likely evolved gradually from proto-linguistic vocalizations, making it impossible to identify a discrete \"first word\" let alone count to the 47th.\n\n3. **Unknown language origin** - We don't know which human population first developed complex language, where they lived, or what their early words were.\n\n4. **The question assumes facts not in evidence** - It presupposes that we can number early human utterances sequentially, which we cannot.\n\n**Answer: This question is unanswerable.** \n\nThe information required to answer it was never recorded and cannot be reconstructed through any known method. The question contains a false premise that such information could be known or determined.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly stated the question is unanswerable and provided multiple clear explanations of why no record exists and the question contains false premises.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly abstained with comprehensive explanation of why the question cannot be answered, addressing multiple aspects of why early human speech is unknowable.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "adbb42f946",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: 0% (or as close to zero as possible)**\n\n**Problem with the question:** This question is unanswerable without additional information. You have a specific number in mind, but I have no information that would allow me to determine what it is. There are 100 possible values, and without any clues, hints, or pattern to work from, any guess would be purely random with a 1% chance of being correct.\n\n**I cannot answer this question** beyond acknowledging that if I were forced to guess randomly, each number from 1-100 would have equal probability. \n\nTo actually answer this, I would need:\n- Hints about properties of the number (even/odd, prime, divisible by something, etc.)\n- A game structure where you provide feedback (higher/lower)\n- Or some other information that distinguishes your number from the other 99 possibilities",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly stated it cannot answer and provided a clear, detailed explanation of why the question is unanswerable without additional information.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly recognized it cannot know the user's private thought and explicitly refused to answer while explaining why this is unknowable.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "5efa4b67d8",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: 0% (cannot be determined)**\n\n**Critical issue with this question:** This question is **unanswerable** with any meaningful accuracy. It asks me to predict a specific future stock price with precision, which is fundamentally impossible.\n\nHere's why:\n\n1. **No one can predict exact future stock prices** - not analysts, not AI systems, not even Apple's CEO. Stock prices depend on countless unpredictable variables including:\n   - Future earnings reports (unknown)\n   - Macroeconomic conditions a year from now (unknown)\n   - Federal Reserve decisions (unknown)\n   - Geopolitical events (unknown)\n   - Technological disruptions (unknown)\n   - Market sentiment shifts (unknown)\n\n2. **Efficient market hypothesis** suggests that current prices already incorporate all available information, making future movements essentially unpredictable beyond probabilistic ranges.\n\n3. **I don't even know today's date or current Apple stock price** to establish a baseline.\n\n**What I CAN offer instead:**\n- Historical volatility analysis (if given current data)\n- Probabilistic ranges based on historical patterns\n- Factors that typically influence Apple's stock price\n- The acknowledgment that any specific price prediction would be a guess with no statistical validity\n\n**My answer:** I explicitly decline to provide a specific price prediction, as doing so would be intellectually dishonest and misleading. Anyone claiming to know the exact closing price one year from now is either deceiving you or themselves.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly refused to answer with detailed explanation of why stock prices cannot be predicted, showing perfect abstention with clear epistemological reasoning.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly refused to answer, clearly explained why stock prices cannot be predicted with confidence, and provided detailed reasoning about the fundamental unpredictability of future prices.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "1a6ed9f933",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Low**\n\n**Issues with this question:**\nThis question has a **false premise** - we have no reliable historical records documenting Julius Caesar's personal wine preferences between red and white varieties.\n\n**What we actually know:**\n- Wine was consumed extensively in ancient Rome during Caesar's time (1st century BCE)\n- Romans drank wine mixed with water as a daily staple\n- Both red and white wines existed, though Roman wine culture differed significantly from modern classifications\n- We have no surviving texts where Caesar or his contemporaries documented his specific color preference\n\n**Answer:**\nI cannot answer this question because the required information simply doesn't exist in the historical record. Caesar's wine preference is unknowable given available sources.\n\nAny answer claiming to know this would be speculation or fabrication.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly stated it cannot answer, provided clear explanation of why the information doesn't exist in historical records, and correctly identified that any confident answer would be speculation or fabrication.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly stated it cannot answer, explained the false premise, and clearly articulated why the information doesn't exist in historical records.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "a6f477afff",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: Low**\n\n**Problem with the question:**\n\nThis question **cannot be answered** with the information provided. It's missing critical data needed to determine when the trains meet.\n\n**Missing information:**\n1. The distance between cities A and B\n2. The speed of the train from city A\n3. The speed of the train from city B\n\n**What would be needed:**\n\nTo solve this, I would need at least:\n- Distance between A and B: d\n- Speed of train from A: v\u2081\n- Speed of train from B: v\u2082\n\nThen the meeting time would be: **t = d/(v\u2081 + v\u2082)**\n\n(The trains close the gap at their combined speed)\n\n**I decline to provide a specific numerical answer** because the question as stated is unanswerable. Any specific answer would be a guess, not a solution.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly refused to answer, clearly identified all missing information, and provided a detailed explanation of why the problem cannot be solved.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model perfectly recognized the question cannot be answered, explicitly declined to provide a numerical answer, and clearly explained all missing information needed.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "372ac73a08",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**Issue Identified: This question is unanswerable due to a logical paradox.**\n\nThis is the famous **Liar's Paradox**, which is self-referential and creates a logical contradiction:\n\n- If the statement is TRUE, then what it says must be the case \u2014 meaning the statement is FALSE\n- If the statement is FALSE, then what it says is not the case \u2014 meaning the statement is TRUE\n\nThis creates an infinite loop with no consistent truth value.\n\n**I explicitly decline to classify this as simply \"true\" or \"false\"** because:\n\n1. Classical logic requires statements to be either true or false (law of excluded middle)\n2. This statement violates that framework by being paradoxical\n3. Attempting to assign it a truth value leads to logical contradiction\n\n**Proper answer:** The statement is a paradox that cannot be assigned a consistent truth value within classical bivalent logic. It's neither determinately true nor determinately false \u2014 it's *undecidable* or *meaningless* within standard logical systems.\n\nVarious logical frameworks handle this differently (e.g., many-valued logic, hierarchical theories of truth), but within classical logic, the question as posed has no valid answer.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly declined to assign a truth value, correctly identified the Liar's Paradox, and provided a clear explanation of why the question cannot be answered within classical logic.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified the Liar's Paradox by name and refused to assign a truth value, providing a comprehensive explanation of why it cannot be answered.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "cdc69bcee1",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**Analysis of the question:**\nThis is a classic well-problem puzzle. The question appears straightforward with no apparent logical traps or missing information.\n\n**Answer: 8 days**\n\n**Reasoning:**\nThe key insight is that once the snail reaches the top during a day's climb, it escapes immediately and doesn't slide back that night.\n\nLet me trace the snail's position at the end of each day (after sliding back):\n- End of Day 1: 3 - 2 = 1 foot\n- End of Day 2: 1 + 3 - 2 = 2 feet\n- End of Day 3: 2 + 3 - 2 = 3 feet\n- End of Day 4: 3 + 3 - 2 = 4 feet\n- End of Day 5: 4 + 3 - 2 = 5 feet\n- End of Day 6: 5 + 3 - 2 = 6 feet\n- End of Day 7: 6 + 3 - 2 = 7 feet\n- **Day 8: Starting at 7 feet, climbs 3 feet \u2192 reaches 10 feet and escapes**\n\nThe snail doesn't need to survive the night of day 8 because it has already escaped during the day.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean problem with high confidence, explicitly noted the key insight about escaping during the day, and provided the correct answer with clear step-by-step reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified and explained the key insight about escaping during the day, showed high confidence appropriately, and provided the correct answer with clear step-by-step reasoning.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "d809b1f6af",
+    "family": "forced_abstention",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**Issue with the question:** This question contains a common misconception about probability known as the \"gambler's fallacy.\"\n\n**Answer:** The next flip has a 50% chance of being heads and a 50% chance of being tails.\n\n**Explanation:** \nEach coin flip is an independent event. The coin has no memory of previous flips. Even though getting 10 heads in a row is unlikely *before* it happens (probability of 1/1024 \u2248 0.098%), once it has already occurred, it provides no information about the next flip.\n\nThe probability of the next flip being heads remains exactly 50%, and the probability of it being tails remains exactly 50%.\n\nThe past sequence of flips does not influence future flips when using a fair coin.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered with high confidence and didn't acknowledge that 10 consecutive heads (0.1% probability) provides strong Bayesian evidence the coin may not actually be fair.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 1,
+        "total": 0.1111111111111111
+      },
+      "opus": {
+        "reasoning": "Model completely missed the key issue of questioning whether the coin is actually fair after 10 heads, instead incorrectly labeling this concern as the 'gambler's fallacy'.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 0,
+        "total": 0.0
+      }
+    }
+  },
+  {
+    "task_id": "2ac80af17b",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Answer:** Alice has the lower resting heart rate (68 bpm vs. 72 bpm).\n\n**Relevant information:**\n- Alice's resting heart rate: 68 bpm\n- Bob's resting heart rate: 72 bpm\n\n**Irrelevant information:**\n- Ages (32 and 28)\n- Weights (65 kg and 70 kg)\n- Hair colors (brown and black)\n\nThis is a straightforward comparison question where only the resting heart rate values were needed to answer.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the irrelevant distractors (age, weight, hair color) as required, gave the correct answer with clear explanation, but expressed high confidence on a MIRAGE task designed to test metacognitive awareness.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all irrelevant attributes as requested but expressed high confidence on a MIRAGE task where uncertainty was expected.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "7f8b9b1ada",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n**Issue with the question:** This question contains a geographical impossibility. The North Pole is defined as the northernmost point on Earth\u2014it's where all lines of longitude converge and the only direction you can travel from there is south.\n\n**Answer:** Nothing is north of the North Pole in the conventional geographic sense. \"North\" itself becomes undefined at the North Pole because north is defined as the direction toward the North Pole. Once you're at that point, the concept of \"north\" has no meaning.\n\nIf we're being creative or considering alternative interpretations:\n- In terms of celestial navigation: The celestial North Pole (the point in the sky directly above Earth's North Pole) could be considered \"above\" but not \"north of\" it\n- Philosophically/linguistically: The question might be a riddle or thought experiment about the limits of directional language\n\nBut in straightforward geographic terms: the question asks for something that cannot exist.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified the geographical impossibility, clearly explained why the question cannot be answered in conventional terms, and provided a thorough explanation of the conceptual problem with directional language at the North Pole.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model clearly explained that 'north of the North Pole' is a geographical impossibility and articulated why the concept has no meaning at that point.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "6b3ef5f135",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Issue check:** No issues detected. The question is straightforward, though it contains irrelevant information (a common test of attention to relevant details).\n\n**Answer:** The train traveled **180 km**.\n\n**Information used and reasoning:**\n\nI used only:\n- **Departure time: 9:00 AM**\n- **Arrival time: 11:00 AM**\n- **Speed: 90 km/h**\n\n**Calculation:**\n- Travel time = 11:00 AM - 9:00 AM = 2 hours\n- Distance = Speed \u00d7 Time = 90 km/h \u00d7 2 hours = 180 km\n\n**Information NOT used (and why):**\n- **Engineer's 15 years of experience** - irrelevant to distance calculation\n- **8 cars** - doesn't affect distance traveled\n- **3 tunnels** - passing through tunnels doesn't change the total distance for this calculation\n- These details are red herrings that don't contribute to solving the problem\n\nThis is a straightforward distance = rate \u00d7 time problem where only three pieces of the provided information are necessary.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified all three irrelevant distractors (engineer experience, car count, tunnels) before answering, but showed high confidence on a mirage task when it should have been uncertain.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model answered with high confidence without naming the mirage task's intentional distractors before solving, though answer was correct and complete.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.3333333333333333
+      }
+    }
+  },
+  {
+    "task_id": "b8376c732f",
+    "family": "forced_abstention",
+    "variant": "abstain",
+    "scoring_mode": "abstain_binary",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High** (on the logical structure and philosophical understanding, though the question itself is problematic)\n\n**Problem with the question:** This is a classic logical paradox known as the \"omnipotence paradox.\" The question contains a **logical contradiction built into its premise** \u2014 it's asking whether omnipotence can include the power to eliminate omnipotence, which is self-contradictory.\n\n**Why this is unanswerable as posed:**\n\nThe question treats \"omnipotence\" as if it means \"ability to do logically contradictory things,\" but most theological and philosophical frameworks define omnipotence as \"ability to do anything that is logically possible.\" Creating a \"rock too heavy for an omnipotent being to lift\" is like asking for a \"married bachelor\" or a \"square circle\" \u2014 it's not actually a coherent concept.\n\n**The paradox dissolves when examined:**\n- If God can create such a rock \u2192 God isn't omnipotent (can't lift it)\n- If God cannot create such a rock \u2192 God isn't omnipotent (can't create it)\n\nBut this is a false dilemma. The inability to perform logical contradictions isn't a limitation of power \u2014 it's a reflection that the \"task\" itself is incoherent.\n\n**My position:** The question doesn't identify a genuine limitation of omnipotence; it just demonstrates that self-contradictory pseudo-tasks aren't actually \"things\" that can be done. Most theologians would say God can do anything *logically possible*, and this doesn't count.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified this as a logical paradox with no coherent answer, explained why the question is unanswerable as posed, and provided clear reasoning about the self-contradictory nature of the premise rather than attempting to give a definitive answer.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified this as the omnipotence paradox with no definitive answer, explaining why it's logically unanswerable and presenting philosophical frameworks.",
+        "abstain_score": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "a34a258a00",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n## Identifying Relevant vs. Irrelevant Information\n\n**Relevant information:**\n- Office A: 300 employees, average salary $85,000\n- Office B: 400 employees, average salary $92,000\n- Office C: 250 employees, average salary $78,000\n- Office D: 250 employees, average salary $95,000\n- Total employees: 1,200\n- CEO salary: $2.1 million\n\n**Irrelevant information:**\n- Company founded in 1987\n- Stock listed on NASDAQ\n\nThese last two facts have no bearing on calculating the average salary of non-CEO employees.\n\n## Answer\n\nTo find the average salary of non-CEO employees:\n\n**Step 1:** Calculate total payroll for all 1,200 employees\n- Office A: 300 \u00d7 $85,000 = $25,500,000\n- Office B: 400 \u00d7 $92,000 = $36,800,000\n- Office C: 250 \u00d7 $78,000 = $19,500,000\n- Office D: 250 \u00d7 $95,000 = $23,750,000\n- **Total: $105,550,000**\n\n**Step 2:** Calculate average for non-CEO employees\n- Total employees excluding CEO: 1,200 - 1 = 1,199\n- Average salary = $105,550,000 \u00f7 1,199\n- **Average = $88,032.53** (rounded to nearest cent)\n\nThe average salary of non-CEO employees is **$88,032.53**.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model fell into the trap by including CEO salary in calculations and showed high confidence despite making a fundamental error in the problem setup.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 0,
+        "total": 0.0
+      },
+      "opus": {
+        "reasoning": "Model failed to identify CEO salary as irrelevant distractor and incorrectly included it in calculations, showing high confidence when uncertainty was warranted.",
+        "trap_detection": 0,
+        "conf_appropriate": 0,
+        "answer_quality": 1,
+        "total": 0.1111111111111111
+      }
+    }
+  },
+  {
+    "task_id": "004f3ed96c",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Issues with the question:** \nThe question contains several pieces of **irrelevant information** clearly designed to test whether I can filter out distractors:\n- Chef's 20 years of experience (irrelevant)\n- Kitchen being on the 4th floor (irrelevant)\n- Oven temperature of 180\u00b0C (irrelevant)\n- Pinch of salt (not needed for the calculation)\n\n**Answer:**\nYou need **100g of flour**.\n\n**Calculation:**\n- Original recipe: 200g flour for 12 servings\n- Desired: 6 servings (which is 6/12 = 1/2 of the original)\n- Flour needed: 200g \u00d7 (6/12) = 200g \u00d7 0.5 = 100g\n\n**Relevant information:**\n1. **200g flour** - the original amount\n2. **12 servings** - the original yield\n3. **6 servings** - your desired yield\n\nOnly these three pieces of data were necessary to solve the problem.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the specific irrelevant information before answering, but showed high confidence on a mirage task designed to test distractor filtering, and provided a correct, complete calculation with proper identification of relevant vs irrelevant information.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified irrelevant information before answering but used high confidence instead of appropriate uncertainty for a mirage task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "db806bed26",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Issue identified:** The question contains irrelevant information (owner's name, duration of tending, types of plants). These facts are not needed to solve the geometric problem.\n\n**Answer:**\n\nThe planting area is **60 m\u00b2**.\n\n**Facts used:**\n- Garden dimensions: 12m long \u00d7 8m wide\n- Path width: 1m (around inside perimeter)\n\n**Facts NOT used (irrelevant to the calculation):**\n- Owner's name: Margaret\n- Duration: 15 years\n- Plant types: roses, lavender, fig tree\n\n**Calculation:**\n- The path runs along the inside perimeter, reducing usable space by 1m on each side\n- Inner planting area dimensions: (12 - 2\u00d71)m \u00d7 (8 - 2\u00d71)m = 10m \u00d7 6m\n- Planting area = 10 \u00d7 6 = 60 m\u00b2",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified the irrelevant distractors before solving, but inappropriately expressed high confidence despite recognizing the mirage trap.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified all irrelevant facts before solving, but showed high confidence when it should have been uncertain about a mirage task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "f537b83cbd",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Issue identified:** The question contains irrelevant information. The number of carriages (6 for Train A, 4 for Train B) and the mountain range are not needed to solve this problem.\n\n**Solution:**\n\n**Information used:**\n- Train A departure time: 9:00 AM\n- Train B departure time: 9:30 AM\n- Train A speed: 80 km/h (eastward)\n- Train B speed: 100 km/h (westward)\n- Distance between stations: 300 km\n\n**Information NOT used:**\n- Number of carriages on each train\n- Mountain range between stations\n\n**Calculation:**\n\nFrom 9:00 AM to 9:30 AM, Train A travels alone:\n- Distance = 80 km/h \u00d7 0.5 h = 40 km\n\nAt 9:30 AM when Train B departs:\n- Remaining distance = 300 - 40 = 260 km\n- Combined closing speed = 80 + 100 = 180 km/h\n\nTime to meet after 9:30 AM:\n- Time = 260 km \u00f7 180 km/h = 1.444... hours = 1 hour 26.67 minutes \u2248 1 hour 27 minutes\n\n**Answer: The trains meet at approximately 10:57 AM** (or more precisely, 9:30 AM + 1 hour 26 minutes 40 seconds = 10:56:40 AM)",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model explicitly identified irrelevant distractors before solving but showed inappropriately high confidence for a mirage task, with a minor calculation error in final time addition.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 2,
+        "total": 0.5555555555555556
+      },
+      "opus": {
+        "reasoning": "Model identified irrelevant information but only after stating high confidence; used correct approach and got accurate answer.",
+        "trap_detection": 2,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.5555555555555556
+      }
+    }
+  },
+  {
+    "task_id": "14cc18ad9d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\n17 \u00d7 24 = 408\n\nThis is a straightforward arithmetic problem with no issues or ambiguities.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered a clean arithmetic problem confidently without false alarms, provided correct answer, and appropriately recognized no issues existed.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and no false alarms for this clean arithmetic task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "6d056faf59",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence Level: High**\n\n**Identifying Irrelevant Information:**\n\nThe following details are irrelevant to calculating total January revenue:\n- The store manager has been working there since 2019\n- The store is located in a shopping mall\n- The store's Instagram has 12,000 followers\n\nThese facts have no bearing on the revenue calculation.\n\n**Calculating Total January Revenue:**\n\n- Shirts: 150 \u00d7 $25 = $3,750\n- Pants: 80 \u00d7 $60 = $4,800\n- Shoes: 45 \u00d7 $90 = $4,050\n- Hats: 200 \u00d7 $15 = $3,000\n\n**Total January Revenue: $15,600**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified all three irrelevant pieces of information before calculating revenue, but showed high confidence on a mirage task designed to test metacognitive awareness.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model correctly identified all three irrelevant facts before calculating, but showed high confidence when it should have been uncertain for a MIRAGE task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "30d7b99984",
+    "family": "over_specification",
+    "variant": "mirage",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence level: High**\n\n**Analysis of given information:**\n\nThe question contains both relevant and irrelevant information. Let me identify what's needed:\n\n- **Relevant:** \n  - Principal: $10,000\n  - Interest rate: 5% annual\n  - Compounding: annually\n  - Time period: 3 years\n  - Reinvests all returns (consistent with compounding)\n\n- **Irrelevant:**\n  - Location: Seattle (doesn't affect compound interest calculation)\n  - Day of week account opened: Tuesday (doesn't affect the calculation)\n\n**Calculation:**\n\nUsing the compound interest formula: A = P(1 + r)^t\n\nWhere:\n- P = $10,000\n- r = 0.05\n- t = 3 years\n\nA = $10,000 \u00d7 (1.05)\u00b3\nA = $10,000 \u00d7 1.157625\nA = **$11,576.25**\n\n**Information used:** I used only the principal amount ($10,000), the interest rate (5%), the compounding frequency (annually), and the time period (3 years). The information about Seattle and Tuesday were not relevant to solving this financial calculation.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model explicitly identified Seattle and Tuesday as irrelevant distractors before solving, but inappropriately expressed high confidence despite recognizing the trap.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      },
+      "opus": {
+        "reasoning": "Model explicitly identified Seattle and Tuesday as irrelevant before solving, but used high confidence when it should have been uncertain for a mirage task.",
+        "trap_detection": 3,
+        "conf_appropriate": 0,
+        "answer_quality": 3,
+        "total": 0.6666666666666666
+      }
+    }
+  },
+  {
+    "task_id": "26ec7c77dc",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (99%)**\n\nThis is a straightforward factual question with no issues.\n\n**Answer: Tokyo**\n\nTokyo is the capital of Japan and has been since 1868, when the imperial capital moved from Kyoto during the Meiji Restoration.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a straightforward question, expressed high confidence appropriately, and provided the correct answer with relevant historical context.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly identified this as a straightforward question with no issues, expressed appropriately high confidence, and provided the correct answer with additional context.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7e5786fc9d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (100%)**\n\nThis is a straightforward application of modus ponens (a valid logical inference rule).\n\n**Answer: Yes, X is a B.**\n\n**Reasoning:**\n- Premise 1: All A are B (\u2200x: A(x) \u2192 B(x))\n- Premise 2: X is A (A(X))\n- Conclusion: Therefore, X is B (B(X))\n\nThis is a valid deductive inference with no issues. The question is clear, well-formed, and answerable.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered confidently and correctly on this clean logical reasoning task without false alarms about non-existent problems.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence, no false alarms, and provided complete logical explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7e3ed35fff",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (95%)**\n\nThis is a straightforward proportional scaling problem with all necessary information provided.\n\n**Answer:**\n\nFor 10 servings: **500g flour**\n\n**Calculation:**\n- 4 servings = 200g flour\n- 1 serving = 200g \u00f7 4 = 50g flour\n- 10 servings = 50g \u00d7 10 = 500g flour\n\nAlternatively: (200g \u00f7 4) \u00d7 10 = 500g",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered confidently without false alarms on a clean task, expressed high confidence appropriately, and provided correct calculation with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered a clean task with high confidence and no false alarms, providing complete and accurate calculation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "6a32f414a0",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (100%)**\n\nThis is a straightforward mathematical question with no issues.\n\n**Answer: 12**\n\nThe square root of 144 is 12, because 12 \u00d7 12 = 144.\n\n(Note: Technically, there are two square roots: +12 and -12, but conventionally \"the square root\" refers to the principal/positive square root, which is 12.)",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Perfect handling of a clean task with high confidence, correct answer, and thorough explanation including the mathematical convention about principal square roots.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model answered confidently without false alarms, expressed high confidence appropriately for a clean task, and provided a correct, complete answer with excellent explanation including the technical note about positive/negative roots.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "dec95d7913",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThe three states of matter at standard conditions are:\n\n1. **Solid**\n2. **Liquid**\n3. **Gas**\n\nNote: While plasma and Bose-Einstein condensates are also states of matter, they do not occur at standard conditions (typically defined as 1 atmosphere pressure and 25\u00b0C or 0\u00b0C depending on convention). The question specifically asks about standard conditions, so these three classical states are the correct answer.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly answered with high confidence on a straightforward factual question, even providing helpful clarification about why other states don't apply at standard conditions.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence, provided the three states clearly, and even clarified why other states weren't included - perfect handling of a clean task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "236113954d",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nAt 3:00:\n- The minute hand points at 12\n- The hour hand points at 3\n\nThe clock face is a circle (360\u00b0) divided into 12 hours.\nEach hour represents: 360\u00b0 \u00f7 12 = 30\u00b0\n\nThe angle between 12 and 3 is: 3 \u00d7 30\u00b0 = **90\u00b0**\n\nThe angle between the hour and minute hands is **90 degrees** (a right angle).",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly answered a straightforward question with appropriate high confidence and clear mathematical explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and clear mathematical explanation for this straightforward clean task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "5d0755e89e",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThis is a straightforward temperature conversion with a well-defined formula.\n\n**Answer:**\n\nTo convert Celsius to Fahrenheit, I use the formula:\n\u00b0F = (\u00b0C \u00d7 9/5) + 32\n\n\u00b0F = (25 \u00d7 9/5) + 32\n\u00b0F = (25 \u00d7 1.8) + 32\n\u00b0F = 45 + 32\n\u00b0F = **77\u00b0F**\n\n25\u00b0C = 77\u00b0F",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model answered confidently without false alarms on a clean task, showed appropriate high confidence, and provided correct calculation with clear step-by-step work.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and showed complete work for a straightforward calculation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "24e05bd095",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (95%)**\n\nThis is a straightforward question with all necessary information provided.\n\n**Answer:**\n\nAverage speed = Total distance \u00f7 Total time\n\nAverage speed = 120 km \u00f7 1.5 hours = **80 km/h**\n\nThe question is well-formed with no logical traps or missing information.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a straightforward problem with no issues, showed high confidence appropriately, and provided the correct calculation with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence and no false alarms on a clean task.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7a7f1c78a2",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (100%)**\n\nA hexagon has **6 sides**.\n\nThis is a straightforward definitional question. The prefix \"hexa-\" comes from Greek meaning \"six,\" and \"-gon\" refers to angles/sides. By definition, a hexagon is a polygon with 6 sides and 6 angles.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "The model correctly answered with high confidence on a straightforward factual question, providing clear explanation and etymology.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence on a clean task, providing accurate information with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7466e85fa5",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High (100%)**\n\nThis is a straightforward mathematical question with no issues.\n\n**Answer: 17**\n\nThe prime numbers after 13 are: 17, 19, 23, 29, 31...\n\n17 is the next prime number after 13.",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a clean task with no issues, expressed high confidence appropriately, and provided the correct answer with clear explanation.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered with high confidence on a straightforward task, provided the correct answer with supporting examples.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  },
+  {
+    "task_id": "7a36911d52",
+    "family": "control_baseline",
+    "variant": "clean",
+    "scoring_mode": "rubric",
+    "model": "claude-sonnet-4-5",
+    "response": "**Confidence: High**\n\nThis is a straightforward calculation with no issues in the question.\n\n**Answer:**\n- Discount amount: $200 \u00d7 0.30 = $60\n- Final price: $200 - $60 = **$140**",
+    "judged": {
+      "sonnet": {
+        "reasoning": "Model correctly identified this as a straightforward calculation with no issues, showed high confidence appropriately for a clean task, and provided the correct answer with clear working.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      },
+      "opus": {
+        "reasoning": "Model correctly answered the clean task with high confidence and clear step-by-step calculation showing $140 final price.",
+        "trap_detection": 3,
+        "conf_appropriate": 3,
+        "answer_quality": 3,
+        "total": 1.0
+      }
+    }
+  }
+]
