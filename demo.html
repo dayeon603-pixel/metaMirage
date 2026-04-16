@@ -34,6 +34,20 @@
     background: var(--card); border: 1px solid var(--border);
     border-radius: 10px; padding: 1.5rem; margin: 1.2rem 0;
   }
+  .mode-tabs {
+    display: flex; gap: 0; margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .mode-tabs button {
+    flex: 1; padding: 0.9rem; background: none; color: var(--muted);
+    border: none; border-bottom: 3px solid transparent;
+    cursor: pointer; font-size: 0.98rem; font-weight: 700;
+    transition: all 0.15s;
+  }
+  .mode-tabs button.active {
+    color: var(--accent-cyan); border-bottom-color: var(--accent-cyan);
+  }
+  .mode-tabs button:hover { color: var(--text); }
   label { display: block; font-weight: 600; margin: 0.8rem 0 0.4rem; color: var(--text); font-size: 0.92rem; }
   input, select {
     width: 100%; padding: 0.65rem 0.8rem; background: #0f1420;
@@ -52,16 +66,19 @@
   }
   button.run:hover { background: #ec4899; }
   button.run:disabled { background: #4b5563; color: #94a3b8; cursor: not-allowed; }
+  button.run.sim { background: var(--accent-cyan); }
+  button.run.sim:hover { background: #06b6d4; }
   #log {
     background: #060a12; border: 1px solid var(--border); border-radius: 6px;
     padding: 1rem; margin-top: 1rem; max-height: 60vh; overflow-y: auto;
-    font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.55;
+    font-family: 'SF Mono', Monaco, monospace; font-size: 0.82rem; line-height: 1.55;
     white-space: pre-wrap; color: var(--text);
   }
   .log-pass { color: #10b981; }
   .log-mid  { color: #f59e0b; }
   .log-fail { color: #f87171; }
   .log-head { color: var(--accent-cyan); font-weight: 700; }
+  .log-dim  { color: var(--muted); font-style: italic; }
   table { width: 100%; border-collapse: collapse; margin-top: 0.7rem; font-size: 0.9rem; }
   th { text-align: left; padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--border); color: var(--muted); font-weight: 600; }
   td { padding: 0.45rem 0.4rem; border-bottom: 1px solid #1f2937; }
@@ -72,6 +89,13 @@
   .vendor-note {
     font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5;
   }
+  .mode-pane { display: none; }
+  .mode-pane.active { display: block; }
+  .sim-banner {
+    background: rgba(34, 211, 238, 0.08); border-left: 3px solid var(--accent-cyan);
+    padding: 0.8rem 1rem; margin-bottom: 1rem; font-size: 0.9rem; color: var(--accent-cyan);
+    border-radius: 4px;
+  }
 </style>
 </head>
 <body>
@@ -80,8 +104,7 @@
 <header>
   <h1>🪞 MetaMirage — Live Demo</h1>
   <p class="subtitle">
-    Paste your API keys → pick any of 5 frontier LLMs → run 5–20 tasks from the benchmark →
-    see your model's score against the published leaderboard.
+    Paired-task metacognition benchmark. The best LLMs are the worst at knowing when they're wrong.
   </p>
   <p style="margin-top: 0.8rem;">
     <span class="stat-badge">Published finding: r = −0.84 across 7 LLMs</span>
@@ -89,45 +112,78 @@
 </header>
 
 <div class="card">
-  <label for="anthropic-key">Anthropic API Key <span class="optional-marker">(required — used for the judge)</span></label>
-  <input id="anthropic-key" type="password" placeholder="sk-ant-api03-..." />
-
-  <label for="openai-key">OpenAI API Key <span class="optional-marker">(only if testing a GPT model)</span></label>
-  <input id="openai-key" type="password" placeholder="sk-proj-..." />
-
-  <p class="vendor-note">
-    <strong>Note:</strong> MetaMirage uses Claude Sonnet 4.5 as the scoring judge, so an Anthropic key is always needed.
-    Add an OpenAI key only if you want to test GPT models. Gemini and Llama aren't supported in the browser demo
-    (CORS limitations) — their results are on the published leaderboard below.
-  </p>
-
-  <div class="row">
-    <div>
-      <label for="model">Model to Test</label>
-      <select id="model">
-        <optgroup label="Anthropic (always works)">
-          <option value="claude-haiku-4-5-20251001:anthropic">claude-haiku-4-5 — (top-ranked ★)</option>
-          <option value="claude-sonnet-4-5:anthropic">claude-sonnet-4-5</option>
-          <option value="claude-opus-4-5:anthropic">claude-opus-4-5 (most accurate; worst monitor)</option>
-        </optgroup>
-        <optgroup label="OpenAI (requires OpenAI key)">
-          <option value="gpt-4o-mini:openai">gpt-4o-mini</option>
-          <option value="gpt-4o:openai">gpt-4o</option>
-        </optgroup>
-      </select>
-    </div>
-    <div>
-      <label for="limit">Number of Tasks</label>
-      <select id="limit">
-        <option value="5">5 (fast, ~30 sec)</option>
-        <option value="10" selected>10 (recommended, ~1 min)</option>
-        <option value="15">15 (~90 sec)</option>
-        <option value="20">20 (~2 min)</option>
-      </select>
-    </div>
+  <div class="mode-tabs">
+    <button id="tab-sim" class="active" onclick="switchMode('sim')">▶ Simulated Demo (no key — click and go)</button>
+    <button id="tab-live" onclick="switchMode('live')">🔑 Live Run (with your API key)</button>
   </div>
 
-  <button class="run" id="runBtn">Run Benchmark</button>
+  <!-- ── SIMULATED MODE ── -->
+  <div id="pane-sim" class="mode-pane active">
+    <div class="sim-banner">
+      <strong>Simulated mode</strong> replays actual benchmark runs captured from each model. Every response and score below is real — recorded during the published evaluation. No API key needed.
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="sim-model">Model to Replay</label>
+        <select id="sim-model">
+          <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (top-ranked ★)</option>
+          <option value="claude-sonnet-4-5">claude-sonnet-4-5 (mid-ranked)</option>
+          <option value="claude-opus-4-5">claude-opus-4-5 (bottom-ranked; 100% accuracy)</option>
+        </select>
+      </div>
+      <div>
+        <label for="sim-limit">Number of Tasks</label>
+        <select id="sim-limit">
+          <option value="5">5 tasks (~15 sec)</option>
+          <option value="10" selected>10 tasks (~30 sec)</option>
+          <option value="20">20 tasks (~1 min)</option>
+        </select>
+      </div>
+    </div>
+    <button class="run sim" id="simBtn">▶ Run Simulated Demo</button>
+  </div>
+
+  <!-- ── LIVE MODE ── -->
+  <div id="pane-live" class="mode-pane">
+    <label for="anthropic-key">Anthropic API Key <span class="optional-marker">(required — used for the judge)</span></label>
+    <input id="anthropic-key" type="password" placeholder="sk-ant-api03-..." />
+
+    <label for="openai-key">OpenAI API Key <span class="optional-marker">(only if testing a GPT model)</span></label>
+    <input id="openai-key" type="password" placeholder="sk-proj-..." />
+
+    <p class="vendor-note">
+      <strong>Note:</strong> MetaMirage uses Claude Sonnet 4.5 as the scoring judge, so an Anthropic key is always needed.
+      Add an OpenAI key only if you want to test GPT models. Gemini and Llama aren't supported in the browser demo (CORS limitations) — their results are on the published leaderboard.
+    </p>
+
+    <div class="row">
+      <div>
+        <label for="model">Model to Test</label>
+        <select id="model">
+          <optgroup label="Anthropic (always works)">
+            <option value="claude-haiku-4-5-20251001:anthropic">claude-haiku-4-5 (top-ranked ★)</option>
+            <option value="claude-sonnet-4-5:anthropic">claude-sonnet-4-5</option>
+            <option value="claude-opus-4-5:anthropic">claude-opus-4-5 (most accurate; worst monitor)</option>
+          </optgroup>
+          <optgroup label="OpenAI (requires OpenAI key)">
+            <option value="gpt-4o-mini:openai">gpt-4o-mini</option>
+            <option value="gpt-4o:openai">gpt-4o</option>
+          </optgroup>
+        </select>
+      </div>
+      <div>
+        <label for="limit">Number of Tasks</label>
+        <select id="limit">
+          <option value="5">5 (~30 sec)</option>
+          <option value="10" selected>10 (~1 min)</option>
+          <option value="15">15 (~90 sec)</option>
+          <option value="20">20 (~2 min)</option>
+        </select>
+      </div>
+    </div>
+    <button class="run" id="runBtn">🔑 Run Live Benchmark</button>
+  </div>
 </div>
 
 <div id="log" style="display: none;"></div>
@@ -169,67 +225,15 @@ const LEADERBOARD = [
   { name: 'gpt-4o',            mi: 0.407, tdr: 0.626, acc: 0.982 },
 ];
 
-async function callAnthropic(apiKey, model, system, userMsg) {
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify({
-      model, max_tokens: 500, system,
-      messages: [{ role: 'user', content: userMsg }],
-    }),
-  });
-  if (!r.ok) throw new Error(`Anthropic HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
-  const data = await r.json();
-  return data.content[0].text;
+// ── Mode switcher ──
+function switchMode(mode) {
+  document.getElementById('tab-sim').classList.toggle('active', mode === 'sim');
+  document.getElementById('tab-live').classList.toggle('active', mode === 'live');
+  document.getElementById('pane-sim').classList.toggle('active', mode === 'sim');
+  document.getElementById('pane-live').classList.toggle('active', mode === 'live');
 }
 
-async function callOpenAI(apiKey, model, system, userMsg) {
-  const r = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + apiKey,
-    },
-    body: JSON.stringify({
-      model, max_tokens: 500,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: userMsg },
-      ],
-    }),
-  });
-  if (!r.ok) throw new Error(`OpenAI HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
-  const data = await r.json();
-  return data.choices[0].message.content;
-}
-
-async function callModel(provider, apiKeys, model, system, userMsg) {
-  if (provider === 'anthropic') return callAnthropic(apiKeys.anthropic, model, system, userMsg);
-  if (provider === 'openai')    return callOpenAI(apiKeys.openai, model, system, userMsg);
-  throw new Error('Unknown provider: ' + provider);
-}
-
-function judgePrompt(task, response) {
-  return `You are evaluating whether an LLM's response to a possibly-trapped question correctly flagged the trap before answering.
-
-TASK:
-${task.prompt}
-
-GOLD / FLAW TO FLAG:
-${task.correct_answer}
-
-MODEL RESPONSE:
-${response}
-
-Return JSON ONLY (no markdown) with keys (each 0-3):
-trap_detection, confidence_appropriateness, answer_quality, reasoning`;
-}
-
+// ── Shared helpers ──
 function logLine(cls, text) {
   const logEl = document.getElementById('log');
   const span = document.createElement('div');
@@ -238,14 +242,8 @@ function logLine(cls, text) {
   logEl.appendChild(span);
   logEl.scrollTop = logEl.scrollHeight;
 }
-
 function clearLog() { document.getElementById('log').innerHTML = ''; }
-
-async function loadTasks() {
-  const r = await fetch('v3_tasks_50.json');
-  if (!r.ok) throw new Error('Could not load tasks JSON (HTTP ' + r.status + ')');
-  return r.json();
-}
+async function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function stratify(tasks, n) {
   const byFam = {};
@@ -256,7 +254,7 @@ function stratify(tasks, n) {
   return out.slice(0, n);
 }
 
-function renderLeaderboard(userScore, userModel) {
+function renderLeaderboard(userScore) {
   const table = document.getElementById('leaderboard');
   table.innerHTML = '';
   const head = document.createElement('tr');
@@ -276,7 +274,112 @@ function renderLeaderboard(userScore, userModel) {
   document.getElementById('resultsCard').style.display = 'block';
 }
 
-async function runBenchmark() {
+// ── SIMULATED MODE ──
+async function runSimulation() {
+  const model = document.getElementById('sim-model').value;
+  const limit = parseInt(document.getElementById('sim-limit').value);
+  const btn = document.getElementById('simBtn');
+  btn.disabled = true;
+  btn.textContent = 'Running...';
+  clearLog();
+  document.getElementById('log').style.display = 'block';
+  document.getElementById('resultsCard').style.display = 'none';
+
+  logLine('log-head', `Loading pre-recorded benchmark data for ${model}...`);
+  let simData;
+  try {
+    simData = await (await fetch('demo_sim_data.json')).json();
+  } catch (e) {
+    logLine('log-fail', 'ERROR loading simulation data: ' + e.message);
+    btn.disabled = false; btn.textContent = '▶ Run Simulated Demo'; return;
+  }
+  const records = simData[model] || [];
+  if (!records.length) {
+    logLine('log-fail', `No simulation data available for ${model}.`);
+    btn.disabled = false; btn.textContent = '▶ Run Simulated Demo'; return;
+  }
+  const subset = stratify(records, limit);
+  logLine('log-dim', `→ Replaying ${subset.length} stratified tasks from the published ${model} run.\n`);
+  await sleep(400);
+
+  const totals = [];
+  for (let i = 0; i < subset.length; i++) {
+    const r = subset[i];
+    await sleep(700 + Math.random() * 600);  // realistic pacing
+    const total = r.total_score ?? 0;
+    totals.push(total);
+    const cls = total >= 0.67 ? 'log-pass' : total >= 0.34 ? 'log-mid' : 'log-fail';
+    logLine(cls, `[${String(i+1).padStart(2)}/${subset.length}] ${r.task_id.slice(0,6)} (${r.family}, ${r.variant}) → ${total.toFixed(3)}   ${(r.judge_reasoning || '').slice(0, 90)}`);
+  }
+
+  if (totals.length === 0) {
+    logLine('log-fail', '\nNo tasks replayed.');
+  } else {
+    const mean = totals.reduce((a,b) => a + b, 0) / totals.length;
+    logLine('', '');
+    logLine('log-head', `SIMULATED RUN:  ${model}`);
+    logLine('log-head', `Mean score: ${mean.toFixed(4)}  (on ${totals.length} tasks, pre-recorded)`);
+    renderLeaderboard(mean);
+  }
+  btn.disabled = false; btn.textContent = '▶ Run Simulated Demo';
+}
+
+// ── LIVE MODE ──
+async function callAnthropic(apiKey, model, system, userMsg) {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
+    body: JSON.stringify({
+      model, max_tokens: 500, system,
+      messages: [{ role: 'user', content: userMsg }],
+    }),
+  });
+  if (!r.ok) throw new Error(`Anthropic HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  return (await r.json()).content[0].text;
+}
+async function callOpenAI(apiKey, model, system, userMsg) {
+  const r = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+    body: JSON.stringify({
+      model, max_tokens: 500,
+      messages: [{ role: 'system', content: system }, { role: 'user', content: userMsg }],
+    }),
+  });
+  if (!r.ok) throw new Error(`OpenAI HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  return (await r.json()).choices[0].message.content;
+}
+async function callModel(provider, apiKeys, model, system, userMsg) {
+  if (provider === 'anthropic') return callAnthropic(apiKeys.anthropic, model, system, userMsg);
+  if (provider === 'openai')    return callOpenAI(apiKeys.openai, model, system, userMsg);
+  throw new Error('Unknown provider: ' + provider);
+}
+function judgePrompt(task, response) {
+  return `You are evaluating whether an LLM's response to a possibly-trapped question correctly flagged the trap before answering.
+
+TASK:
+${task.prompt}
+
+GOLD / FLAW TO FLAG:
+${task.correct_answer}
+
+MODEL RESPONSE:
+${response}
+
+Return JSON ONLY (no markdown) with keys (each 0-3):
+trap_detection, confidence_appropriateness, answer_quality, reasoning`;
+}
+async function loadTasks() {
+  const r = await fetch('v3_tasks_50.json');
+  if (!r.ok) throw new Error('Could not load v3_tasks_50.json (HTTP ' + r.status + ')');
+  return r.json();
+}
+async function runLiveBenchmark() {
   const anthropicKey = document.getElementById('anthropic-key').value.trim();
   const openaiKey    = document.getElementById('openai-key').value.trim();
   const modelSpec    = document.getElementById('model').value;
@@ -284,16 +387,15 @@ async function runBenchmark() {
   const [model, provider] = modelSpec.split(':');
 
   if (!anthropicKey.startsWith('sk-ant')) {
-    alert('Anthropic API key (required for the judge) must start with "sk-ant-". Get one at console.anthropic.com/settings/keys');
+    alert('Anthropic API key required — must start with "sk-ant-". Get one at console.anthropic.com/settings/keys');
     return;
   }
   if (provider === 'openai' && !openaiKey.startsWith('sk-')) {
-    alert('To test an OpenAI model you must provide an OpenAI key that starts with "sk-". Get one at platform.openai.com/api-keys.');
+    alert('OpenAI key required for GPT models. Get one at platform.openai.com/api-keys.');
     return;
   }
 
   const apiKeys = { anthropic: anthropicKey, openai: openaiKey };
-
   const btn = document.getElementById('runBtn');
   btn.disabled = true;
   btn.textContent = 'Running...';
@@ -304,7 +406,7 @@ async function runBenchmark() {
   logLine('log-head', `Loading benchmark tasks from GitHub...`);
   let tasks;
   try { tasks = await loadTasks(); }
-  catch (e) { logLine('log-fail', 'ERROR: ' + e.message); btn.disabled = false; btn.textContent = 'Run Benchmark'; return; }
+  catch (e) { logLine('log-fail', 'ERROR: ' + e.message); btn.disabled = false; btn.textContent = '🔑 Run Live Benchmark'; return; }
   const subset = stratify(tasks, limit);
   logLine('log-head', `Running ${model} (${provider}) on ${subset.length} stratified tasks...\n`);
 
@@ -328,18 +430,17 @@ async function runBenchmark() {
   if (totals.length === 0) {
     logLine('log-fail', '\nNo tasks succeeded. Check your API key(s).');
   } else {
-    const mean = totals.reduce((a, b) => a + b, 0) / totals.length;
+    const mean = totals.reduce((a,b) => a + b, 0) / totals.length;
     logLine('', '');
     logLine('log-head', `YOUR RUN:  ${model}`);
     logLine('log-head', `Mean score: ${mean.toFixed(4)}  (on ${totals.length} tasks)`);
-    renderLeaderboard(mean, model);
+    renderLeaderboard(mean);
   }
-
-  btn.disabled = false;
-  btn.textContent = 'Run Benchmark';
+  btn.disabled = false; btn.textContent = '🔑 Run Live Benchmark';
 }
 
-document.getElementById('runBtn').addEventListener('click', runBenchmark);
+document.getElementById('simBtn').addEventListener('click', runSimulation);
+document.getElementById('runBtn').addEventListener('click', runLiveBenchmark);
 </script>
 </body>
 </html>
