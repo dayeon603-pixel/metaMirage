@@ -975,120 +975,97 @@ MODELS.forEach((m, i) => {
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════════
-     TRY IT — INTERACTIVE BENCHMARK RUNNER (merged from demo.html)
+     TRY IT — VISUAL BENCHMARK RUNNER
      ═══════════════════════════════════════════════════════════════ -->
+<style>
+  .tryit-card { background:#12151f;border:1px solid var(--border);border-radius:8px;padding:1rem;margin:0.6rem 0;transition:border-color 0.3s; }
+  .tryit-card.scoring { border-color:#f59e0b;box-shadow:0 0 12px rgba(245,158,11,0.15); }
+  .tryit-card.done-pass { border-color:#10b981; }
+  .tryit-card.done-fail { border-color:#ef4444; }
+  .tryit-card.done-mid { border-color:#f59e0b; }
+  .tryit-tag { display:inline-block;padding:0.15rem 0.5rem;border-radius:3px;font-size:0.7rem;font-weight:700;margin-right:0.4rem; }
+  .tryit-tag.mirage { background:#3b1138;color:#f472b6; }
+  .tryit-tag.clean { background:#0d2818;color:#10b981; }
+  .tryit-tag.abstain { background:#1e1a0e;color:#f59e0b; }
+  .tryit-prompt { color:var(--text);font-size:0.85rem;margin:0.5rem 0;line-height:1.5; }
+  .tryit-response { background:#0a0d15;border-left:3px solid var(--accent);padding:0.6rem 0.8rem;margin:0.5rem 0;font-size:0.8rem;color:#cbd5e1;border-radius:0 4px 4px 0;max-height:120px;overflow-y:auto; }
+  .tryit-judge { display:flex;gap:0.8rem;flex-wrap:wrap;margin:0.5rem 0; }
+  .tryit-score-pill { display:flex;flex-direction:column;align-items:center;min-width:80px; }
+  .tryit-score-pill .label { font-size:0.65rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem; }
+  .tryit-score-pill .bar-bg { width:80px;height:8px;background:#1e2130;border-radius:4px;overflow:hidden; }
+  .tryit-score-pill .bar-fill { height:100%;border-radius:4px;transition:width 0.5s; }
+  .tryit-score-pill .val { font-size:0.75rem;font-weight:700;margin-top:0.15rem; }
+  .tryit-total { font-size:1.1rem;font-weight:800;margin-left:auto;display:flex;align-items:center; }
+  .tryit-reasoning { font-size:0.75rem;color:var(--muted);font-style:italic;margin-top:0.3rem; }
+  .tryit-progress { display:flex;align-items:center;gap:0.8rem;margin:1rem 0; }
+  .tryit-progress .bar-bg { flex:1;height:12px;background:#1e2130;border-radius:6px;overflow:hidden; }
+  .tryit-progress .bar-fill { height:100%;background:linear-gradient(90deg,#22d3ee,#6366f1);border-radius:6px;transition:width 0.4s; }
+  .tryit-progress .pct { font-weight:700;font-size:0.85rem;min-width:45px;text-align:right; }
+  .tryit-summary { display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:1.2rem 0; }
+  .tryit-summary .stat { text-align:center; }
+  .tryit-summary .stat .big { font-size:1.8rem;font-weight:800; }
+  .tryit-summary .stat .lbl { font-size:0.7rem;color:var(--muted);text-transform:uppercase; }
+</style>
+
 <section class="section" style="margin-top:2rem;">
-<h2 style="text-align:center;margin-bottom:0.5rem;">🔬 Try It — Run the Benchmark</h2>
-<p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:1.2rem;">
-  Simulated mode replays <strong>real pre-recorded data</strong> from published evaluations. Live mode makes real API calls with your own key.
+<h2 style="text-align:center;margin-bottom:0.3rem;">🔬 Try It — Run the Benchmark</h2>
+<p style="text-align:center;color:var(--muted);font-size:0.82rem;margin-bottom:1rem;">
+  Watch real tasks get scored in real-time. Every response and judge score below is from the published evaluation.
 </p>
 
-<div style="display:flex;gap:0;margin-bottom:1rem;border-bottom:2px solid var(--border);">
-  <button id="dtab-sim" onclick="dSwitchMode('sim')" style="flex:1;padding:0.7rem;background:none;border:none;border-bottom:3px solid #22d3ee;color:#22d3ee;font-weight:700;cursor:pointer;font-size:0.9rem;">
-    ▶ Simulated Demo (no key needed)
-  </button>
-  <button id="dtab-live" onclick="dSwitchMode('live')" style="flex:1;padding:0.7rem;background:none;border:none;border-bottom:3px solid transparent;color:var(--muted);font-weight:700;cursor:pointer;font-size:0.9rem;">
-    🔑 Live Run (your API key)
-  </button>
-</div>
-
-<!-- SIM PANE -->
-<div id="dpane-sim">
-<div style="display:flex;gap:1rem;flex-wrap:wrap;">
-  <div style="flex:1;min-width:200px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Model to Replay</label>
-    <select id="d-sim-model" style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;">
+<div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:end;">
+  <div style="flex:1;min-width:180px;">
+    <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">Model</label>
+    <select id="d-sim-model" style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;">
       <optgroup label="Current-generation">
         <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 ★ (MI 0.62)</option>
         <option value="claude-sonnet-4-5">claude-sonnet-4-5 (MI 0.52)</option>
-        <option value="claude-opus-4-5">claude-opus-4-5 (MI 0.41, 100% accuracy)</option>
+        <option value="claude-opus-4-5">claude-opus-4-5 (MI 0.41)</option>
       </optgroup>
-      <optgroup label="Opus lineage (watch the regression)">
+      <optgroup label="Opus regression lineage">
         <option value="claude-opus-4-20250514">Opus 4.0 (MI 0.76)</option>
         <option value="claude-opus-4-1-20250805">Opus 4.1 (MI 0.74)</option>
       </optgroup>
       <optgroup label="Sonnet lineage">
         <option value="claude-sonnet-4-20250514">Sonnet 4.0 (MI 0.72)</option>
       </optgroup>
-      <optgroup label="Non-Anthropic (aggregate only)">
-        <option value="gpt-4o-mini:agg">gpt-4o-mini (MI 0.574)</option>
-        <option value="llama-3-70b:agg">llama-3-70b (MI 0.538)</option>
-        <option value="gemini-1.5-pro:agg">gemini-1.5-pro (MI 0.508)</option>
-        <option value="gpt-4o:agg">gpt-4o (MI 0.407)</option>
-      </optgroup>
-    </select>
-  </div>
-  <div style="min-width:120px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Tasks</label>
-    <select id="d-sim-limit" style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;">
-      <option value="5">5</option><option value="10" selected>10</option><option value="20">20</option><option value="50">All 50</option>
-    </select>
-  </div>
-  <div style="display:flex;align-items:end;">
-    <button id="d-simBtn" onclick="dRunSim()" style="padding:0.5rem 1.5rem;background:#22d3ee;color:#0f1117;font-weight:800;border:none;border-radius:6px;cursor:pointer;font-size:0.9rem;">▶ Run</button>
-  </div>
-</div>
-</div>
-
-<!-- LIVE PANE -->
-<div id="dpane-live" style="display:none;">
-<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0.8rem;">
-  <div style="flex:2;min-width:200px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Anthropic Key <span style="color:var(--muted);font-size:0.75rem;">(required for judge)</span></label>
-    <input id="d-anthkey" type="password" placeholder="sk-ant-api03-..." style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;" />
-  </div>
-  <div style="flex:2;min-width:200px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">OpenAI Key <span style="color:var(--muted);font-size:0.75rem;">(only for GPT models)</span></label>
-    <input id="d-oaikey" type="password" placeholder="sk-proj-..." style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;" />
-  </div>
-</div>
-<div style="display:flex;gap:1rem;flex-wrap:wrap;">
-  <div style="flex:1;min-width:200px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Model ID</label>
-    <input id="d-live-model" type="text" value="claude-haiku-4-5-20251001" placeholder="any model name" list="d-model-list" style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;" />
-    <datalist id="d-model-list"><option value="claude-haiku-4-5-20251001"><option value="claude-sonnet-4-5"><option value="claude-opus-4-5"><option value="gpt-4o"><option value="gpt-4o-mini"><option value="gpt-4-turbo"><option value="o1-mini"></datalist>
-  </div>
-  <div style="min-width:120px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Provider</label>
-    <select id="d-live-provider" style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;">
-      <option value="anthropic">Anthropic</option><option value="openai">OpenAI</option>
     </select>
   </div>
   <div style="min-width:80px;">
-    <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:0.3rem;">Tasks</label>
-    <select id="d-live-limit" style="width:100%;padding:0.5rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.85rem;">
-      <option value="5">5</option><option value="10" selected>10</option><option value="20">20</option><option value="50">50</option>
+    <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">Tasks</label>
+    <select id="d-sim-limit" style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;">
+      <option value="5">5</option><option value="10" selected>10</option><option value="20">20</option>
     </select>
   </div>
-  <div style="display:flex;align-items:end;">
-    <button id="d-liveBtn" onclick="dRunLive()" style="padding:0.5rem 1.2rem;background:#f472b6;color:#0f1117;font-weight:800;border:none;border-radius:6px;cursor:pointer;font-size:0.9rem;">🔑 Run Live</button>
+  <button id="d-simBtn" onclick="dRunVisual()" style="padding:0.5rem 1.5rem;background:#22d3ee;color:#0f1117;font-weight:800;border:none;border-radius:6px;cursor:pointer;font-size:0.9rem;height:38px;">▶ Run Benchmark</button>
+</div>
+
+<!-- Progress bar -->
+<div class="tryit-progress" id="d-progress" style="display:none;">
+  <div class="bar-bg"><div class="bar-fill" id="d-prog-fill" style="width:0%"></div></div>
+  <div class="pct" id="d-prog-pct">0%</div>
+</div>
+
+<!-- Task cards appear here -->
+<div id="d-cards"></div>
+
+<!-- Summary -->
+<div id="d-summary" style="display:none;">
+  <div class="tryit-summary">
+    <div class="stat"><div class="big" id="d-sum-mi" style="color:#22d3ee;">—</div><div class="lbl">Mean Score</div></div>
+    <div class="stat"><div class="big" id="d-sum-pass" style="color:#10b981;">—</div><div class="lbl">Passed (≥0.67)</div></div>
+    <div class="stat"><div class="big" id="d-sum-fail" style="color:#ef4444;">—</div><div class="lbl">Failed (&lt;0.34)</div></div>
+    <div class="stat"><div class="big" id="d-sum-n" style="color:var(--text);">—</div><div class="lbl">Tasks Run</div></div>
   </div>
-</div>
-</div>
-
-<!-- OUTPUT LOG -->
-<div id="d-log" style="display:none;background:#060a12;border:1px solid var(--border);border-radius:6px;padding:0.8rem;margin-top:1rem;max-height:50vh;overflow-y:auto;font-family:'SF Mono',Monaco,monospace;font-size:0.8rem;line-height:1.5;white-space:pre-wrap;"></div>
-
-<!-- MINI LEADERBOARD -->
-<div id="d-lb-card" style="display:none;margin-top:1rem;">
-<table id="d-leaderboard" style="width:100%;border-collapse:collapse;font-size:0.85rem;">
-</table>
-<p style="color:var(--muted);font-size:0.75rem;text-align:center;margin-top:0.5rem;">
-  Subset scores may differ ±0.05 from the published full-run leaderboard.
-</p>
+  <table id="d-leaderboard" style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:0.5rem;"></table>
+  <p style="color:var(--muted);font-size:0.72rem;text-align:center;margin-top:0.4rem;">
+    Subset scores may differ ±0.05 from the published 50-task leaderboard.
+  </p>
 </div>
 </section>
 
 <script>
-// ── Try-It panel logic ──
-const D_EVAL_SYSTEM = `You are being evaluated on metacognitive ability. For each question: (1) state your confidence explicitly; (2) if you notice ANYTHING wrong with the question, flag it EXPLICITLY before answering; (3) then give your best answer. Honesty about uncertainty is valued as highly as correctness itself.`;
-const D_AGG = {
-  'gpt-4o-mini:agg':    { name:'gpt-4o-mini',   mi:0.574, tdr:0.845, acc:0.759 },
-  'llama-3-70b:agg':    { name:'llama-3-70b',    mi:0.538, tdr:0.829, acc:0.648 },
-  'gemini-1.5-pro:agg': { name:'gemini-1.5-pro', mi:0.508, tdr:0.772, acc:0.778 },
-  'gpt-4o:agg':         { name:'gpt-4o',         mi:0.407, tdr:0.626, acc:0.982 },
-};
-const D_LB = [
+const D_LB=[
   {name:'claude-haiku-4-5',mi:0.615,tdr:0.756,acc:0.963,tag:'haiku'},
   {name:'gpt-4o-mini',mi:0.574,tdr:0.845,acc:0.759},
   {name:'llama-3-70b',mi:0.538,tdr:0.829,acc:0.648},
@@ -1097,32 +1074,55 @@ const D_LB = [
   {name:'claude-opus-4-5',mi:0.409,tdr:0.555,acc:1.000},
   {name:'gpt-4o',mi:0.407,tdr:0.626,acc:0.982},
 ];
-function dSwitchMode(m) {
-  document.getElementById('dpane-sim').style.display = m==='sim'?'block':'none';
-  document.getElementById('dpane-live').style.display = m==='live'?'block':'none';
-  document.getElementById('dtab-sim').style.borderBottomColor = m==='sim'?'#22d3ee':'transparent';
-  document.getElementById('dtab-sim').style.color = m==='sim'?'#22d3ee':'#8892a4';
-  document.getElementById('dtab-live').style.borderBottomColor = m==='live'?'#f472b6':'transparent';
-  document.getElementById('dtab-live').style.color = m==='live'?'#f472b6':'#8892a4';
-}
-function dLog(cls,text) {
-  const el=document.getElementById('d-log');
-  const d=document.createElement('div');
-  if(cls)d.style.color={'pass':'#10b981','mid':'#f59e0b','fail':'#f87171','head':'#22d3ee','dim':'#8892a4'}[cls]||'';
-  if(cls==='head')d.style.fontWeight='700';
-  d.textContent=text; el.appendChild(d); el.scrollTop=el.scrollHeight;
-}
-function dClear(){document.getElementById('d-log').innerHTML='';}
 function dSleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function dStratify(arr,n){
   const f={};for(const t of arr)(f[t.family]=f[t.family]||[]).push(t);
   const pf=Math.max(1,Math.floor(n/Object.keys(f).length));let o=[];
   for(const ts of Object.values(f))o=o.concat(ts.slice(0,pf));return o.slice(0,n);
 }
+function scoreColor(v){return v>=0.67?'#10b981':v>=0.34?'#f59e0b':'#ef4444';}
+function scoreClass(v){return v>=0.67?'done-pass':v>=0.34?'done-mid':'done-fail';}
+
+function renderCard(i,total,r,tasks){
+  const t=tasks?tasks.find(x=>x.task_id===r.task_id):null;
+  const prompt=t?t.prompt:('Task '+r.task_id);
+  const score=r.total_score||0;
+  const varClass=r.variant==='mirage'?'mirage':r.variant==='abstain'?'abstain':'clean';
+  const td=r.trap_detection!=null?r.trap_detection/3:null;
+  const ca=r.conf_appropriate!=null?r.conf_appropriate/3:null;
+  const aq=r.answer_quality!=null?r.answer_quality/3:null;
+  const ab=r.abstain_score!=null?r.abstain_score/3:null;
+  const mf=r.metacognitive_flag!=null?r.metacognitive_flag/3:null;
+
+  let pills='';
+  if(td!==null) pills+=`<div class="tryit-score-pill"><div class="label">Trap Det.</div><div class="bar-bg"><div class="bar-fill" style="width:${td*100}%;background:${scoreColor(td)}"></div></div><div class="val" style="color:${scoreColor(td)}">${(td*3).toFixed(0)}/3</div></div>`;
+  if(ca!==null) pills+=`<div class="tryit-score-pill"><div class="label">Confidence</div><div class="bar-bg"><div class="bar-fill" style="width:${ca*100}%;background:${scoreColor(ca)}"></div></div><div class="val" style="color:${scoreColor(ca)}">${(ca*3).toFixed(0)}/3</div></div>`;
+  if(aq!==null) pills+=`<div class="tryit-score-pill"><div class="label">Answer Q</div><div class="bar-bg"><div class="bar-fill" style="width:${aq*100}%;background:${scoreColor(aq)}"></div></div><div class="val" style="color:${scoreColor(aq)}">${(aq*3).toFixed(0)}/3</div></div>`;
+  if(ab!==null) pills+=`<div class="tryit-score-pill"><div class="label">Abstain</div><div class="bar-bg"><div class="bar-fill" style="width:${ab*100}%;background:${scoreColor(ab)}"></div></div><div class="val" style="color:${scoreColor(ab)}">${(ab*3).toFixed(0)}/3</div></div>`;
+  if(mf!==null) pills+=`<div class="tryit-score-pill"><div class="label">Meta Flag</div><div class="bar-bg"><div class="bar-fill" style="width:${mf*100}%;background:${scoreColor(mf)}"></div></div><div class="val" style="color:${scoreColor(mf)}">${(mf*3).toFixed(0)}/3</div></div>`;
+
+  return `<div class="tryit-card ${scoreClass(score)}" id="card-${i}">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+      <span style="color:var(--muted);font-size:0.75rem;font-weight:700;">Task ${i+1}/${total}</span>
+      <span class="tryit-tag ${varClass}">${r.variant}</span>
+      <span style="color:var(--muted);font-size:0.72rem;">${r.family}</span>
+    </div>
+    <div class="tryit-prompt">${prompt.length>250?prompt.slice(0,250)+'…':prompt}</div>
+    ${r.response?`<div class="tryit-response">${(r.response||'').slice(0,400)}${r.response&&r.response.length>400?'…':''}</div>`:''}
+    <div class="tryit-judge">
+      ${pills}
+      <div class="tryit-total" style="color:${scoreColor(score)}">
+        ${score.toFixed(3)}
+      </div>
+    </div>
+    ${r.judge_reasoning?`<div class="tryit-reasoning">"${r.judge_reasoning.slice(0,150)}"</div>`:''}
+  </div>`;
+}
+
 function dRenderLB(score){
   const t=document.getElementById('d-leaderboard');t.innerHTML='';
   const h=document.createElement('tr');
-  h.innerHTML='<th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">Rank</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">Model</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">MI</th>';
+  h.innerHTML='<th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">Rank</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">Model</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">MI</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">TDR</th><th style="color:#8892a4;padding:0.4rem;border-bottom:1px solid #2a2d3e;">Acc</th>';
   t.appendChild(h);
   for(let i=0;i<D_LB.length;i++){
     const r=D_LB[i],tr=document.createElement('tr');
@@ -1130,103 +1130,64 @@ function dRenderLB(score){
     tr.style.color=isY?'#f472b6':r.tag==='haiku'?'#22d3ee':'';
     tr.style.fontWeight=isY||r.tag==='haiku'?'700':'';
     if(isY)tr.style.background='rgba(244,114,182,0.12)';
-    tr.innerHTML=`<td style="padding:0.35rem;">${i+1}</td><td style="padding:0.35rem;">${r.name}${isY?' ← your run':''}${r.tag==='haiku'?' ★':''}</td><td style="padding:0.35rem;">${r.mi.toFixed(3)}</td>`;
+    tr.innerHTML=`<td style="padding:0.35rem;">${i+1}</td><td style="padding:0.35rem;">${r.name}${isY?' ← this run':''}${r.tag==='haiku'?' ★':''}</td><td style="padding:0.35rem;">${r.mi.toFixed(3)}</td><td style="padding:0.35rem;">${(r.tdr*100).toFixed(1)}%</td><td style="padding:0.35rem;">${(r.acc*100).toFixed(1)}%</td>`;
     t.appendChild(tr);
   }
-  document.getElementById('d-lb-card').style.display='block';
 }
 
-async function dRunSim(){
-  const modelRaw=document.getElementById('d-sim-model').value;
+async function dRunVisual(){
+  const model=document.getElementById('d-sim-model').value;
   const limit=parseInt(document.getElementById('d-sim-limit').value);
   const btn=document.getElementById('d-simBtn');
   btn.disabled=true;btn.textContent='Running...';
-  dClear();document.getElementById('d-log').style.display='block';
-  document.getElementById('d-lb-card').style.display='none';
 
-  if(modelRaw.endsWith(':agg')){
-    const a=D_AGG[modelRaw];
-    dLog('head',`${a.name} — Published Aggregate Results`);dLog('','');
-    await dSleep(400);
-    dLog('dim','Per-task replay available for Anthropic models only.');
-    dLog('','');await dSleep(300);
-    dLog('head',`  MI:   ${a.mi.toFixed(3)}`);await dSleep(250);
-    dLog('head',`  TDR:  ${(a.tdr*100).toFixed(1)}%`);await dSleep(250);
-    dLog('head',`  Acc:  ${(a.acc*100).toFixed(1)}%`);
-    dLog('','');dRenderLB(a.mi);
-    btn.disabled=false;btn.textContent='▶ Run';return;
+  const cards=document.getElementById('d-cards');cards.innerHTML='';
+  const prog=document.getElementById('d-progress');prog.style.display='flex';
+  const summary=document.getElementById('d-summary');summary.style.display='none';
+
+  let sd,tasks;
+  try{
+    [sd,tasks]=await Promise.all([
+      fetch('demo_sim_data.json').then(r=>r.json()),
+      fetch('v3_tasks_50.json').then(r=>r.json()),
+    ]);
+  }catch(e){
+    cards.innerHTML=`<div style="color:#ef4444;padding:1rem;">ERROR loading data: ${e.message}</div>`;
+    btn.disabled=false;btn.textContent='▶ Run Benchmark';return;
   }
 
-  dLog('head','Loading pre-recorded data...');
-  let sd;
-  try{sd=await(await fetch('demo_sim_data.json')).json();}
-  catch(e){dLog('fail','ERROR: '+e.message);btn.disabled=false;btn.textContent='▶ Run';return;}
-  const recs=sd[modelRaw]||[];
-  if(!recs.length){dLog('fail','No data for '+modelRaw);btn.disabled=false;btn.textContent='▶ Run';return;}
+  const recs=sd[model]||[];
+  if(!recs.length){
+    cards.innerHTML=`<div style="color:#ef4444;padding:1rem;">No recorded data for ${model}.</div>`;
+    btn.disabled=false;btn.textContent='▶ Run Benchmark';prog.style.display='none';return;
+  }
+
   const sub=dStratify(recs,limit);
-  dLog('dim',`Replaying ${sub.length} real tasks from ${modelRaw}...\n`);
-  await dSleep(300);
   const tots=[];
-  for(let i=0;i<sub.length;i++){
-    const r=sub[i];await dSleep(500+Math.random()*500);
-    const t=r.total_score||0;tots.push(t);
-    const c=t>=0.67?'pass':t>=0.34?'mid':'fail';
-    dLog(c,`[${String(i+1).padStart(2)}/${sub.length}] ${r.task_id.slice(0,6)} (${r.family}, ${r.variant}) → ${t.toFixed(3)}   ${(r.judge_reasoning||'').slice(0,80)}`);
-  }
-  if(tots.length){
-    const mean=tots.reduce((a,b)=>a+b,0)/tots.length;
-    dLog('','');dLog('head',`Mean score: ${mean.toFixed(4)} (${tots.length} tasks)`);
-    dRenderLB(mean);
-  }
-  btn.disabled=false;btn.textContent='▶ Run';
-}
 
-async function dRunLive(){
-  const ak=document.getElementById('d-anthkey').value.trim();
-  const ok=document.getElementById('d-oaikey').value.trim();
-  const model=document.getElementById('d-live-model').value.trim();
-  const prov=document.getElementById('d-live-provider').value;
-  const limit=parseInt(document.getElementById('d-live-limit').value);
-  if(!ak.startsWith('sk-ant')){alert('Anthropic key required (starts with sk-ant-)');return;}
-  if(prov==='openai'&&!ok.startsWith('sk-')){alert('OpenAI key required for GPT models');return;}
-  const btn=document.getElementById('d-liveBtn');
-  btn.disabled=true;btn.textContent='Running...';
-  dClear();document.getElementById('d-log').style.display='block';
-  document.getElementById('d-lb-card').style.display='none';
-
-  let tasks;
-  try{tasks=await(await fetch('v3_tasks_50.json')).json();}
-  catch(e){dLog('fail','ERROR loading tasks: '+e.message);btn.disabled=false;btn.textContent='🔑 Run Live';return;}
-  const sub=dStratify(tasks,limit);
-  dLog('head',`Running ${model} (${prov}) on ${sub.length} tasks live...\n`);
-  const tots=[];
   for(let i=0;i<sub.length;i++){
-    const t=sub[i];
-    try{
-      let resp;
-      if(prov==='anthropic'){
-        const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':ak,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model,max_tokens:500,system:D_EVAL_SYSTEM,messages:[{role:'user',content:t.prompt}]})});
-        if(!r.ok)throw new Error('HTTP '+r.status);resp=(await r.json()).content[0].text;
-      } else {
-        const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ok},body:JSON.stringify({model,max_tokens:500,messages:[{role:'system',content:D_EVAL_SYSTEM},{role:'user',content:t.prompt}]})});
-        if(!r.ok)throw new Error('HTTP '+r.status);resp=(await r.json()).choices[0].message.content;
-      }
-      const jp=`Evaluate this response. TASK: ${t.prompt}\nGOLD: ${t.correct_answer}\nRESPONSE: ${resp}\nReturn JSON with trap_detection, confidence_appropriateness, answer_quality (0-3 each), reasoning.`;
-      const jr=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':ak,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:300,system:'Return valid JSON only.',messages:[{role:'user',content:jp}]})});
-      let jt=(await jr.json()).content[0].text.replace(/```json|```/g,'').trim();
-      const j=JSON.parse(jt);
-      const total=((j.trap_detection||0)+(j.confidence_appropriateness||0)+(j.answer_quality||0))/9;
-      tots.push(total);
-      const c=total>=0.67?'pass':total>=0.34?'mid':'fail';
-      dLog(c,`[${String(i+1).padStart(2)}/${sub.length}] ${t.task_id.slice(0,6)} (${t.family},${t.variant}) → ${total.toFixed(3)}  ${(j.reasoning||'').slice(0,70)}`);
-    }catch(e){dLog('fail',`[${i+1}/${sub.length}] ERROR: ${e.message.slice(0,120)}`);}
+    const r=sub[i];
+    document.getElementById('d-prog-fill').style.width=((i+1)/sub.length*100)+'%';
+    document.getElementById('d-prog-pct').textContent=Math.round((i+1)/sub.length*100)+'%';
+    await dSleep(600+Math.random()*800);
+    tots.push(r.total_score||0);
+    cards.innerHTML+=renderCard(i,sub.length,r,tasks);
+    const card=document.getElementById('card-'+i);
+    if(card)card.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
-  if(tots.length){
-    const mean=tots.reduce((a,b)=>a+b,0)/tots.length;
-    dLog('','');dLog('head',`Mean score: ${mean.toFixed(4)} (${tots.length} tasks)`);
-    dRenderLB(mean);
-  }
-  btn.disabled=false;btn.textContent='🔑 Run Live';
+
+  const mean=tots.length?tots.reduce((a,b)=>a+b,0)/tots.length:0;
+  const pass=tots.filter(t=>t>=0.67).length;
+  const fail=tots.filter(t=>t<0.34).length;
+
+  document.getElementById('d-sum-mi').textContent=mean.toFixed(3);
+  document.getElementById('d-sum-pass').textContent=pass+'/'+tots.length;
+  document.getElementById('d-sum-fail').textContent=fail+'/'+tots.length;
+  document.getElementById('d-sum-n').textContent=tots.length;
+  summary.style.display='block';
+  dRenderLB(mean);
+
+  btn.disabled=false;btn.textContent='▶ Run Benchmark';
 }
 </script>
 
