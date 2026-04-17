@@ -1035,21 +1035,21 @@ MODELS.forEach((m, i) => {
     <input id="d-anthkey" type="password" placeholder="sk-ant-api03-..." style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;" />
   </div>
   <div style="flex:2;min-width:180px;">
-    <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">OpenAI Key <span style="color:var(--muted);font-size:0.72rem;">(only for GPT / OpenAI models)</span></label>
-    <input id="d-oaikey" type="password" placeholder="sk-proj-..." style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;" />
+    <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">OpenRouter Key <span style="color:var(--muted);font-size:0.72rem;">(for GPT, Gemini, Llama, Mistral — <a href="https://openrouter.ai/keys" target="_blank" style="color:#22d3ee;">get free key</a>)</span></label>
+    <input id="d-oaikey" type="password" placeholder="sk-or-..." style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;" />
   </div>
 </div>
 <div style="display:flex;gap:0.8rem;flex-wrap:wrap;align-items:end;">
   <div style="flex:1;min-width:200px;">
     <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">Model ID <span style="color:var(--muted);font-size:0.72rem;">(type ANY model name)</span></label>
     <input id="d-live-model" type="text" value="claude-haiku-4-5-20251001" placeholder="e.g. claude-haiku-4-5, gpt-4o, o1-mini, your-custom-model" list="d-model-list" style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;" />
-    <datalist id="d-model-list"><option value="claude-haiku-4-5-20251001"><option value="claude-sonnet-4-5"><option value="claude-opus-4-5"><option value="gpt-4o"><option value="gpt-4o-mini"><option value="gpt-4-turbo"><option value="o1-mini"><option value="o1-preview"><option value="claude-3-5-sonnet-20241022"><option value="claude-3-opus-20240229"></datalist>
+    <datalist id="d-model-list"><option value="claude-haiku-4-5-20251001"><option value="claude-sonnet-4-5"><option value="claude-opus-4-5"><option value="openai/gpt-4o"><option value="openai/gpt-4o-mini"><option value="google/gemini-2.0-flash-exp:free"><option value="meta-llama/llama-3.1-70b-instruct"><option value="mistralai/mistral-large-latest"><option value="deepseek/deepseek-chat-v3-0324:free"><option value="qwen/qwen-2.5-72b-instruct"></datalist>
   </div>
   <div style="min-width:100px;">
     <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:0.25rem;">Provider</label>
     <select id="d-live-provider" style="width:100%;padding:0.45rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.82rem;">
       <option value="anthropic">Anthropic (claude-*)</option>
-      <option value="openai">OpenAI (gpt-*, o1-*)</option>
+      <option value="openrouter">OpenRouter (gpt-*, gemini-*, llama-*, mistral-*, etc.)</option>
     </select>
   </div>
   <div style="min-width:70px;">
@@ -1060,7 +1060,8 @@ MODELS.forEach((m, i) => {
   </div>
   <button id="d-liveBtn" onclick="dRunLive()" style="padding:0.5rem 1.2rem;background:#f472b6;color:#0f1117;font-weight:800;border:none;border-radius:6px;cursor:pointer;font-size:0.9rem;height:38px;">🔑 Run Live</button>
 </div>
-<p style="color:var(--muted);font-size:0.75rem;margin-top:0.5rem;">Your keys stay in your browser. Never sent anywhere except directly to the respective API. MetaMirage uses Claude Sonnet 4.5 as the scoring judge.</p>
+<p style="color:var(--muted);font-size:0.75rem;margin-top:0.5rem;">Your keys stay in your browser — sent only to Anthropic/OpenRouter APIs directly. MetaMirage uses Claude Sonnet 4.5 as the scoring judge.<br>
+<strong>OpenRouter</strong> supports 200+ models (GPT-4o, Gemini, Llama, Mistral, DeepSeek, Qwen, etc.) through one key. <a href="https://openrouter.ai/keys" target="_blank" style="color:#22d3ee;">Get a free key →</a></p>
 </div>
 
 <!-- SIM PANE (secondary) -->
@@ -1136,7 +1137,7 @@ async function dRunLive(){
   const prov=document.getElementById('d-live-provider').value;
   const limit=parseInt(document.getElementById('d-live-limit').value);
   if(!ak.startsWith('sk-ant')){alert('Anthropic API key required (starts with sk-ant-). Get one at console.anthropic.com/settings/keys');return;}
-  if(prov==='openai'&&!ok.startsWith('sk-')){alert('OpenAI key required for GPT/o1 models');return;}
+  if(prov==='openrouter'&&!ok){alert('OpenRouter key required for non-Anthropic models. Get a free key at openrouter.ai/keys');return;}
   const btn=document.getElementById('d-liveBtn');
   btn.disabled=true;btn.textContent='Running...';
   const cards=document.getElementById('d-cards');cards.innerHTML='';
@@ -1158,7 +1159,7 @@ async function dRunLive(){
         const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':ak,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model,max_tokens:500,system:D_EVAL_SYS,messages:[{role:'user',content:t.prompt}]})});
         if(!r.ok)throw new Error('HTTP '+r.status+': '+(await r.text()).slice(0,100));resp=(await r.json()).content[0].text;
       } else {
-        const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ok},body:JSON.stringify({model,max_tokens:500,messages:[{role:'system',content:D_EVAL_SYS},{role:'user',content:t.prompt}]})});
+        const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+ok,'HTTP-Referer':'https://dayeon603-pixel.github.io/MetaMirage/','X-Title':'MetaMirage Benchmark'},body:JSON.stringify({model,max_tokens:500,messages:[{role:'system',content:D_EVAL_SYS},{role:'user',content:t.prompt}]})});
         if(!r.ok)throw new Error('HTTP '+r.status+': '+(await r.text()).slice(0,100));resp=(await r.json()).choices[0].message.content;
       }
       const jp=`Evaluate this response for metacognitive quality.\nTASK: ${t.prompt}\nGOLD/FLAW: ${t.correct_answer}\nRESPONSE: ${resp}\nReturn JSON ONLY with keys (0-3 each): trap_detection, confidence_appropriateness, answer_quality, reasoning`;
